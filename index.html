@@ -9,6 +9,9 @@
         :root {
             --gold: #f2c94c;
             --dark: #0d0d0f;
+            /* Наш новый глубокий бордовый для градиента */
+            --bordeaux-deep: rgba(28, 0, 15, 1); /* Глухой, темный слева */
+            --bordeaux-light: rgba(28, 0, 15, 0.1); /* Прозрачный справа */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,6 +34,7 @@
             padding: 0 8%;
         }
 
+        /* --- ФОН КУХНИ (ИСПРАВЛЕНО: слегка просвечивает слева) --- */
         .hero-bg {
             position: absolute;
             top: 0; right: 0;
@@ -38,23 +42,31 @@
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1;
+            opacity: 0.15; /* Базовая прозрачность кухни, чтобы она просвечивала сквозь темный градиент слева */
         }
 
+        /* --- СЛОЖНЫЙ БОРДОВЫЙ ГРАДИЕНТ (НОВОЕ: Слева глухой, справа прозрачный) --- */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, rgba(13,13,15,0.98) 15%, rgba(13,13,15,0.6) 50%, rgba(13,13,15,0.2) 100%);
+            background: linear-gradient(90deg, 
+                var(--bordeaux-deep) 0%,     /* Полное перекрытие слева (текст скрыт) */
+                var(--bordeaux-deep) 25%,    /* Держим плотный цвет */
+                rgba(28, 0, 15, 0.8) 45%,    /* Начинаем плавное рассеивание */
+                rgba(28, 0, 15, 0.5) 65%,    /* Просвечивает сильнее */
+                var(--bordeaux-light) 100%   /* Почти прозрачный справа (кухня видна) */
+            );
             z-index: 2;
         }
 
-        /* КОНТЕНТ-КОНТЕЙНЕР */
+        /* КОНТЕНТ-КОНТЕЙНЕР (Скрыт плотным градиентом слева) */
         .content { 
             position: relative; 
             z-index: 10; 
             max-width: 850px; 
             display: flex;
             flex-direction: column;
-            gap: 25px; /* Отступы между блоками на ПК */
+            gap: 25px; 
         }
 
         h1 {
@@ -98,13 +110,12 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
-        /* --- ЭТАПЫ (ФУТЕР) --- */
+        /* --- ЭТАПЫ (ФУТЕР ДЛЯ ПК) --- */
         .footer-steps {
             display: flex;
             z-index: 50;
         }
 
-        /* Стиль для ПК */
         @media (min-width: 1025px) {
             .footer-steps {
                 position: fixed;
@@ -133,47 +144,50 @@
         @media (max-width: 1024px) {
             .hero { 
                 padding: 100px 5% 50px; 
-                justify-content: center; /* Центрируем весь контент-блок по вертикали */
+                justify-content: center;
                 align-items: center;
             }
+            
+            /* На мобильных градиент должен быть вертикальным */
+            .overlay {
+                background: linear-gradient(180deg, 
+                    var(--bordeaux-deep) 0%,     /* Текст скрыт сверху */
+                    var(--bordeaux-deep) 35%,
+                    rgba(28, 0, 15, 0.8) 55%,
+                    var(--bordeaux-light) 100%   /* Кухня видна снизу */
+                );
+            }
+
             .content { 
                 align-items: center; 
                 text-align: center; 
                 width: 100%;
-                gap: 20px; /* Уменьшаем отступы, чтобы всё влезло */
+                gap: 20px; 
             }
             .description { 
                 border-left: none; padding-left: 0; 
                 margin: 0 auto;
-                font-size: 15px; /* Уменьшаем шрифт описания */
+                font-size: 15px;
             }
             .btn { align-self: center; }
             .phone-number { display: none; }
 
-            /* Надписи строго ПОД кнопкой по центру */
             .footer-steps {
                 position: relative;
                 bottom: auto; left: auto; transform: none;
-                margin-top: 15px; /* Небольшой отступ от кнопки */
+                margin-top: 15px; 
                 flex-direction: column; 
-                gap: 12px; /* Компактное расположение пунктов */
+                gap: 12px;
                 width: 100%;
             }
             
             .step { justify-content: center; }
             .step span { 
-                font-size: 12px; /* Уменьшаем шрифт этапов для мобилок */
+                font-size: 12px;
                 white-space: nowrap; 
             }
             
-            h1 { font-size: clamp(28px, 8vw, 50px); } /* Более компактный заголовок */
-        }
-
-        /* Условие для очень маленьких экранов (высота < 650px) */
-        @media (max-height: 650px) and (max-width: 1024px) {
-            .content { gap: 10px; }
-            .description { display: none; } /* Скрываем описание на совсем мелких экранах, чтобы не было наезда */
-            .footer-steps { margin-top: 10px; }
+            h1 { font-size: clamp(28px, 8vw, 50px); }
         }
     </style>
 </head>
