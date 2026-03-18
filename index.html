@@ -29,7 +29,7 @@
             height: 100vh;
             width: 100%;
             display: flex;
-            align-items: center; /* Контент по центру по вертикали */
+            align-items: center;
             position: relative;
             padding: 0 8%;
         }
@@ -57,7 +57,6 @@
             z-index: 2;
         }
 
-        /* ОСНОВНОЙ КОНТЕНТ */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -76,12 +75,13 @@
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
+        /* --- ОПИСАНИЕ: УВЕЛИЧЕНО НА 10% --- */
         .description {
-            font-size: clamp(16px, 1.8vw, 20px);
+            font-size: clamp(17.6px, 2vw, 22px); /* Было 16px, стало 17.6px (+10%) */
             font-weight: 400;
             line-height: 1.6;
             color: rgba(255,255,255,0.85);
-            max-width: 500px;
+            max-width: 550px;
             margin-bottom: 40px;
             border-left: 3px solid var(--gold);
             padding-left: 20px;
@@ -103,14 +103,14 @@
 
         .btn:hover { background: var(--gold); color: black; }
 
-        /* --- ПОДВАЛ (STEPS BAR) --- */
+        /* --- ПОДВАЛ (STEPS BAR) - ТОЧНЫЙ РАЗМЕР И ТЕКСТ --- */
         .steps-bar {
             position: absolute;
-            bottom: 50px; /* Прижали к самому низу */
+            bottom: 50px;
             left: 8%;
             right: 8%;
             display: flex;
-            justify-content: flex-start; /* В одну строку от левого края */
+            justify-content: flex-start;
             gap: 60px;
             z-index: 20;
             animation: fadeInUp 1.5s ease-out forwards;
@@ -125,8 +125,8 @@
         }
         
         .step-text { 
-            font-size: 20px; /* Увеличенный шрифт */
-            font-weight: 700; 
+            font-size: clamp(17.6px, 2vw, 22px); /* ТОЧНО ТАКОЙ ЖЕ РАЗМЕР, КАК ОПИСАНИЕ */
+            font-weight: 400; /* ТОЧНО ТАКАЯ ЖЕ ТОЛШИНА, КАК ОПИСАНИЕ */
             text-transform: uppercase; 
             letter-spacing: 1px; 
             color: #fff;
@@ -154,9 +154,8 @@
         }
 
         /* МОБИЛЬНАЯ АДАПТАЦИЯ */
-        @media (max-width: 1024px) {
+        @media (max-width: 1100px) {
             .steps-bar { gap: 30px; }
-            .step-text { font-size: 16px; }
         }
 
         @media (max-width: 768px) {
@@ -166,7 +165,7 @@
             .phone-number { display: none; }
 
             .steps-bar { 
-                position: relative; /* На мобильных возвращаем в поток под кнопку */
+                position: relative;
                 bottom: auto;
                 left: auto;
                 right: auto;
@@ -175,7 +174,7 @@
                 align-items: center; 
                 gap: 20px; 
             }
-            .step-text { font-size: 18px; }
+            .step-text { font-size: 18px; white-space: normal; }
         }
 
     </style>
@@ -206,8 +205,8 @@
 
         <div class="steps-bar">
             <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
         </div>
     </section>
 
