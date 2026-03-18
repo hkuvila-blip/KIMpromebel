@@ -88,16 +88,16 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
-        /* --- ФУТЕР (ЭТАПЫ) - ЦЕНТРИРОВАНИЕ И ПРИЖАТИЕ ВНИЗ --- */
+        /* --- ФУТЕР (ЭТАПЫ) --- */
         .footer-steps {
-            position: fixed; /* Фиксируем относительно экрана */
-            bottom: 30px;    /* Расстояние от нижнего края */
+            position: fixed;
+            bottom: 30px;
             left: 50%;
-            transform: translateX(-50%); /* Идеальное центрирование */
+            transform: translateX(-50%);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: clamp(20px, 4vw, 60px);
+            gap: 50px;
             z-index: 50;
             width: 100%;
             padding: 0 20px;
@@ -110,29 +110,38 @@
             box-shadow: 0 0 10px var(--gold);
         }
         .step span { 
-            font-size: clamp(10px, 1.2vw, 14px); 
+            font-size: 13px;
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1px;
             white-space: nowrap;
         }
 
-        /* --- АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ --- */
-        @media (max-width: 768px) {
-            .hero { padding: 120px 20px 100px; align-items: flex-start; height: auto; min-height: 100vh; }
+        /* --- АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И СМАРТФОНОВ --- */
+        @media (max-width: 1024px) {
             .phone-number { display: none; }
             
-            /* На мобильных фиксированный футер может мешать, 
-               поэтому возвращаем его в поток под кнопку */
+            /* Надписи строго друг под другом */
+            .footer-steps {
+                flex-direction: column; 
+                gap: 15px;
+                bottom: 25px; /* Немного ниже на планшетах */
+            }
+            
+            .step { width: 100%; justify-content: center; }
+            .step span { white-space: normal; text-align: center; font-size: 14px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 120px 20px 120px; align-items: flex-start; height: auto; min-height: 100vh; }
+            
+            /* На маленьких смартфонах переносим в поток, чтобы не перекрывать контент */
             .footer-steps {
                 position: relative;
                 bottom: auto; left: auto; transform: none;
-                margin-top: 60px;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
+                margin-top: 50px;
+                padding-bottom: 30px;
             }
-            .step span { font-size: 14px; white-space: normal; text-align: center; }
         }
     </style>
 </head>
@@ -162,9 +171,9 @@
         </div>
 
         <div class="footer-steps">
-            <div class="step"><div class="dot"></div><span>создаем 3д проект</span></div>
-            <div class="step"><div class="dot"></div><span>готовим документы</span></div>
-            <div class="step"><div class="dot"></div><span>отправляем на производство</span></div>
+            <div class="step"><div class="dot"></div><span>1. Создаём 3д проект</span></div>
+            <div class="step"><div class="dot"></div><span>2. Готовим документы</span></div>
+            <div class="step"><div class="dot"></div><span>3. Отправляем на производство</span></div>
         </div>
     </section>
 
