@@ -83,13 +83,16 @@
             max-width: 850px; 
             display: flex;
             flex-direction: column;
-            gap: 25px; 
+            /* Увеличенный общий отступ между элементами */
+            gap: 45px; 
         }
 
         h1 {
             font-size: clamp(32px, 6vw, 85px);
             font-weight: 200; line-height: 1.1;
             text-transform: uppercase;
+            /* Отступ снизу именно для заголовка */
+            margin-bottom: 10px;
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
@@ -100,10 +103,12 @@
             color: rgba(255,255,255,0.9);
             max-width: 500px;
             border-left: 3px solid var(--gold); padding-left: 20px;
+            /* Дополнительный отступ до кнопки */
+            margin-bottom: 15px;
         }
 
         .btn {
-            padding: 18px 45px;
+            padding: 20px 50px;
             border: 1px solid var(--gold);
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
@@ -114,7 +119,6 @@
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
-        /* ШАПКА ДЕСКТОП */
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
@@ -128,7 +132,6 @@
         .phone-icon {
             width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            transition: 0.3s;
         }
 
         .footer-steps { display: flex; z-index: 50; }
@@ -147,42 +150,24 @@
         }
         .step span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ: ТОЛЬКО ТРУБКА Х2 */
         @media (max-width: 1024px) {
-            .top-nav {
-                flex-direction: column; 
-                gap: 20px; 
-                top: 25px;
-            }
+            .top-nav { flex-direction: column; gap: 20px; top: 25px; }
             .logo { font-size: 22px; }
-            
-            /* Скрываем текстовый номер */
             .phone-number { display: none; }
-            
-            /* Увеличиваем иконку в 2 раза */
-            .phone-icon {
-                width: 70px; /* Увеличенный размер */
-                height: 70px;
-                border-width: 2px;
-                background: rgba(242, 201, 76, 0.1);
-                box-shadow: 0 0 20px rgba(242, 201, 76, 0.2);
-            }
-            /* Увеличиваем SVG внутри иконки */
-            .phone-icon svg {
-                width: 30px;
-                height: 30px;
-            }
+            .phone-icon { width: 70px; height: 70px; background: rgba(242, 201, 76, 0.1); }
+            .phone-icon svg { width: 30px; height: 30px; }
 
-            .hero { padding: 160px 5% 50px; justify-content: center; align-items: center; }
-            .overlay {
-                background: linear-gradient(180deg, #0d0d0f 0%, #0d0d0f 35%, rgba(13, 13, 15, 0) 100%);
-            }
-            .content { align-items: center; text-align: center; width: 100%; gap: 20px; }
-            .description { border-left: none; padding-left: 0; margin: 0 auto; }
+            .hero { padding: 180px 5% 50px; justify-content: center; align-items: center; }
+            .overlay { background: linear-gradient(180deg, #0d0d0f 0%, #0d0d0f 35%, rgba(13, 13, 15, 0) 100%); }
+            
+            /* Увеличенные отступы для мобилки */
+            .content { align-items: center; text-align: center; width: 100%; gap: 40px; }
+            .description { border-left: none; padding-left: 0; margin: 0 auto; margin-bottom: 10px; }
+            
             .btn { align-self: center; }
-            .footer-steps { position: relative; margin-top: 30px; flex-direction: column; gap: 15px; }
+            .footer-steps { position: relative; margin-top: 40px; flex-direction: column; gap: 15px; }
             .step { justify-content: center; }
-            h1 { font-size: clamp(26px, 8vw, 44px); }
+            h1 { font-size: clamp(26px, 8vw, 44px); margin-bottom: 0; }
         }
     </style>
 </head>
