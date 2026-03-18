@@ -22,14 +22,14 @@
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .hero {
             height: 100vh;
             width: 100%;
             display: flex;
-            align-items: center;
+            align-items: center; /* Контент по центру по вертикали */
             position: relative;
             padding: 0 8%;
         }
@@ -57,6 +57,7 @@
             z-index: 2;
         }
 
+        /* ОСНОВНОЙ КОНТЕНТ */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -65,67 +66,66 @@
         }
 
         h1 {
-            font-size: clamp(38px, 8vw, 95px);
+            font-size: clamp(38px, 7vw, 90px);
             font-weight: 200;
             line-height: 1;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(16px, 2vw, 22px);
+            font-size: clamp(16px, 1.8vw, 20px);
             font-weight: 400;
             line-height: 1.6;
             color: rgba(255,255,255,0.85);
-            max-width: 550px;
-            margin-bottom: 50px;
-            border-left: 4px solid var(--gold);
-            padding-left: 25px;
+            max-width: 500px;
+            margin-bottom: 40px;
+            border-left: 3px solid var(--gold);
+            padding-left: 20px;
         }
 
         .btn {
-            padding: 22px 50px;
+            padding: 20px 50px;
             border: 1px solid var(--gold);
             color: white;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 2px;
             transition: 0.3s;
             background: rgba(242, 201, 76, 0.1);
             display: inline-block;
-            margin-bottom: 60px; /* Отступ от кнопки до надписей ниже */
         }
 
-        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 20px rgba(242, 201, 76, 0.4); }
+        .btn:hover { background: var(--gold); color: black; }
 
-        /* --- ИСПРАВЛЕННЫЙ БЛОК НАДПИСЕЙ --- */
+        /* --- ПОДВАЛ (STEPS BAR) --- */
         .steps-bar {
+            position: absolute;
+            bottom: 50px; /* Прижали к самому низу */
+            left: 8%;
+            right: 8%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            animation: fadeInUp 1.3s ease-out forwards;
+            justify-content: flex-start; /* В одну строку от левого края */
+            gap: 60px;
+            z-index: 20;
+            animation: fadeInUp 1.5s ease-out forwards;
         }
 
-        .step-item { 
-            display: flex; 
-            align-items: center; 
-            gap: 15px;
-        }
-
+        .step-item { display: flex; align-items: center; gap: 15px; }
         .dot-marker { 
             width: 12px; height: 12px; 
             background-color: var(--gold); 
             border-radius: 50%; 
-            box-shadow: 0 0 12px var(--gold);
+            box-shadow: 0 0 10px var(--gold);
         }
         
         .step-text { 
-            font-size: clamp(16px, 1.5vw, 20px); /* Увеличенный, адаптивный шрифт */
+            font-size: 20px; /* Увеличенный шрифт */
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
@@ -133,46 +133,49 @@
             white-space: nowrap;
         }
 
-        /* ТЕЛЕФОН И ЛОГО */
         header { position: absolute; top: 40px; left: 8%; z-index: 100; }
-        .logo { font-weight: 900; font-size: 24px; letter-spacing: 2px; }
+        .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block {
             position: absolute;
             top: 40px; right: 8%;
             z-index: 100;
-            display: flex; align-items: center; gap: 15px;
+            display: flex; align-items: center; gap: 12px;
             text-decoration: none; color: white;
         }
 
         .phone-icon {
-            width: 45px; height: 45px;
+            width: 40px; height: 40px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: var(--gold); font-size: 18px;
+            color: var(--gold);
         }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
-        @media (max-width: 768px) {
-            .hero { padding: 0 5%; justify-content: center; text-align: center; }
-            .hero-bg { width: 100%; opacity: 0.4; }
-            .overlay { background: rgba(13, 13, 15, 0.85); }
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 1024px) {
+            .steps-bar { gap: 30px; }
+            .step-text { font-size: 16px; }
+        }
 
-            .description { border-left: none; padding-left: 0; margin: 0 auto 40px; }
-            
-            .btn { margin-bottom: 40px; width: 100%; }
+        @media (max-width: 768px) {
+            .hero { padding: 0 6%; justify-content: center; text-align: center; }
+            .hero-bg { width: 100%; opacity: 0.5; }
+            .description { border-left: none; padding-left: 0; margin: 0 auto 35px; }
+            .phone-number { display: none; }
 
             .steps-bar { 
+                position: relative; /* На мобильных возвращаем в поток под кнопку */
+                bottom: auto;
+                left: auto;
+                right: auto;
+                margin-top: 50px;
                 flex-direction: column; 
-                align-items: flex-start;
-                display: inline-flex;
-                gap: 20px;
+                align-items: center; 
+                gap: 20px; 
             }
-
-            .step-text { font-size: 16px; }
-            .phone-number { display: none; }
+            .step-text { font-size: 18px; }
         }
 
     </style>
@@ -198,14 +201,13 @@
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
-            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
+        </div>
 
-            <div class="steps-bar">
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
-            </div>
+        <div class="steps-bar">
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
         </div>
     </section>
 
