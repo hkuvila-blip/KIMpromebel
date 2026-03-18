@@ -1,1 +1,1 @@
-![Шапка](https://github.com/user-attachments/assets/341a4966-80ac-4dd5-9e84-0ef4021fa27a)
+![hero](https://github.com/user-attachments/assets/02702cad-be75-4818-933e-8227e3ba00e9)
