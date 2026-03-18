@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KIMPROMEBEL | Конструктор мебели</title>
-    <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body, html { height: 100%; width: 100%; background: #111; font-family: 'Golos Text', sans-serif; overflow: hidden; color: white; }
+        body, html { height: 100%; width: 100%; background: #0a0a0c; font-family: 'Montserrat', sans-serif; overflow: hidden; color: white; }
 
         .hero {
             height: 100vh;
@@ -19,7 +19,7 @@
             overflow: hidden; 
         }
 
-        /* ЗЕРКАЛЬНЫЙ ФОН */
+        /* ФОН С ТВОЕЙ КУХНЕЙ (ОРИГИНАЛЬНЫЙ ВИД) */
         .hero::before {
             content: "";
             position: absolute;
@@ -27,15 +27,18 @@
             left: 0;
             width: 100%;
             height: 100%;
+            /* ССЫЛКА НА ТВОЮ КУХНЮ ИЗ АССЕТОВ GITHUB */
             background-image: url('https://github.com/user-attachments/assets/02702cad-be75-4818-933e-8227e3ba00e9');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            transform: scaleX(-1); /* Зеркалим фото */
+            
+            /* МЫ УБРАЛИ TRANSFORM, КАРТИНКА ВЕРНУЛАСЬ В ПЕРВОНАЧАЛЬНЫЙ ВИД */
+            
             z-index: 1;
         }
 
-        /* ПРАВИЛЬНЫЙ ГРАДИЕНТ: ТЕМНЫЙ СЛЕВА -> СВЕТЛЫЙ СПРАВА */
+        /* ГЛЯНЦЕВОЕ ЗАТЕМНЕНИЕ (ТЕМНЫЙ ГРАДИЕНТ -> ПОЧТИ ПРОЗРАЧНО) */
         .hero::after {
             content: "";
             position: absolute;
@@ -43,46 +46,59 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, rgba(17, 17, 17, 0.95) 25%, rgba(17, 17, 17, 0.1) 100%);
+            
+            /* Глубокий антрацит, как глянцевый лак, уходит в легкую дымку */
+            background: linear-gradient(90deg, 
+                rgba(10, 10, 12, 0.98) 20%, 
+                rgba(10, 10, 12, 0.6) 80%, 
+                rgba(10, 10, 12, 0.1) 100%
+            );
+            
+            /* Легкий блюр для эффекта глянцевого стекла */
+            backdrop-filter: blur(3px); 
+            
             z-index: 2;
         }
 
         .content { z-index: 10; max-width: 900px; position: relative; }
 
         h1 { 
-            font-size: clamp(32px, 7vw, 72px); 
+            font-size: clamp(32px, 7vw, 75px); 
             font-weight: 900; 
             text-transform: uppercase; 
-            line-height: 1; 
-            margin-bottom: 24px; 
-            letter-spacing: -0.03em; /* Сжимаем буквы для стиля */
+            line-height: 0.95; 
+            margin-bottom: 25px; 
+            letter-spacing: -2px;
+            color: white;
+            text-shadow: 0 5px 25px rgba(0,0,0,0.6); /* Объем для текста */
         }
         
         h1 span { color: #f2c94c; }
 
         p { 
-            font-size: clamp(15px, 2vw, 20px); 
+            font-size: clamp(15px, 2vw, 22px); 
             margin-bottom: 45px; 
-            color: #b0b0b0; 
-            max-width: 550px; 
+            color: #f5f5f5; 
+            max-width: 600px; 
             font-weight: 400;
             line-height: 1.5;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
         
         .btn {
-            padding: 22px 50px; 
+            padding: 22px 55px; 
             background: #f2c94c; 
             color: #000;
             text-decoration: none; 
-            font-weight: 700; 
+            font-weight: 800; 
             text-transform: uppercase;
             display: inline-block; 
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             transition: all 0.3s ease;
-            border: 2px solid #f2c94c;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        .btn:hover { background: transparent; color: #f2c94c; transform: translateY(-3px); }
+        .btn:hover { background: #ffffff; color: #000; transform: translateY(-5px) scale(1.02); }
 
         .logo-top {
             position: absolute;
@@ -92,6 +108,8 @@
             font-size: 22px;
             letter-spacing: 0.1em;
             z-index: 100;
+            text-transform: uppercase;
+            color: white;
         }
         .logo-top span { color: #f2c94c; }
 
@@ -104,8 +122,8 @@
     <section class="hero">
         <div class="content">
             <h1>ПРОЕКТИРОВАНИЕ <br><span>КУХОНЬ</span> ДЛЯ <br>ПРОИЗВОДСТВА</h1>
-            <p>Техническая документация, деталировка и 3D-визуализация. <br>Конструкторский подход, исключающий ошибки на монтаже.</p>
-            <a href="https://t.me/kimpromebel_pro" target="_blank" class="btn">Заказать расчет</a>
+            <p>Конструкторская документация, чертежи и 3D-визуализация. <br>Технически безупречные проекты за 2-3 дня.</p>
+            <a href="https://t.me/kimpromebel_pro" target="_blank" class="btn">Заказать проект</a>
         </div>
     </section>
 
