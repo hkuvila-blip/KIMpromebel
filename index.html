@@ -22,11 +22,11 @@
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
-            overflow-x: hidden;
+            overflow: hidden; /* Запрещаем лишний скролл на десктопе */
         }
 
         .hero {
-            min-height: 100vh;
+            height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
@@ -57,7 +57,7 @@
             z-index: 2;
         }
 
-        /* КОНТЕНТ */
+        /* ОСНОВНОЙ БЛОК */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -72,7 +72,6 @@
             text-transform: uppercase;
             margin-bottom: 25px;
         }
-
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
@@ -100,38 +99,39 @@
             background: rgba(242, 201, 76, 0.1);
             display: inline-block;
         }
-
         .btn:hover { background: var(--gold); color: black; }
 
-        /* ЭТАПЫ (Steps Bar) */
+        /* --- ПОДВАЛ (STEPS BAR) - ТЕПЕРЬ СТРОГО ВНИЗУ --- */
         .steps-bar {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px; /* Расстояние от нижнего края экрана */
             left: 8%;
+            right: 8%;
             display: flex;
-            gap: 50px;
+            justify-content: flex-start;
+            gap: 60px;
             z-index: 20;
             animation: fadeInUp 1.5s ease-out forwards;
         }
 
-        .step-item { display: flex; align-items: center; gap: 12px; }
+        .step-item { display: flex; align-items: center; gap: 15px; }
         .dot-marker { 
-            width: 10px; height: 10px; 
+            width: 12px; height: 12px; 
             background-color: var(--gold); 
             border-radius: 50%; 
-            box-shadow: 0 0 8px var(--gold);
+            box-shadow: 0 0 10px var(--gold);
         }
         
         .step-text { 
-            font-size: clamp(17.6px, 1.8vw, 22px);
-            font-weight: 400;
+            font-size: clamp(17.6px, 1.8vw, 22px); /* Размер как у описания */
+            font-weight: 400; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
             color: #fff;
             white-space: nowrap;
         }
 
-        /* ШАПКА */
+        /* ШАПКА И КОНТАКТЫ */
         header { position: absolute; top: 35px; left: 8%; z-index: 100; }
         .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
@@ -143,7 +143,6 @@
             display: flex; align-items: center; gap: 12px;
             text-decoration: none; color: white;
         }
-
         .phone-icon {
             width: 40px; height: 40px;
             border: 1px solid var(--gold);
@@ -152,43 +151,31 @@
             color: var(--gold);
         }
 
-        /* --- СМАРТФОНЫ (MOBILE) --- */
+        /* --- АДАПТАЦИЯ ПОД СМАРТФОНЫ --- */
         @media (max-width: 768px) {
-            .hero { padding: 100px 6% 40px; align-items: flex-start; }
+            body, html { overflow-y: auto; } /* Разрешаем скролл на мобильных */
+            .hero { padding: 120px 6% 60px; align-items: flex-start; height: auto; min-height: 100vh; }
             .content { text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; }
             
-            .hero-bg { width: 100%; opacity: 0.5; }
-            .overlay { background: rgba(13, 13, 15, 0.85); }
+            .hero-bg { width: 100%; opacity: 0.4; }
+            .overlay { background: rgba(13, 13, 15, 0.9); }
 
-            h1 { font-size: 38px; margin-bottom: 20px; }
-            
-            .description { 
-                border-left: none; 
-                padding-left: 0; 
-                margin-bottom: 30px; 
-                font-size: 17px;
-                line-height: 1.4;
-            }
+            h1 { font-size: clamp(32px, 10vw, 42px); }
+            .description { border-left: none; padding-left: 0; margin-bottom: 30px; font-size: 17px; }
+            .btn { width: 100%; max-width: 300px; }
 
-            .btn { width: 100%; max-width: 280px; }
-
-            /* На смартфоне этапы ПЕРЕЕЗЖАЮТ под кнопку */
+            /* На смартфоне убираем абсолютное позиционирование внизу */
             .steps-bar { 
                 position: relative; 
-                bottom: auto; left: auto; 
+                bottom: auto; left: auto; right: auto;
                 margin-top: 50px; 
                 flex-direction: column; 
                 align-items: center;
-                gap: 15px;
+                gap: 20px;
                 width: 100%;
             }
-            .step-text { 
-                white-space: normal; 
-                font-size: 16px; 
-                text-align: center;
-            }
+            .step-text { white-space: normal; font-size: 17px; text-align: center; }
             .phone-number { display: none; }
-            header, .phone-block { top: 25px; }
         }
     </style>
 </head>
@@ -214,12 +201,12 @@
                 Создаем техническую базу для безупречного производства.
             </div>
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
+        </div>
 
-            <div class="steps-bar mobile-only">
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
-                <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
-            </div>
+        <div class="steps-bar">
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
+            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
         </div>
     </section>
 
