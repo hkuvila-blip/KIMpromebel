@@ -8,22 +8,20 @@
     <style>
         :root {
             --gold: #f2c94c;
-            --dark: #0d0d0f;
-            /* Слева оставляем плотность для читаемости текста */
-            --bordeaux-deep: rgba(30, 2, 18, 0.65); 
-            /* Справа — полная прозрачность (на 20% светлее предыдущего) */
-            --bordeaux-light: rgba(30, 2, 18, 0);
+            --dark-grey: #1a1a1c; /* Новый базовый темно-серый */
             
-            /* ЭФФЕКТЫ ГЛЯНЦА */
-            --gloss-bright: rgba(255, 255, 255, 0.18); /* Основной блик */
-            --gloss-sharp: rgba(255, 255, 255, 0.1);  /* Острый отблеск */
+            /* Настройки затемнения по ТЗ */
+            --mask-heavy: rgba(26, 26, 28, 0.8); /* 80% слева */
+            --mask-light: rgba(26, 26, 28, 0.2); /* 20% справа */
+            
+            --gloss-shine: rgba(255, 255, 255, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html { 
             height: 100%; width: 100%; 
-            background: var(--dark); 
+            background: #0d0d0f; 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
             overflow-x: hidden;
@@ -39,33 +37,31 @@
             padding: 0 8%;
         }
 
-        /* ФОН КУХНИ — Максимальная четкость */
+        /* ФОН КУХНИ */
         .hero-bg {
             position: absolute;
             top: 0; right: 0;
-            width: 90%; height: 100%;
+            width: 95%; height: 100%;
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1;
-            opacity: 0.55; 
+            opacity: 0.6; /* Хорошая видимость для серого фона */
         }
 
-        /* УЛЬТРА-ГЛЯНЦЕВЫЙ ГРАДИЕНТ */
+        /* ГЕОМЕТРИЧЕСКИЙ ГРАДИЕНТ 1/3 */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Острый глянцевый блик */
-                linear-gradient(125deg, transparent 40%, var(--gloss-sharp) 45%, var(--gloss-bright) 48%, transparent 52%),
-                /* Мягкое свечение */
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-                /* Бордовый фильтр (максимально смещен влево) */
+                /* Глянцевый блик */
+                linear-gradient(115deg, transparent 45%, var(--gloss-shine) 50%, transparent 55%),
+                /* Основной серый фильтр с делением по 1/3 */
                 linear-gradient(90deg, 
-                    var(--bordeaux-deep) 0%,     
-                    var(--bordeaux-deep) 5%,    /* Глухая тень только в самом начале */
-                    rgba(30, 2, 18, 0.4) 25%,    
-                    rgba(30, 2, 18, 0.1) 50%,  
-                    var(--bordeaux-light) 80%    /* Полное осветление правой части */
+                    var(--mask-heavy) 0%,      /* Начало: 80% */
+                    var(--mask-heavy) 33.3%,   /* Конец первой трети: 80% */
+                    rgba(26, 26, 28, 0.5) 50%, /* Плавный переход в центре */
+                    var(--mask-light) 66.6%,   /* Начало последней трети: 20% */
+                    var(--mask-light) 100%     /* Финиш: 20% */
                 );
             z-index: 2;
         }
@@ -79,24 +75,11 @@
             gap: 25px; 
         }
 
-        /* Отражение под текстом */
-        .content::after {
-            content: "";
-            position: absolute;
-            bottom: -40px;
-            left: 0; width: 100%; height: 50%;
-            transform: scaleY(-1);
-            opacity: 0.12;
-            filter: blur(10px);
-            background: linear-gradient(0deg, #fff 5%, transparent 100%);
-            -webkit-mask-image: linear-gradient(transparent 20%, black 90%);
-        }
-
         h1 {
             font-size: clamp(32px, 6vw, 85px);
             font-weight: 200; line-height: 1.1;
             text-transform: uppercase;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
@@ -104,10 +87,9 @@
         .description {
             font-size: clamp(15px, 1.5vw, 19px);
             font-weight: 400; line-height: 1.6;
-            color: rgba(255,255,255,0.95);
+            color: rgba(255,255,255,0.9);
             max-width: 500px;
             border-left: 3px solid var(--gold); padding-left: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .btn {
@@ -116,24 +98,24 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(242, 201, 76, 0.25);
+            background: rgba(242, 201, 76, 0.15);
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
-            box-shadow: 0 0 30px rgba(242, 201, 76, 0.2);
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
             backdrop-filter: blur(4px);
         }
-        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.6); }
+        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 40px rgba(242, 201, 76, 0.5); }
 
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
         }
-        .logo { font-weight: 900; font-size: 22px; text-shadow: 0 5px 15px rgba(0,0,0,0.7); }
+        .logo { font-weight: 900; font-size: 22px; }
         .logo span { color: var(--gold); }
 
         .phone-block { 
             display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; 
-            background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 30px; backdrop-filter: blur(5px);
+            background: rgba(255,255,255,0.05); padding: 5px 15px; border-radius: 30px; backdrop-filter: blur(10px);
         }
         .phone-icon {
             width: 35px; height: 35px; border: 1.5px solid var(--gold); border-radius: 50%;
@@ -159,11 +141,9 @@
         @media (max-width: 1024px) {
             .hero { padding: 100px 5% 50px; justify-content: center; align-items: center; }
             .overlay {
-                background: 
-                    linear-gradient(135deg, var(--gloss-sharp), transparent),
-                    linear-gradient(180deg, var(--bordeaux-deep) 0%, rgba(30, 2, 18, 0.2) 60%, transparent 100%);
+                /* Вертикальный градиент для мобилок: 80% сверху, 20% снизу */
+                background: linear-gradient(180deg, var(--mask-heavy) 0%, var(--mask-heavy) 40%, var(--mask-light) 90%);
             }
-            .content::after { display: none; }
             .content { align-items: center; text-align: center; width: 100%; gap: 20px; }
             .description { border-left: none; padding-left: 0; margin: 0 auto; }
             .btn { align-self: center; }
