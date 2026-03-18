@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIMpromebel | Конструктор мебели</title>
+    <title>KIMPROMEBEL | Профессиональное проектирование</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,25 +17,25 @@
             padding: 0 10%;
             position: relative;
             
-            /* ТОНИРОВКА + ПРЯМАЯ ССЫЛКА НА ТВОЕ ФОТО */
+            /* ТОНИРОВКА + ПРЯМАЯ ССЫЛКА ИЗ ТВОЕГО СКРИНШОТА */
             background: 
-                linear-gradient(90deg, rgba(26, 29, 35, 0.8) 20%, rgba(26, 29, 35, 0.3) 100%),
-                url('https://i.ibb.co/LhyM4pC/image.jpg'); /* Твоя кухня загружена сюда */
+                linear-gradient(90deg, rgba(26, 29, 35, 0.8) 20%, rgba(26, 29, 35, 0.2) 100%),
+                url('https://github.com/user-attachments/assets/02702cad-be75-4818-933e-8227e3ba00e9');
             
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        .content { z-index: 10; max-width: 800px; }
+        .content { z-index: 10; max-width: 900px; }
 
         h1 { 
-            font-size: clamp(40px, 8vw, 80px); 
+            font-size: clamp(35px, 8vw, 75px); 
             font-weight: 900; 
             text-transform: uppercase; 
-            line-height: 0.9; 
-            margin-bottom: 20px; 
-            letter-spacing: -2px;
+            line-height: 0.95; 
+            margin-bottom: 25px; 
+            letter-spacing: -1px;
         }
         
         h1 span { color: #f2c94c; }
@@ -44,7 +44,7 @@
             font-size: clamp(16px, 2vw, 22px); 
             margin-bottom: 40px; 
             color: #d1d5db; 
-            max-width: 600px; 
+            max-width: 550px; 
             font-weight: 400;
         }
         
@@ -56,24 +56,31 @@
             font-weight: 800; 
             text-transform: uppercase;
             display: inline-block; 
-            letter-spacing: 1px;
             transition: 0.3s ease;
         }
 
         .btn:hover { background: #ffffff; transform: translateY(-5px); }
 
-        /* Декоративная линия под заголовком */
-        .line { width: 100px; height: 4px; background: #f2c94c; margin-bottom: 30px; }
+        .logo-top {
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .logo-top span { color: #f2c94c; }
 
     </style>
 </head>
 <body>
 
+    <div class="logo-top">KIM<span>PROMEBEL</span></div>
+
     <section class="hero">
         <div class="content">
-            <div class="line"></div>
-            <h1>KIM<span>PRO</span>MEBEL</h1>
-            <p>Профессиональное проектирование мебели и деталировка. Чертежи для производства за 2-3 дня.</p>
+            <h1>ПРОЕКТИРОВАНИЕ <br><span>КУХОНЬ</span> ДЛЯ <br>ПРОИЗВОДСТВА</h1>
+            <p>Конструкторская документация, чертежи и 3D-визуализация. Исключаю ошибки при сборке и экономлю ваше время.</p>
             <a href="https://t.me/kimpromebel_pro" target="_blank" class="btn">Обсудить проект</a>
         </div>
     </section>
