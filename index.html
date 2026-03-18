@@ -46,7 +46,13 @@
             z-index: 2;
         }
 
-        .content { position: relative; z-index: 10; max-width: 800px; }
+        .content { 
+            position: relative; 
+            z-index: 10; 
+            max-width: 800px; 
+            display: flex;
+            flex-direction: column;
+        }
 
         h1 {
             font-size: clamp(34px, 6vw, 85px);
@@ -72,6 +78,7 @@
             font-size: 13px; letter-spacing: 2px;
             background: rgba(242, 201, 76, 0.05);
             display: inline-block; transition: 0.3s;
+            align-self: flex-start; /* Кнопка по ширине текста */
         }
         .btn:hover { background: var(--gold); color: black; }
 
@@ -88,60 +95,66 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
-        /* --- ФУТЕР (ЭТАПЫ) --- */
+        /* --- ЭТАПЫ (ФУТЕР) --- */
         .footer-steps {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 50px;
             z-index: 50;
-            width: 100%;
-            padding: 0 20px;
+            transition: all 0.3s ease;
         }
 
-        .step { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        /* Стиль для ПК (по умолчанию) */
+        @media (min-width: 1025px) {
+            .footer-steps {
+                position: fixed;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                justify-content: center;
+                gap: 60px;
+                width: 100%;
+            }
+        }
+
+        .step { display: flex; align-items: center; gap: 10px; }
         .dot { 
             width: 8px; height: 8px; 
             background: var(--gold); border-radius: 50%; 
             box-shadow: 0 0 10px var(--gold);
+            flex-shrink: 0;
         }
         .step span { 
             font-size: 13px;
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1px;
-            white-space: nowrap;
         }
 
-        /* --- АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И СМАРТФОНОВ --- */
+        /* --- АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТА И СМАРТФОНА (до 1024px) --- */
         @media (max-width: 1024px) {
+            .hero { padding: 120px 5% 60px; align-items: center; height: auto; min-height: 100vh; }
+            .content { align-items: center; text-align: center; }
+            .description { border-left: none; padding-left: 0; margin-left: auto; margin-right: auto; }
+            .btn { align-self: center; }
             .phone-number { display: none; }
-            
-            /* Надписи строго друг под другом */
+
+            /* Надписи переезжают ПОД кнопку */
             .footer-steps {
-                flex-direction: column; 
-                gap: 15px;
-                bottom: 25px; /* Немного ниже на планшетах */
+                position: relative; /* В потоке контента */
+                bottom: auto; left: auto; transform: none;
+                margin-top: 50px; /* Отступ от кнопки */
+                flex-direction: column; /* Строго друг под другом */
+                gap: 20px;
+                width: 100%;
             }
             
-            .step { width: 100%; justify-content: center; }
-            .step span { white-space: normal; text-align: center; font-size: 14px; }
+            .step { justify-content: center; }
+            .step span { font-size: 14px; white-space: nowrap; }
         }
 
-        @media (max-width: 768px) {
-            .hero { padding: 120px 20px 120px; align-items: flex-start; height: auto; min-height: 100vh; }
-            
-            /* На маленьких смартфонах переносим в поток, чтобы не перекрывать контент */
-            .footer-steps {
-                position: relative;
-                bottom: auto; left: auto; transform: none;
-                margin-top: 50px;
-                padding-bottom: 30px;
-            }
+        @media (max-width: 480px) {
+            .btn { width: 100%; text-align: center; }
+            .step span { font-size: 13px; }
         }
     </style>
 </head>
@@ -167,13 +180,14 @@
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
+            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
-        </div>
 
-        <div class="footer-steps">
-            <div class="step"><div class="dot"></div><span>1. Создаём 3д проект</span></div>
-            <div class="step"><div class="dot"></div><span>2. Готовим документы</span></div>
-            <div class="step"><div class="dot"></div><span>3. Отправляем на производство</span></div>
+            <div class="footer-steps">
+                <div class="step"><div class="dot"></div><span>1. Создаём 3д проект</span></div>
+                <div class="step"><div class="dot"></div><span>2. Готовим документы</span></div>
+                <div class="step"><div class="dot"></div><span>3. Отправляем на производство</span></div>
+            </div>
         </div>
     </section>
 
