@@ -18,7 +18,7 @@
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
-            overflow: hidden; /* Убираем лишнюю прокрутку на десктопе */
+            overflow-x: hidden;
         }
 
         .hero {
@@ -88,66 +88,51 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
-        /* --- ФУТЕР (ЭТАПЫ) - ЖЕСТКОЕ ПОЗИЦИОНИРОВАНИЕ --- */
+        /* --- ФУТЕР (ЭТАПЫ) - ЦЕНТРИРОВАНИЕ И ПРИЖАТИЕ ВНИЗ --- */
         .footer-steps {
-            position: absolute;
-            bottom: 40px; /* Прижимаем к низу */
-            left: 8%;
-            right: 8%;
+            position: fixed; /* Фиксируем относительно экрана */
+            bottom: 30px;    /* Расстояние от нижнего края */
+            left: 50%;
+            transform: translateX(-50%); /* Идеальное центрирование */
             display: flex;
-            justify-content: flex-start; /* На десктопе в ряд от левого края */
-            gap: 50px;
-            z-index: 20;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(20px, 4vw, 60px);
+            z-index: 50;
+            width: 100%;
+            padding: 0 20px;
         }
 
-        .step { display: flex; align-items: center; gap: 12px; }
+        .step { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
         .dot { 
             width: 8px; height: 8px; 
             background: var(--gold); border-radius: 50%; 
             box-shadow: 0 0 10px var(--gold);
-            flex-shrink: 0;
         }
         .step span { 
-            font-size: 13px; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px;
+            font-size: clamp(10px, 1.2vw, 14px); 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
             white-space: nowrap;
         }
 
-        /* --- АДАПТИВНОСТЬ --- */
-        
-        /* Планшеты и узкие экраны */
-        @media (max-width: 1100px) {
-            .footer-steps { gap: 30px; }
-            .step span { font-size: 11px; }
-        }
-
-        @media (max-width: 850px) {
+        /* --- АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ --- */
+        @media (max-width: 768px) {
+            .hero { padding: 120px 20px 100px; align-items: flex-start; height: auto; min-height: 100vh; }
             .phone-number { display: none; }
-            .footer-steps { 
-                justify-content: center; /* Центрируем на планшетах */
-                bottom: 30px;
-            }
-        }
-
-        /* Смартфоны */
-        @media (max-width: 500px) {
-            body, html { overflow-y: auto; } /* Разрешаем скролл если экран совсем крошечный */
-            .hero { padding: 120px 25px 60px; align-items: flex-start; height: auto; min-height: 100vh; }
-            .content { text-align: left; }
-            .description { margin-bottom: 30px; }
-            .btn { width: 100%; text-align: center; }
-
-            /* Переносим этапы под кнопку */
+            
+            /* На мобильных фиксированный футер может мешать, 
+               поэтому возвращаем его в поток под кнопку */
             .footer-steps {
                 position: relative;
-                bottom: auto; left: auto; right: auto;
-                margin-top: 50px;
+                bottom: auto; left: auto; transform: none;
+                margin-top: 60px;
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-                padding-bottom: 40px;
+                align-items: center;
+                gap: 15px;
             }
-            .step span { font-size: 14px; white-space: normal; }
+            .step span { font-size: 14px; white-space: normal; text-align: center; }
         }
     </style>
 </head>
@@ -174,12 +159,12 @@
                 Создаем техническую базу для безупречного производства.
             </div>
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
+        </div>
 
-            <div class="footer-steps">
-                <div class="step"><div class="dot"></div><span>1. Создаём 3д проект</span></div>
-                <div class="step"><div class="dot"></div><span>2. Готовим документы</span></div>
-                <div class="step"><div class="dot"></div><span>3. Отправляем на производство</span></div>
-            </div>
+        <div class="footer-steps">
+            <div class="step"><div class="dot"></div><span>создаем 3д проект</span></div>
+            <div class="step"><div class="dot"></div><span>готовим документы</span></div>
+            <div class="step"><div class="dot"></div><span>отправляем на производство</span></div>
         </div>
     </section>
 
