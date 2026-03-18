@@ -8,10 +8,10 @@
     <style>
         :root {
             --gold: #f2c94c;
+            /* Золотистый оттенок для блика */
+            --gold-glare: rgba(242, 201, 76, 0.05); /* Плотность 5% */
             --gold-soft: rgba(242, 201, 76, 0.08);
             --pure-black: #0d0d0f;
-            /* Блик стал на 50% прозрачнее (0.2 -> 0.1) */
-            --glare-color: rgba(255, 255, 255, 0.1); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,10 +24,12 @@
             overflow-x: hidden;
         }
 
-        /* АНИМАЦИЯ БЛИКА — СТАЛА ПЛАВНЕЕ (2.5s) */
+        /* АНИМАЦИЯ ЗОЛОТОГО БЛИКА — СТАЛА ЕЩЕ МЕДЛЕННЕЕ (3s) */
         @keyframes shine-slide {
-            0% { transform: translateX(-150%) skewX(-25deg); }
-            100% { transform: translateX(300%) skewX(-25deg); }
+            0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
+            10% { opacity: 1; } /* Плавное появление */
+            90% { opacity: 1; }
+            100% { transform: translateX(350%) skewX(-25deg); opacity: 0; } /* Плавное затухание */
         }
 
         .hero {
@@ -67,18 +69,21 @@
             overflow: hidden;
         }
 
-        /* КОРРЕКЦИЯ БЛИКА: Тоньше и прозрачнее */
+        /* КОРРЕКЦИЯ ЗОЛОТОГО БЛИКА: Тоньше, прозрачнее, золотистее */
         .overlay::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 35%; height: 100%;
+            top: 0; left: 0; width: 30%; height: 100%;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                var(--glare-color) 50%, 
+                var(--gold-glare) 50%, 
                 transparent 100%
             );
-            animation: shine-slide 2.5s ease-in-out forwards;
+            /* Анимация один раз при загрузке (3 секунды) */
+            animation: shine-slide 3s ease-in-out forwards;
             z-index: 3;
+            /* Фильтр для имитации зеркальности */
+            backdrop-filter: blur(1px);
         }
 
         .content { 
@@ -112,7 +117,7 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(242, 201, 76, 0.1);
+            background: rgba(242, 201, 76, 0.05); /* Легкий золотой фон кнопки */
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
         }
