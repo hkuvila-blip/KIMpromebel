@@ -26,12 +26,12 @@
         }
 
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
             position: relative;
-            padding: 0 8%;
+            padding: 80px 8%;
         }
 
         .hero-bg {
@@ -61,12 +61,11 @@
             position: relative; 
             z-index: 10; 
             max-width: 900px;
-            width: 100%;
             animation: fadeInUp 1s ease-out forwards; 
         }
 
         h1 {
-            font-size: clamp(32px, 7vw, 90px);
+            font-size: clamp(34px, 7vw, 90px);
             font-weight: 200;
             line-height: 1;
             text-transform: uppercase;
@@ -77,12 +76,12 @@
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(17px, 2vw, 22px);
+            font-size: clamp(17px, 1.8vw, 22px);
             font-weight: 400;
             line-height: 1.5;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
             max-width: 550px;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
             border-left: 3px solid var(--gold);
             padding-left: 20px;
         }
@@ -101,15 +100,15 @@
             display: inline-block;
         }
 
-        /* ПОДВАЛ ДЛЯ ДЕСКТОПА */
+        .btn:hover { background: var(--gold); color: black; }
+
+        /* --- ЭТАПЫ (Steps Bar) --- */
         .steps-bar {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px;
             left: 8%;
-            right: 8%;
             display: flex;
-            justify-content: flex-start;
-            gap: 50px;
+            gap: 40px;
             z-index: 20;
             animation: fadeInUp 1.5s ease-out forwards;
         }
@@ -119,11 +118,11 @@
             width: 10px; height: 10px; 
             background-color: var(--gold); 
             border-radius: 50%; 
-            box-shadow: 0 0 8px var(--gold);
+            box-shadow: 0 0 10px var(--gold);
         }
         
         .step-text { 
-            font-size: clamp(17px, 2vw, 22px);
+            font-size: clamp(16px, 1.5vw, 20px);
             font-weight: 400;
             text-transform: uppercase; 
             letter-spacing: 1px; 
@@ -151,54 +150,46 @@
             color: var(--gold);
         }
 
-        /* --- ГЛУБОКАЯ МОБИЛЬНАЯ ОПТИМИЗАЦИЯ --- */
+        /* --- ФИКСАЦИЯ МОБИЛЬНОЙ ВЕРСИИ --- */
+        @media (max-width: 992px) {
+            .steps-bar { gap: 20px; }
+            .step-text { font-size: 14px; }
+        }
+
         @media (max-width: 768px) {
-            .hero { padding: 0 5%; justify-content: center; }
-            .content { text-align: center; display: flex; flex-direction: column; align-items: center; }
-            
+            .hero { padding: 100px 5% 40px; align-items: flex-start; text-align: center; }
             .hero-bg { width: 100%; opacity: 0.4; }
             .overlay { background: rgba(13, 13, 15, 0.85); }
-
-            h1 { font-size: 36px; margin-bottom: 20px; }
             
+            .content { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                margin-top: 20px;
+            }
+
             .description { 
                 border-left: none; 
                 padding-left: 0; 
-                font-size: 16px; 
+                font-size: 17px; 
                 margin-bottom: 30px; 
-                line-height: 1.4;
             }
 
-            .btn { width: 100%; max-width: 300px; padding: 15px; }
+            .btn { width: 100%; max-width: 280px; }
 
-            .phone-number { display: none; }
-            header, .phone-block { top: 20px; }
-
+            /* Переносим этапы под кнопку на мобильных */
             .steps-bar { 
-                position: relative;
-                bottom: auto; left: auto; right: auto;
-                margin-top: 40px;
-                flex-direction: column;
+                position: relative; 
+                bottom: auto; left: auto; 
+                margin-top: 50px; 
+                flex-direction: column; 
                 align-items: center;
                 gap: 15px;
                 width: 100%;
             }
-            
-            .step-text { 
-                font-size: 15px; /* Уменьшаем для мобильных, чтобы влезло */
-                white-space: normal; /* Разрешаем перенос, если экран совсем узкий */
-                text-align: center;
-            }
-
-            .dot-marker { width: 8px; height: 8px; }
+            .step-text { white-space: normal; font-size: 16px; line-height: 1.2; }
+            .phone-number { display: none; }
         }
-
-        /* Для сверхмалых экранов (iPhone 5/SE) */
-        @media (max-width: 350px) {
-            h1 { font-size: 28px; }
-            .step-text { font-size: 14px; }
-        }
-
     </style>
 </head>
 <body>
