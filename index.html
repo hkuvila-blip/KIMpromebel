@@ -91,42 +91,50 @@
             text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* HEADER & PHONE */
-        header { position: absolute; top: 35px; left: 8%; z-index: 100; }
+        /* --- ШАПКА САЙТА --- */
+        .top-nav {
+            position: absolute;
+            top: 35px;
+            left: 8%;
+            right: 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
         .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block {
-            position: absolute; top: 35px; right: 8%;
-            z-index: 100; display: flex; align-items: center; gap: 12px;
-            text-decoration: none; color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
         }
 
         .phone-icon {
             width: 44px; height: 44px;
-            border: 2px solid var(--gold); border-radius: 50%;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             background: rgba(13, 13, 15, 0.6);
             box-shadow: 0 0 15px rgba(242, 201, 76, 0.3);
         }
         /* ЖЕЛТАЯ ТРУБКА */
-        .phone-icon svg { width: 20px; height: 20px; fill: var(--gold); }
+        .phone-icon svg { width: 22px; height: 22px; fill: var(--gold); }
 
-        /* MOBILE FIXES */
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 768px) {
-            .hero { padding: 130px 6% 50px; align-items: flex-start; height: auto; min-height: 100vh; }
+            .top-nav { top: 20px; left: 5%; right: 5%; }
+            .logo { font-size: 16px; } /* Уменьшаем, чтобы не мешало иконке */
+            
+            .hero { padding: 140px 6% 50px; align-items: flex-start; height: auto; min-height: 100vh; }
             .content { display: flex; flex-direction: column; align-items: center; text-align: center; }
             
-            .logo { font-size: 19px; }
-            header { left: 6%; top: 25px; }
-
-            .phone-block { 
-                right: auto; left: 50%; 
-                transform: translateX(-50%); 
-                top: 20px;
-            }
-            .phone-number { display: none; }
-            .phone-icon { width: 48px; height: 48px; }
+            .phone-number { display: none; } /* Скрываем цифры на мобильном */
+            .phone-icon { width: 42px; height: 42px; }
 
             .description { border-left: none; padding-left: 0; font-size: 16px; margin-bottom: 30px; }
             .btn { width: 100%; max-width: 300px; }
@@ -141,16 +149,16 @@
 </head>
 <body>
 
-    <header>
+    <nav class="top-nav">
         <div class="logo">KIM<span>PRO</span>MEBEL</div>
-    </header>
-
-    <a href="tel:+380675867998" class="phone-block">
-        <div class="phone-icon">
-            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        </div>
-        <div class="phone-number"><span>(+38)</span> 067 586 79 98</div>
-    </a>
+        
+        <a href="tel:+380675867998" class="phone-block">
+            <div class="phone-number"><span>(+38)</span> 067 586 79 98</div>
+            <div class="phone-icon">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            </div>
+        </a>
+    </nav>
 
     <section class="hero">
         <div class="hero-bg"></div>
