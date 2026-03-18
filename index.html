@@ -57,7 +57,7 @@
             z-index: 2;
         }
 
-        /* ОСНОВНОЙ КОНТЕНТ */
+        /* КОНТЕНТ */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -81,7 +81,7 @@
             font-weight: 400;
             line-height: 1.6;
             color: rgba(255,255,255,0.85);
-            max-width: 500px;
+            max-width: 550px;
             margin-bottom: 40px;
             border-left: 3px solid var(--gold);
             padding-left: 20px;
@@ -103,10 +103,8 @@
 
         .btn:hover { background: var(--gold); color: black; }
 
-        /* --- ИСПРАВЛЕННЫЕ ЭТАПЫ ДЛЯ ДЕСКТОПА --- */
         .steps-bar {
-            /* Убрано абсолютное позиционирование */
-            margin-top: 80px; /* Фиксированный отступ от кнопки на десктопе */
+            margin-top: 80px;
             display: flex;
             justify-content: flex-start;
             gap: 60px;
@@ -123,7 +121,7 @@
         }
         
         .step-text { 
-            font-size: 18px; /* Восстановил размер как в описании */
+            font-size: 18px; 
             font-weight: 700; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
@@ -144,17 +142,20 @@
             text-decoration: none; color: white;
         }
 
+        /* ЯРКАЯ И ЧЕТКАЯ ИКОНКА */
         .phone-icon {
             width: 40px; height: 40px;
-            border: 1px solid var(--gold);
+            border: 2px solid var(--gold); /* Более толстая рамка для четкости */
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: var(--gold);
+            color: var(--gold); /* Ярко-желтый телефон */
+            background: rgba(13, 13, 15, 0.5); /* Фон для контраста */
+            box-shadow: 0 0 10px rgba(242, 201, 76, 0.4); /* Золотое свечение */
         }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ (как в V37) */
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ (V39) */
         @media (max-width: 768px) {
-            .hero { padding: 100px 6% 40px; align-items: flex-start; }
+            .hero { padding: 120px 6% 40px; align-items: flex-start; }
             .hero-bg { width: 100%; opacity: 0.5; }
             .overlay { background: rgba(13, 13, 15, 0.85); }
             .content { 
@@ -163,20 +164,37 @@
                 align-items: center; 
                 text-align: center;
             }
-
+            
+            h1 { font-size: clamp(32px, 10vw, 42px); margin-bottom: 20px; }
             .description { border-left: none; padding-left: 0; margin: 0 auto 35px; font-size: 16px; }
+            .btn { width: 100%; max-width: 300px; }
+            
+            /* ЦЕНТРОВКА ТЕЛЕФОНА И ЛОГО НА МОБИЛЬНОМ */
+            header { left: 5%; top: 25px; width: 90%; display: flex; justify-content: space-between; align-items: center; }
+            .logo { font-size: 18px; }
+
+            .phone-block { 
+                position: absolute;
+                top: 25px; 
+                left: 50%; 
+                right: auto;
+                transform: translateX(-50%); /* Идеально по центру */
+                width: auto;
+                justify-content: center;
+                gap: 10px;
+            }
+            .phone-icon { width: 35px; height: 35px; border-width: 1px; font-size: 14px; }
             .phone-number { display: none; }
             
-            /* На мобильных этапы возвращаем в поток под кнопку с меньшим отступом */
             .steps-bar { 
                 position: relative; 
                 bottom: auto; left: auto; right: auto;
-                margin-top: 50px; /* Отступ от кнопки на мобильном */
+                margin-top: 50px;
                 flex-direction: column; 
                 align-items: center; 
                 gap: 20px; 
             }
-            .step-text { font-size: 16px; white-space: normal; }
+            .step-text { font-size: 16px; white-space: normal; text-align: center;}
         }
 
     </style>
@@ -202,7 +220,6 @@
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
-            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
 
             <div class="steps-bar">
