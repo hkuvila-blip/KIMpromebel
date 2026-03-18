@@ -8,57 +8,49 @@
     <style>
         :root { --primary: #f2c94c; --dark: #1e2229; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--dark); color: #fff; }
+        body { font-family: 'Montserrat', sans-serif; background: #000; color: #fff; }
 
         header {
             position: fixed; width: 100%; padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(30, 34, 41, 0.8); backdrop-filter: blur(10px); z-index: 1000;
+            background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); z-index: 1000;
         }
         .logo { font-weight: 800; font-size: 24px; text-transform: uppercase; }
         .logo span { color: var(--primary); }
 
+        /* ИСПРАВЛЕННЫЙ БЛОК С ПРОЗРАЧНОЙ ТОНИРОВКОЙ */
         .hero {
-            height: 100vh; display: flex; align-items: center; padding: 0 8%;
-            /* ТОНИРОВКА: СДЕЛАЛ ЕЕ БОЛЕЕ ПРОЗРАЧНОЙ (0.4 и 0.6), ЧТОБЫ ВИДЕТЬ КУХНЮ */
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            /* Мы убрали тяжелые заливки. Теперь тут только легкий градиент */
             background: 
-                linear-gradient(90deg, rgba(30,34,41,0.85) 35%, rgba(30,34,41,0.4) 100%),
-                linear-gradient(rgba(30,34,41,0.3), rgba(30,34,41,0.3)),
-                url('hero.jpg'); /* ССЫЛКА НА ТВОЁ ФОТО */
-            background-size: cover; background-position: center;
+                linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                url('hero.jpg') no-repeat center center;
+            background-size: cover;
         }
 
-        .hero-content { max-width: 800px; z-index: 2; }
-        h1 { font-size: clamp(32px, 6vw, 64px); font-weight: 800; text-transform: uppercase; line-height: 1.1; margin-bottom: 20px; }
+        .hero-content { max-width: 800px; z-index: 5; }
+        h1 { font-size: clamp(30px, 6vw, 60px); font-weight: 800; text-transform: uppercase; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
         h1 span { color: var(--primary); }
-        p { font-size: 18px; margin-bottom: 30px; color: #d1d5db; }
+        p { font-size: 18px; margin-bottom: 30px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
 
         .btn { 
-            padding: 18px 40px; background: var(--primary); color: #000; 
+            padding: 15px 35px; background: var(--primary); color: #000; 
             text-decoration: none; font-weight: 800; text-transform: uppercase;
             display: inline-block; transition: 0.3s;
         }
-        .btn:hover { background: #fff; transform: translateY(-3px); }
-
-        .services { padding: 80px 8%; background: #1e2229; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: #2a2e38; padding: 30px; border-left: 4px solid var(--primary); }
+        .btn:hover { background: #fff; }
     </style>
 </head>
 <body>
     <header><div class="logo">KIM<span>promebel</span></div></header>
     <section class="hero">
         <div class="hero-content">
-            <h1>Проектирование <span>кухонь</span> для производства</h1>
-            <p>Техническая документация, чертежи и 3D-визуализация от KIMpromebel. Срок 2-3 дня.</p>
-            <a href="https://t.me/kimpromebel_pro" class="btn">Написать в Telegram</a>
-        </div>
-    </section>
-    <section class="services">
-        <div class="grid">
-            <div class="card"><h3>Деталировка</h3><p>Полный список деталей для распила.</p></div>
-            <div class="card"><h3>Фурнитура</h3><p>Спецификация петель, направляющих и механизмов.</p></div>
-            <div class="card"><h3>Схемы сборки</h3><p>Понятные чертежи для мастеров в цеху.</p></div>
+            <h1>Проектирование <span>кухонь</span></h1>
+            <p>Техническая документация и 3D-визуализация от KIMpromebel.</p>
+            <a href="https://t.me/kimpromebel_pro" class="btn">Написать мне</a>
         </div>
     </section>
 </body>
