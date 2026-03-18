@@ -31,7 +31,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding: 80px 8%;
+            padding: 0 8%;
         }
 
         .hero-bg {
@@ -57,6 +57,7 @@
             z-index: 2;
         }
 
+        /* КОНТЕНТ */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -76,9 +77,9 @@
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(17px, 1.8vw, 22px);
+            font-size: clamp(17.6px, 1.8vw, 22px);
             font-weight: 400;
-            line-height: 1.5;
+            line-height: 1.6;
             color: rgba(255,255,255,0.85);
             max-width: 550px;
             margin-bottom: 40px;
@@ -87,7 +88,7 @@
         }
 
         .btn {
-            padding: 18px 45px;
+            padding: 20px 50px;
             border: 1px solid var(--gold);
             color: white;
             text-decoration: none;
@@ -102,13 +103,13 @@
 
         .btn:hover { background: var(--gold); color: black; }
 
-        /* --- ЭТАПЫ (Steps Bar) --- */
+        /* ЭТАПЫ (Steps Bar) */
         .steps-bar {
             position: absolute;
-            bottom: 40px;
+            bottom: 50px;
             left: 8%;
             display: flex;
-            gap: 40px;
+            gap: 50px;
             z-index: 20;
             animation: fadeInUp 1.5s ease-out forwards;
         }
@@ -118,11 +119,11 @@
             width: 10px; height: 10px; 
             background-color: var(--gold); 
             border-radius: 50%; 
-            box-shadow: 0 0 10px var(--gold);
+            box-shadow: 0 0 8px var(--gold);
         }
         
         .step-text { 
-            font-size: clamp(16px, 1.5vw, 20px);
+            font-size: clamp(17.6px, 1.8vw, 22px);
             font-weight: 400;
             text-transform: uppercase; 
             letter-spacing: 1px; 
@@ -130,54 +131,48 @@
             white-space: nowrap;
         }
 
-        header { position: absolute; top: 30px; left: 8%; z-index: 100; }
-        .logo { font-weight: 900; font-size: 20px; letter-spacing: 1px; }
+        /* ШАПКА */
+        header { position: absolute; top: 35px; left: 8%; z-index: 100; }
+        .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block {
             position: absolute;
-            top: 30px; right: 8%;
+            top: 35px; right: 8%;
             z-index: 100;
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
             text-decoration: none; color: white;
         }
 
         .phone-icon {
-            width: 35px; height: 35px;
+            width: 40px; height: 40px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: var(--gold);
         }
 
-        /* --- ФИКСАЦИЯ МОБИЛЬНОЙ ВЕРСИИ --- */
-        @media (max-width: 992px) {
-            .steps-bar { gap: 20px; }
-            .step-text { font-size: 14px; }
-        }
-
+        /* --- СМАРТФОНЫ (MOBILE) --- */
         @media (max-width: 768px) {
-            .hero { padding: 100px 5% 40px; align-items: flex-start; text-align: center; }
-            .hero-bg { width: 100%; opacity: 0.4; }
-            .overlay { background: rgba(13, 13, 15, 0.85); }
+            .hero { padding: 100px 6% 40px; align-items: flex-start; }
+            .content { text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; }
             
-            .content { 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                margin-top: 20px;
-            }
+            .hero-bg { width: 100%; opacity: 0.5; }
+            .overlay { background: rgba(13, 13, 15, 0.85); }
 
+            h1 { font-size: 38px; margin-bottom: 20px; }
+            
             .description { 
                 border-left: none; 
                 padding-left: 0; 
-                font-size: 17px; 
                 margin-bottom: 30px; 
+                font-size: 17px;
+                line-height: 1.4;
             }
 
             .btn { width: 100%; max-width: 280px; }
 
-            /* Переносим этапы под кнопку на мобильных */
+            /* На смартфоне этапы ПЕРЕЕЗЖАЮТ под кнопку */
             .steps-bar { 
                 position: relative; 
                 bottom: auto; left: auto; 
@@ -187,8 +182,13 @@
                 gap: 15px;
                 width: 100%;
             }
-            .step-text { white-space: normal; font-size: 16px; line-height: 1.2; }
+            .step-text { 
+                white-space: normal; 
+                font-size: 16px; 
+                text-align: center;
+            }
             .phone-number { display: none; }
+            header, .phone-block { top: 25px; }
         }
     </style>
 </head>
@@ -215,7 +215,7 @@
             </div>
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
 
-            <div class="steps-bar">
+            <div class="steps-bar mobile-only">
                 <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
                 <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
                 <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
