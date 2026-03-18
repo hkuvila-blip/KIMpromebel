@@ -22,7 +22,7 @@
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
-            overflow-x: hidden; /* Запрещаем горизонтальный скролл */
+            overflow-x: hidden;
         }
 
         .hero {
@@ -53,7 +53,7 @@
                 rgba(13, 13, 15, 0.5) 60%, 
                 rgba(13, 13, 15, 0.1) 100%
             );
-            backdrop-filter: blur(1.5px);
+            backdrop-filter: blur(1px);
             z-index: 2;
         }
 
@@ -76,104 +76,107 @@
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(14px, 1.5vw, 16px);
+            font-size: clamp(16px, 1.8vw, 20px);
             font-weight: 400;
             line-height: 1.6;
-            color: rgba(255,255,255,0.8);
-            max-width: 450px;
-            margin-bottom: 40px;
-            border-left: 2px solid var(--gold);
+            color: rgba(255,255,255,0.9);
+            max-width: 500px;
+            margin-bottom: 45px;
+            border-left: 3px solid var(--gold);
             padding-left: 20px;
         }
 
         .btn {
-            padding: 18px 40px;
+            padding: 20px 45px;
             border: 1px solid var(--gold);
             color: white;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 11px;
+            font-size: 13px;
             letter-spacing: 2px;
             transition: 0.3s;
             background: rgba(242, 201, 76, 0.1);
             display: inline-block;
         }
 
-        /* ТЕЛЕФОН */
+        .btn:hover { background: var(--gold); color: black; }
+
         .phone-block {
             position: absolute;
-            top: 30px;
-            right: 8%;
+            top: 35px; right: 8%;
             z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: white;
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: white;
         }
 
         .phone-icon {
-            width: 34px; height: 34px;
+            width: 40px; height: 40px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: var(--gold);
-            font-size: 14px;
         }
 
-        .phone-number { font-size: 15px; font-weight: 500; letter-spacing: 0.5px; }
-
-        /* ЭТАПЫ (НИЗ) */
+        /* --- ОБНОВЛЕННЫЕ НИЖНИЕ НАДПИСИ --- */
         .steps-bar {
             position: absolute;
-            bottom: 40px;
+            bottom: 60px;
             left: 8%;
             display: flex;
-            gap: 30px;
+            gap: 50px;
             z-index: 20;
+            animation: fadeInUp 1.2s ease-out forwards;
         }
 
-        .step-item { display: flex; align-items: center; gap: 8px; }
-        .dot-marker { width: 6px; height: 6px; background-color: var(--gold); border-radius: 50%; }
-        .step-text { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.8); }
+        .step-item { display: flex; align-items: center; gap: 15px; }
+        .dot-marker { 
+            width: 10px; height: 10px; 
+            background-color: var(--gold); 
+            border-radius: 50%; 
+            box-shadow: 0 0 10px var(--gold);
+        }
+        
+        .step-text { 
+            font-size: 18px; /* Увеличено в 2 раза */
+            font-weight: 500; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: rgba(255, 255, 255, 1); 
+        }
 
-        header { position: absolute; top: 30px; left: 8%; z-index: 100; }
-        .logo { font-weight: 900; font-size: 18px; letter-spacing: 1px; }
+        header { position: absolute; top: 35px; left: 8%; z-index: 100; }
+        .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
-        /* --- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ (Smartphones) --- */
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ --- */
         @media (max-width: 768px) {
-            .hero { padding: 0 5%; justify-content: center; text-align: center; }
-            
-            .hero-bg { width: 100%; opacity: 0.6; } /* На мобильных фото — на весь экран фоном */
+            .hero { padding: 0 6%; justify-content: center; text-align: center; }
+            .hero-bg { width: 100%; opacity: 0.5; }
             
             .overlay {
-                background: radial-gradient(circle, rgba(13, 13, 15, 0.7) 0%, rgba(13, 13, 15, 0.95) 100%);
+                background: radial-gradient(circle, rgba(13, 13, 15, 0.8) 0%, rgba(13, 13, 15, 0.98) 100%);
             }
 
-            .description { border-left: none; padding-left: 0; margin: 0 auto 30px; }
+            .description { border-left: none; padding-left: 0; margin: 0 auto 35px; }
 
-            .phone-number { display: none; } /* Оставляем только иконку трубки */
-            .phone-block { right: 5%; top: 25px; }
-            header { left: 5%; top: 25px; }
+            .phone-number { display: none; }
+            .phone-block { right: 6%; top: 30px; }
+            header { left: 6%; top: 30px; }
 
             .steps-bar { 
-                left: 0; right: 0; bottom: 20px;
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: 50px; /* Отступ от кнопки до этапов на мобильном */
                 flex-direction: column; 
-                align-items: center; 
-                gap: 8px; 
+                align-items: flex-start; /* Выравнивание по левому краю для красоты */
+                display: inline-flex; /* Чтобы блок был по центру */
+                gap: 15px; 
             }
             
-            .step-text { font-size: 8px; }
-            
-            h1 { font-size: 38px; margin-bottom: 20px; }
-        }
-
-        /* Для очень маленьких экранов (iPhone SE и т.д.) */
-        @media (max-width: 380px) {
-            h1 { font-size: 30px; }
-            .btn { width: 100%; text-align: center; }
+            .step-text { font-size: 14px; } /* Чуть меньше для мобильных, но все равно крупно */
+            h1 { font-size: 40px; }
         }
 
     </style>
@@ -199,13 +202,14 @@
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
+            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
-        </div>
 
-        <div class="steps-bar">
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
+            <div class="steps-bar">
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
+            </div>
         </div>
     </section>
 
