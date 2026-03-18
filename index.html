@@ -9,11 +9,15 @@
         :root {
             --gold: #f2c94c;
             --dark: #0d0d0f;
-            /* Еще на 15% светлее: 0.85 -> 0.70 */
-            --bordeaux-deep: rgba(35, 2, 20, 0.7); 
-            --bordeaux-mid: rgba(35, 2, 20, 0.4);
-            --bordeaux-light: rgba(35, 2, 20, 0.02);
-            --gloss-sheen: rgba(255, 255, 255, 0.07); /* Цвет блика */
+            /* Еще на 5% светлее слева: 0.70 -> 0.65 */
+            --bordeaux-deep: rgba(35, 2, 20, 0.65); 
+            --bordeaux-mid: rgba(35, 2, 20, 0.35);
+            /* Правая сторона осветлена на 20%: 0.02 -> 0.01 (почти прозрачная) */
+            --bordeaux-light: rgba(35, 2, 20, 0.01);
+            
+            /* БОЛЬШЕ БЛЕСКА И ОТРАЖЕНИЯ */
+            --gloss-sheen: rgba(255, 255, 255, 0.12); /* Ярче блик */
+            --mirror-reflect: rgba(255, 255, 255, 0.04); /* Отражение текста */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,7 +40,7 @@
             padding: 0 8%;
         }
 
-        /* ФОН КУХНИ — Стал ярче */
+        /* ФОН КУХНИ — Полностью открыт справа */
         .hero-bg {
             position: absolute;
             top: 0; right: 0;
@@ -44,27 +48,29 @@
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1;
-            opacity: 0.35; 
+            opacity: 0.45; /* Стал сочнее */
         }
 
-        /* СЛОЖНЫЙ ГРАДИЕНТ + БЛЕСК */
+        /* СЛОЖНЫЙ ГРАДИЕНТ + ГЛЯНЦЕВЫЙ БЛЕСК */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Блик для блеска */
-                linear-gradient(110deg, transparent 35%, var(--gloss-sheen) 45%, transparent 50%),
-                /* Основной бордовый фильтр */
+                /* БЛИКИ ДЛЯ БЛЕСКА (Многослойные) */
+                radial-gradient(circle at 75% 30%, var(--gloss-sheen) 0%, transparent 45%),
+                radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.09) 0%, transparent 35%),
+                /* Основной бордовый фильтр (Осветленный и рассеянный) */
                 linear-gradient(90deg, 
-                    var(--bordeaux-deep) 0%,     
-                    var(--bordeaux-deep) 15%,    
-                    var(--bordeaux-mid) 40%,    
-                    rgba(35, 2, 20, 0.2) 70%,    
-                    var(--bordeaux-light) 100%   
+                    var(--bordeaux-deep) 0%,     /* Тень слева */
+                    var(--bordeaux-deep) 10%,    /* Быстрое рассеивание */
+                    var(--bordeaux-mid) 35%,    
+                    rgba(35, 2, 20, 0.15) 60%,  /* Осветленный центр */
+                    var(--bordeaux-light) 100%   /* Полная прозрачность справа */
                 );
             z-index: 2;
         }
 
+        /* КОНТЕНТ-КОНТЕЙНЕР — Глянцевый блеск на тексте */
         .content { 
             position: relative; 
             z-index: 10; 
@@ -74,11 +80,27 @@
             gap: 25px; 
         }
 
+        /* ЗЕРКАЛЬНОЕ ОТРАЖЕНИЕ ТЕКСТА (НОВОЕ) */
+        .content::after {
+            content: "";
+            position: absolute;
+            bottom: -30px; /* Отражение под текстом */
+            left: 0; width: 100%; height: 60%;
+            background: inherit; /* Копируем контент */
+            transform: scaleY(-1); /* Зеркально отражаем */
+            opacity: 0.15; /* Очень тонкое */
+            filter: blur(12px); /* Размытость для зеркальности */
+            background-clip: padding-box;
+            background: linear-gradient(0deg, #fff 10%, transparent 100%);
+            -webkit-mask-image: linear-gradient(transparent 30%, var(--bordeaux-mid) 90%);
+        }
+
         h1 {
             font-size: clamp(32px, 6vw, 85px);
             font-weight: 200; line-height: 1.1;
             text-transform: uppercase;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Тень для читаемости на светлом фоне */
+            text-shadow: 0 5px 25px rgba(0,0,0,0.6); /* Глубокая тень */
+            position: relative;
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
@@ -86,7 +108,7 @@
         .description {
             font-size: clamp(15px, 1.5vw, 19px);
             font-weight: 400; line-height: 1.6;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.92);
             max-width: 500px;
             border-left: 3px solid var(--gold); padding-left: 20px;
         }
@@ -97,25 +119,27 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(242, 201, 76, 0.15);
+            background: rgba(242, 201, 76, 0.2);
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
-            box-shadow: 0 0 20px rgba(242, 201, 76, 0.1);
+            box-shadow: 0 0 25px rgba(242, 201, 76, 0.15);
+            backdrop-filter: blur(3px); /* Зеркальный эффект на кнопке */
         }
-        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 30px rgba(242, 201, 76, 0.4); }
+        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 40px rgba(242, 201, 76, 0.5); }
 
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
         }
-        .logo { font-weight: 900; font-size: 22px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .logo { font-weight: 900; font-size: 22px; text-shadow: 0 3px 15px rgba(0,0,0,0.6); }
         .logo span { color: var(--gold); }
 
         .phone-block { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
         .phone-icon {
             width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(5px);
         }
 
         .footer-steps { display: flex; z-index: 50; }
@@ -136,9 +160,14 @@
 
         @media (max-width: 1024px) {
             .hero { padding: 100px 5% 50px; justify-content: center; align-items: center; }
+            
+            /* Глянец на мобильных: Блик сверху */
             .overlay {
-                background: linear-gradient(180deg, var(--bordeaux-deep) 0%, var(--bordeaux-deep) 25%, var(--bordeaux-mid) 55%, var(--bordeaux-light) 100%);
+                background: 
+                    radial-gradient(circle at 80% 10%, var(--gloss-sheen) 0%, transparent 40%),
+                    linear-gradient(180deg, var(--bordeaux-deep) 0%, rgba(35, 2, 20, 0.1) 75%, var(--bordeaux-light) 100%);
             }
+            .content::after { display: none; } /* Отражение на мобилках мешает */
             .content { align-items: center; text-align: center; width: 100%; gap: 20px; }
             .description { border-left: none; padding-left: 0; margin: 0 auto; font-size: 15px; }
             .btn { align-self: center; }
