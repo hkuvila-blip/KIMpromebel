@@ -10,6 +10,8 @@
             --gold: #f2c94c;
             --gold-soft: rgba(242, 201, 76, 0.08);
             --pure-black: #0d0d0f;
+            /* Блик стал на 50% прозрачнее (0.2 -> 0.1) */
+            --glare-color: rgba(255, 255, 255, 0.1); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,10 +24,10 @@
             overflow-x: hidden;
         }
 
-        /* АНИМАЦИЯ БЛИКА ПРИ ЗАГРУЗКЕ */
+        /* АНИМАЦИЯ БЛИКА — СТАЛА ПЛАВНЕЕ (2.5s) */
         @keyframes shine-slide {
             0% { transform: translateX(-150%) skewX(-25deg); }
-            100% { transform: translateX(250%) skewX(-25deg); }
+            100% { transform: translateX(300%) skewX(-25deg); }
         }
 
         .hero {
@@ -38,7 +40,6 @@
             padding: 0 8%;
         }
 
-        /* ФОН КУХНИ */
         .hero-bg {
             position: absolute;
             top: 0; left: 0;
@@ -51,14 +52,11 @@
             transform: scaleX(-1); 
         }
 
-        /* ГРАДИЕНТ С ЗОЛОТЫМ СВЕЧЕНИЕМ И БЛИКОМ */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Золотое свечение слева */
                 radial-gradient(circle at 5% 20%, var(--gold-soft) 0%, transparent 40%),
-                /* Основной градиент 100 -> 0 */
                 linear-gradient(90deg, 
                     #0d0d0f 0%,           
                     #0d0d0f 25%,          
@@ -69,13 +67,17 @@
             overflow: hidden;
         }
 
-        /* САМ БЛИК (Анимированный элемент) */
+        /* КОРРЕКЦИЯ БЛИКА: Тоньше и прозрачнее */
         .overlay::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 40%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shine-slide 1.8s ease-in-out forwards;
+            top: 0; left: 0; width: 35%; height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--glare-color) 50%, 
+                transparent 100%
+            );
+            animation: shine-slide 2.5s ease-in-out forwards;
             z-index: 3;
         }
 
@@ -116,7 +118,6 @@
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
-        /* ШАПКА */
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
@@ -130,10 +131,8 @@
         .phone-icon {
             width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            transition: 0.3s;
         }
 
-        /* ЭТАПЫ */
         .footer-steps { display: flex; z-index: 50; }
 
         @media (min-width: 1025px) {
@@ -150,10 +149,9 @@
         }
         .step span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ КОРРЕКТИРОВКА */
         @media (max-width: 1024px) {
             .top-nav {
-                flex-direction: column; /* Элементы друг под другом */
+                flex-direction: column; 
                 gap: 15px; 
                 top: 20px;
             }
