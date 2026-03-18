@@ -86,16 +86,27 @@
             gap: 45px; 
         }
 
-        /* КОРРЕКТИРОВКА ТОЛЩИНЫ ЗАГОЛОВКА (V73) */
+        /* КОРРЕКТИРОВКА ЗАГОЛОВКА (V74) */
         h1 {
             font-size: clamp(32px, 6vw, 85px);
-            font-weight: 200; /* В два раза тоньше для "Эксклюзивные" и "уровня" */
+            font-weight: 200;
             line-height: 1.1;
             text-transform: uppercase;
             letter-spacing: 1px;
+            -webkit-font-smoothing: antialiased; /* Улучшенное сглаживание */
         }
-        h1 b { font-weight: 900; display: block; letter-spacing: -1px; } 
-        h1 span { color: var(--gold); font-weight: 200; } /* PRO также становится тонким */
+        
+        h1 b { 
+            font-weight: 900; 
+            display: block; 
+            letter-spacing: 0.06em; /* Увеличенное расстояние между буквами */
+            margin: 5px 0;
+            /* Убираем любые эффекты обводки для четкости */
+            -webkit-text-stroke: 0;
+            text-shadow: none;
+        } 
+        
+        h1 span { color: var(--gold); font-weight: 200; }
 
         .description {
             font-size: clamp(20px, 2vw, 25px); 
@@ -164,6 +175,7 @@
             .footer-steps { position: relative; margin-top: 40px; flex-direction: column; gap: 15px; }
             .step { justify-content: center; }
             h1 { font-size: clamp(26px, 8vw, 44px); }
+            h1 b { letter-spacing: 0.04em; }
         }
     </style>
 </head>
