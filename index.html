@@ -45,21 +45,27 @@
             z-index: 2;
         }
 
-        .content { position: relative; z-index: 10; max-width: 900px; width: 100%; }
+        /* КОНТЕНТ С КОРРЕКЦИЕЙ ДЛЯ ПЛАНШЕТОВ */
+        .content { 
+            position: relative; 
+            z-index: 10; 
+            max-width: 900px; 
+            width: 100%; 
+        }
 
         h1 {
-            font-size: clamp(38px, 7vw, 95px);
-            font-weight: 200; line-height: 1;
+            font-size: clamp(32px, 6vw, 90px); /* Сжато для лучшей посадки */
+            font-weight: 200; line-height: 1.1;
             text-transform: uppercase; margin-bottom: 25px;
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(17px, 1.8vw, 21px);
+            font-size: clamp(16px, 1.6vw, 20px);
             font-weight: 400; line-height: 1.6;
             color: rgba(255,255,255,0.85);
-            max-width: 550px; margin-bottom: 40px;
+            max-width: 500px; margin-bottom: 40px;
             border-left: 3px solid var(--gold); padding-left: 20px;
         }
 
@@ -75,75 +81,55 @@
         .btn:hover { background: var(--gold); color: black; }
 
         .steps-bar {
-            margin-top: 80px;
-            display: flex; justify-content: flex-start; gap: 60px;
+            margin-top: clamp(40px, 8vh, 80px);
+            display: flex; flex-wrap: wrap; /* Разрешаем перенос для средних экранов */
+            justify-content: flex-start; gap: clamp(20px, 4vw, 60px);
         }
 
         .step-item { display: flex; align-items: center; gap: 12px; }
         .dot-marker { 
-            width: 10px; height: 10px; 
+            flex-shrink: 0; width: 10px; height: 10px; 
             background-color: var(--gold); border-radius: 50%; 
             box-shadow: 0 0 10px var(--gold);
         }
         
         .step-text { 
-            font-size: 18px; font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 1px;
+            font-size: clamp(14px, 1.4vw, 18px); 
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* --- ШАПКА САЙТА --- */
+        /* ШАПКА */
         .top-nav {
-            position: absolute;
-            top: 35px;
-            left: 8%;
-            right: 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
+            position: absolute; top: 35px; left: 8%; right: 8%;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
         }
 
-        .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
+        .logo { font-weight: 900; font-size: clamp(18px, 2.5vw, 24px); letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
-        .phone-block {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: white;
-        }
+        .phone-block { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
 
         .phone-icon {
-            width: 44px; height: 44px;
-            border: 2px solid var(--gold);
-            border-radius: 50%;
+            width: 44px; height: 44px; border: 2px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            background: rgba(13, 13, 15, 0.6);
-            box-shadow: 0 0 15px rgba(242, 201, 76, 0.3);
+            background: rgba(13, 13, 15, 0.6); box-shadow: 0 0 15px rgba(242, 201, 76, 0.3);
         }
-        /* ЖЕЛТАЯ ТРУБКА */
         .phone-icon svg { width: 22px; height: 22px; fill: var(--gold); }
 
-        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
+        /* --- ПРАВИЛА ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ (Media Queries) --- */
+        @media (max-width: 1024px) {
+            .top-nav { left: 5%; right: 5%; }
+            .hero { padding: 120px 5% 50px; }
+            .phone-number { display: none; } /* На планшетах тоже оставляем только иконку */
+        }
+
         @media (max-width: 768px) {
-            .top-nav { top: 20px; left: 5%; right: 5%; }
-            .logo { font-size: 16px; } /* Уменьшаем, чтобы не мешало иконке */
-            
             .hero { padding: 140px 6% 50px; align-items: flex-start; height: auto; min-height: 100vh; }
             .content { display: flex; flex-direction: column; align-items: center; text-align: center; }
-            
-            .phone-number { display: none; } /* Скрываем цифры на мобильном */
-            .phone-icon { width: 42px; height: 42px; }
-
-            .description { border-left: none; padding-left: 0; font-size: 16px; margin-bottom: 30px; }
+            .description { border-left: none; padding-left: 0; margin-bottom: 30px; }
             .btn { width: 100%; max-width: 300px; }
-            
-            .steps-bar { 
-                margin-top: 50px; flex-direction: column; 
-                align-items: flex-start; gap: 20px; width: fit-content;
-            }
-            .step-text { font-size: 16px; white-space: normal; text-align: left; }
+            .steps-bar { flex-direction: column; align-items: flex-start; width: fit-content; margin-top: 50px; }
+            .step-text { text-align: left; white-space: normal; }
         }
     </style>
 </head>
@@ -151,9 +137,8 @@
 
     <nav class="top-nav">
         <div class="logo">KIM<span>PRO</span>MEBEL</div>
-        
         <a href="tel:+380675867998" class="phone-block">
-            <div class="phone-number"><span>(+38)</span> 067 586 79 98</div>
+            <div class="phone-number">(+38) 067 586 79 98</div>
             <div class="phone-icon">
                 <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
             </div>
@@ -163,16 +148,13 @@
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="overlay"></div>
-        
         <div class="content">
             <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
             <div class="description">
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
-            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
-
             <div class="steps-bar">
                 <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
                 <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
