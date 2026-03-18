@@ -13,7 +13,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
-            height: 100%; width: 100%; 
+            min-height: 100%; width: 100%; 
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
@@ -21,7 +21,7 @@
         }
 
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
@@ -49,14 +49,14 @@
 
         h1 {
             font-size: clamp(38px, 6vw, 90px);
-            font-weight: 200; line-height: 1;
+            font-weight: 200; line-height: 1.1;
             text-transform: uppercase; margin-bottom: 25px;
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(17px, 1.6vw, 21px);
+            font-size: clamp(16px, 1.6vw, 20px);
             font-weight: 400; line-height: 1.6;
             color: rgba(255,255,255,0.85);
             max-width: 500px; margin-bottom: 40px;
@@ -74,17 +74,18 @@
         }
         .btn:hover { background: var(--gold); color: black; }
 
-        /* --- НОВЫЙ ЦЕНТРИРОВАННЫЙ ПОДВАЛ ДЛЯ ПК --- */
+        /* ЭТАПЫ (ПОДВАЛ) - ДЛЯ ПК */
         .steps-bar {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             justify-content: center;
-            gap: clamp(30px, 4vw, 80px);
+            gap: 50px;
             z-index: 20;
-            width: 90%;
+            width: 100%;
+            padding: 0 20px;
         }
 
         .step-item { display: flex; align-items: center; gap: 12px; }
@@ -95,7 +96,7 @@
         }
         
         .step-text { 
-            font-size: clamp(14px, 1.2vw, 18px); 
+            font-size: 16px; 
             font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
             white-space: nowrap;
         }
@@ -116,25 +117,36 @@
         }
         .phone-icon svg { width: 22px; height: 22px; fill: var(--gold); }
 
-        /* АДАПТИВ ПОД ПЛАНШЕТЫ И ТЕЛЕФОНЫ */
+        /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 1024px) {
             .phone-number { display: none; }
-            .steps-bar { bottom: 40px; flex-wrap: wrap; }
+            .steps-bar { gap: 30px; }
+            .step-text { font-size: 14px; }
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 140px 6% 60px; align-items: flex-start; height: auto; min-height: 100vh; }
+            .hero { padding: 120px 6% 40px; align-items: center; height: auto; min-height: 100vh; }
             .content { display: flex; flex-direction: column; align-items: center; text-align: center; }
-            .description { border-left: none; padding-left: 0; margin-bottom: 30px; }
-            .btn { width: 100%; max-width: 300px; }
             
-            /* На мобильных переносим подвал из абсолюта в обычный поток под кнопку */
+            .top-nav { top: 20px; }
+            .logo { font-size: 18px; }
+
+            .description { border-left: none; padding-left: 0; margin-bottom: 30px; }
+            .btn { width: 100%; max-width: 280px; }
+            
+            /* ФИКС ДЛЯ МОБИЛЬНЫХ ЭТАПОВ */
             .steps-bar { 
-                position: relative; bottom: auto; left: auto; transform: none;
-                margin-top: 50px; flex-direction: column; 
-                align-items: flex-start; width: fit-content; margin-left: auto; margin-right: auto;
+                position: relative; /* Возвращаем в поток под кнопку */
+                bottom: auto; left: auto; transform: none;
+                margin-top: 40px;
+                flex-direction: column; 
+                align-items: center; /* Центрируем всё */
+                gap: 15px; 
+                width: 100%;
+                padding-bottom: 30px;
             }
-            .step-text { white-space: normal; text-align: left; }
+            .step-item { justify-content: center; width: 100%; }
+            .step-text { white-space: normal; text-align: center; font-size: 15px; }
         }
     </style>
 </head>
@@ -161,12 +173,12 @@
                 Создаем техническую базу для безупречного производства.
             </div>
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
-        </div>
 
-        <div class="steps-bar">
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
+            <div class="steps-bar">
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим тех. часть</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в цех</span></div>
+            </div>
         </div>
     </section>
 
