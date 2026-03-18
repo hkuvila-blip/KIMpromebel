@@ -11,11 +11,6 @@
             --dark: #0d0d0f;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
             height: 100%; width: 100%; 
@@ -37,166 +32,111 @@
         .hero-bg {
             position: absolute;
             top: 0; right: 0;
-            width: 80%;
-            height: 100%;
+            width: 80%; height: 100%;
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
             z-index: 1;
         }
 
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, 
-                rgba(13, 13, 15, 0.98) 15%, 
-                rgba(13, 13, 15, 0.6) 50%, 
-                rgba(13, 13, 15, 0.2) 100%
-            );
-            backdrop-filter: blur(1px);
+            background: linear-gradient(90deg, rgba(13,13,15,0.98) 15%, rgba(13,13,15,0.6) 50%, rgba(13,13,15,0.2) 100%);
             z-index: 2;
         }
 
-        /* КОНТЕНТ */
-        .content { 
-            position: relative; 
-            z-index: 10; 
-            max-width: 900px;
-            animation: fadeInUp 1s ease-out forwards; 
-        }
+        .content { position: relative; z-index: 10; max-width: 900px; width: 100%; }
 
         h1 {
             font-size: clamp(38px, 7vw, 95px);
-            font-weight: 200;
-            line-height: 1;
-            text-transform: uppercase;
-            margin-bottom: 25px;
+            font-weight: 200; line-height: 1;
+            text-transform: uppercase; margin-bottom: 25px;
         }
-
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
         .description {
             font-size: clamp(17px, 1.8vw, 21px);
-            font-weight: 400;
-            line-height: 1.6;
+            font-weight: 400; line-height: 1.6;
             color: rgba(255,255,255,0.85);
-            max-width: 550px;
-            margin-bottom: 40px;
-            border-left: 3px solid var(--gold);
-            padding-left: 20px;
+            max-width: 550px; margin-bottom: 40px;
+            border-left: 3px solid var(--gold); padding-left: 20px;
         }
 
         .btn {
             padding: 20px 50px;
             border: 1px solid var(--gold);
-            color: white;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 2px;
-            transition: 0.3s;
+            color: white; text-decoration: none;
+            text-transform: uppercase; font-weight: 700;
+            font-size: 13px; letter-spacing: 2px;
             background: rgba(242, 201, 76, 0.1);
-            display: inline-block;
+            display: inline-block; transition: 0.3s;
         }
-
         .btn:hover { background: var(--gold); color: black; }
 
         .steps-bar {
             margin-top: 80px;
-            display: flex;
-            justify-content: flex-start;
-            gap: 60px;
-            z-index: 20;
-            animation: fadeInUp 1.3s ease-out forwards;
+            display: flex; justify-content: flex-start; gap: 60px;
         }
 
         .step-item { display: flex; align-items: center; gap: 12px; }
         .dot-marker { 
             width: 10px; height: 10px; 
-            background-color: var(--gold); 
-            border-radius: 50%; 
+            background-color: var(--gold); border-radius: 50%; 
             box-shadow: 0 0 10px var(--gold);
         }
         
         .step-text { 
-            font-size: 18px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: #fff;
-            white-space: nowrap;
+            font-size: 18px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* ТЕЛЕФОН И ЛОГО */
+        /* HEADER & PHONE */
         header { position: absolute; top: 35px; left: 8%; z-index: 100; }
         .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block {
-            position: absolute;
-            top: 35px; right: 8%;
-            z-index: 100;
-            display: flex; align-items: center; gap: 12px;
+            position: absolute; top: 35px; right: 8%;
+            z-index: 100; display: flex; align-items: center; gap: 12px;
             text-decoration: none; color: white;
         }
 
-        /* ЯРКАЯ И ЧЕТКАЯ ИКОНКА */
         .phone-icon {
-            width: 40px; height: 40px;
-            border: 2px solid var(--gold); /* Более толстая рамка для четкости */
-            border-radius: 50%;
+            width: 44px; height: 44px;
+            border: 2px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: var(--gold); /* Ярко-желтый телефон */
-            background: rgba(13, 13, 15, 0.5); /* Фон для контраста */
-            box-shadow: 0 0 10px rgba(242, 201, 76, 0.4); /* Золотое свечение */
+            background: rgba(13, 13, 15, 0.6);
+            box-shadow: 0 0 15px rgba(242, 201, 76, 0.3);
         }
+        /* ЖЕЛТАЯ ТРУБКА */
+        .phone-icon svg { width: 20px; height: 20px; fill: var(--gold); }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ (V39) */
+        /* MOBILE FIXES */
         @media (max-width: 768px) {
-            .hero { padding: 120px 6% 40px; align-items: flex-start; }
-            .hero-bg { width: 100%; opacity: 0.5; }
-            .overlay { background: rgba(13, 13, 15, 0.85); }
-            .content { 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-            }
+            .hero { padding: 130px 6% 50px; align-items: flex-start; height: auto; min-height: 100vh; }
+            .content { display: flex; flex-direction: column; align-items: center; text-align: center; }
             
-            h1 { font-size: clamp(32px, 10vw, 42px); margin-bottom: 20px; }
-            .description { border-left: none; padding-left: 0; margin: 0 auto 35px; font-size: 16px; }
-            .btn { width: 100%; max-width: 300px; }
-            
-            /* ЦЕНТРОВКА ТЕЛЕФОНА И ЛОГО НА МОБИЛЬНОМ */
-            header { left: 5%; top: 25px; width: 90%; display: flex; justify-content: space-between; align-items: center; }
-            .logo { font-size: 18px; }
+            .logo { font-size: 19px; }
+            header { left: 6%; top: 25px; }
 
             .phone-block { 
-                position: absolute;
-                top: 25px; 
-                left: 50%; 
-                right: auto;
-                transform: translateX(-50%); /* Идеально по центру */
-                width: auto;
-                justify-content: center;
-                gap: 10px;
+                right: auto; left: 50%; 
+                transform: translateX(-50%); 
+                top: 20px;
             }
-            .phone-icon { width: 35px; height: 35px; border-width: 1px; font-size: 14px; }
             .phone-number { display: none; }
+            .phone-icon { width: 48px; height: 48px; }
+
+            .description { border-left: none; padding-left: 0; font-size: 16px; margin-bottom: 30px; }
+            .btn { width: 100%; max-width: 300px; }
             
             .steps-bar { 
-                position: relative; 
-                bottom: auto; left: auto; right: auto;
-                margin-top: 50px;
-                flex-direction: column; 
-                align-items: center; 
-                gap: 20px; 
+                margin-top: 50px; flex-direction: column; 
+                align-items: flex-start; gap: 20px; width: fit-content;
             }
-            .step-text { font-size: 16px; white-space: normal; text-align: center;}
+            .step-text { font-size: 16px; white-space: normal; text-align: left; }
         }
-
     </style>
 </head>
 <body>
@@ -206,7 +146,9 @@
     </header>
 
     <a href="tel:+380675867998" class="phone-block">
-        <div class="phone-icon">📞</div>
+        <div class="phone-icon">
+            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
         <div class="phone-number"><span>(+38)</span> 067 586 79 98</div>
     </a>
 
@@ -220,6 +162,7 @@
                 Индивидуальное проектирование и деталировка. 
                 Создаем техническую базу для безупречного производства.
             </div>
+            
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
 
             <div class="steps-bar">
