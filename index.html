@@ -3,119 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KIMPROMEBEL | Проектирование</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap" rel="stylesheet">
+    <title>KIMPROMEBEL | Exclusive Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #f2c94c;
+            --dark: #0d0d0f;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { 
             height: 100%; width: 100%; 
-            background: #0a0a0c; 
+            background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
-            font-weight: 500; /* Medium 500 */
-            overflow: hidden; 
             color: white; 
+            overflow-x: hidden;
         }
 
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero {
             height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
-            padding: 0 10%;
             position: relative;
-            overflow: hidden; 
+            padding: 0 8%;
         }
 
-        /* ФОНОВАЯ КАРТИНКА (ПРЯМАЯ ССЫЛКА) */
-        .hero::before {
-            content: "";
+        /* ФОНОВАЯ КАРТИНКА */
+        .hero-bg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            /* ИСПОЛЬЗУЕМ ВАШУ ПРЯМУЮ ССЫЛКУ ИЗ АССЕТОВ */
-            background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5'); 
+            top: 0; right: 0;
+            width: 70%; /* Картинка занимает часть экрана справа, как в премиум-дизайне */
+            height: 100%;
+            background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             z-index: 1;
         }
 
-        /* ГЛЯНЦЕВОЕ ГЛУБОКОЕ ЗАТЕМНЕНИЕ */
-        .hero::after {
-            content: "";
+        /* СЛОЖНЫЙ ГЛЯНЦЕВЫЙ ГРАДИЕНТ */
+        .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Градиент: слева глубокий антрацит, справа прозрачность */
             background: linear-gradient(90deg, 
-                rgba(10, 10, 12, 0.98) 15%, 
-                rgba(10, 10, 12, 0.7) 50%, 
-                rgba(10, 10, 12, 0.1) 100%
+                var(--dark) 30%, 
+                rgba(13, 13, 15, 0.8) 50%, 
+                rgba(13, 13, 15, 0.1) 100%
             );
-            /* Эффект глянцевого стекла (блюр) */
-            backdrop-filter: blur(4px); 
             z-index: 2;
         }
 
-        .content { z-index: 10; max-width: 900px; position: relative; }
-
-        h1 { 
-            font-size: clamp(30px, 7vw, 72px); 
-            font-weight: 900; /* Заголовок жирный для стиля */
-            text-transform: uppercase; 
-            line-height: 0.95; 
-            margin-bottom: 25px; 
-            letter-spacing: -2px;
+        /* КОНТЕНТ */
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
         }
-        
-        h1 span { color: #f2c94c; }
 
-        p { 
-            font-size: clamp(16px, 2vw, 20px); 
-            margin-bottom: 40px; 
-            color: #efefef; 
-            max-width: 550px; 
-            line-height: 1.6;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        .step-num {
+            font-size: 14px;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+            font-weight: 700;
         }
-        
+
+        h1 {
+            font-size: clamp(40px, 8vw, 90px);
+            font-weight: 200; /* Тонкое начертание для стиля */
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        h1 b {
+            font-weight: 900; /* Жирный акцент */
+            display: block;
+        }
+
+        h1 span {
+            color: var(--gold);
+        }
+
+        .description {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.6);
+            max-width: 500px;
+            margin-bottom: 50px;
+            border-left: 1px solid var(--gold);
+            padding-left: 30px;
+        }
+
+        /* КНОПКА В СТИЛЕ IMPULSE */
+        .cta-box {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
         .btn {
-            padding: 20px 50px; 
-            background: #f2c94c; 
-            color: #000;
-            text-decoration: none; 
-            font-weight: 700; 
+            padding: 25px 60px;
+            border: 1px solid var(--gold);
+            color: white;
+            text-decoration: none;
             text-transform: uppercase;
-            display: inline-block; 
-            letter-spacing: 1px;
-            transition: 0.3s ease;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            position: relative;
+            background: rgba(242, 201, 76, 0.1);
         }
 
-        .btn:hover { 
-            background: #ffffff; 
-            transform: translateY(-5px); 
+        .btn:hover {
+            background: var(--gold);
+            color: black;
+            transform: translateY(-5px);
         }
 
-        .logo-top {
+        /* ЛОГОТИП */
+        header {
             position: absolute;
-            top: 40px;
-            left: 10%;
-            font-weight: 900;
-            font-size: 22px;
+            top: 50px; left: 8%;
             z-index: 100;
+            width: 84%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
-        .logo-top span { color: #f2c94c; }
+
+        .logo span { color: var(--gold); }
+
+        .nav-dots {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dot {
+            width: 8px; height: 8px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+        }
+
+        .dot.active { background: var(--gold); }
 
     </style>
 </head>
 <body>
 
-    <div class="logo-top">KIM<span>PROMEBEL</span></div>
+    <header>
+        <div class="logo">KIM<span>PRO</span>MEBEL</div>
+        <div style="font-size: 12px; letter-spacing: 2px; font-weight: 700; opacity: 0.5;">DESIGN & ENGINEERING</div>
+    </header>
+
+    <div class="nav-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
 
     <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="overlay"></div>
+        
         <div class="content">
-            <h1>ПРОЕКТИРОВАНИЕ <br><span>КУХОНЬ</span> ДЛЯ <br>ПРОИЗВОДСТВА</h1>
-            <p>Конструкторская документация, чертежи и 3D-визуализация. Технически безупречные проекты за 2-3 дня.</p>
-            <a href="https://t.me/kimpromebel_pro" target="_blank" class="btn">Заказать проект</a>
+            <span class="step-num">01 / CONCEPT</span>
+            <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
+            
+            <div class="description">
+                Индивидуальное проектирование и деталировка мебели. 
+                Мы создаем не просто чертежи, а фундамент вашего идеального пространства.
+            </div>
+
+            <div class="cta-box">
+                <a href="https://t.me/kimpromebel_pro" target="_blank" class="btn">Обсудить проект</a>
+            </div>
         </div>
     </section>
 
