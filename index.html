@@ -14,7 +14,7 @@
             --mask-left: rgba(22, 22, 24, 0); 
             --mask-right: rgba(22, 22, 24, 0.95); 
             
-            --gloss-bright: rgba(255, 255, 255, 0.2);
+            --gloss-bright: rgba(255, 255, 255, 0.22);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +37,7 @@
             padding: 0 8%;
         }
 
-        /* ФОН КУХНИ — Теперь яркий и контрастный */
+        /* ФОН КУХНИ — ОТЗЕРКАЛЕН ПО ГОРИЗОНТАЛИ */
         .hero-bg {
             position: absolute;
             top: 0; left: 0;
@@ -45,23 +45,25 @@
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1;
-            opacity: 0.9; /* Максимальная яркость */
-            filter: contrast(1.1) brightness(1.05); /* Глянцевый контраст */
+            opacity: 0.9;
+            filter: contrast(1.1) brightness(1.05);
+            /* Магия зеркального отображения */
+            transform: scaleX(-1); 
         }
 
-        /* ГРАДИЕНТ И ГЛЯНЕЦ (ИНВЕРСИЯ) */
+        /* ГРАДИЕНТ И ГЛЯНЕЦ */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Острый глянцевый блик по центру */
-                linear-gradient(115deg, transparent 30%, var(--gloss-bright) 50%, transparent 70%),
-                /* Зонирование 1/3: слева прозрачно, справа плотно */
+                /* Глянцевый блик */
+                linear-gradient(115deg, transparent 25%, var(--gloss-bright) 50%, transparent 75%),
+                /* Зонирование 1/3: 0% слева -> 95% справа */
                 linear-gradient(90deg, 
                     var(--mask-left) 0%,      
-                    var(--mask-left) 33.3%,   /* До 1/3 экрана фото чистое */
+                    var(--mask-left) 33.3%,   /* Чистое фото в первой трети */
                     rgba(22, 22, 24, 0.5) 50%, 
-                    var(--mask-right) 66.6%,  /* С 2/3 экрана фон плотный 95% */
+                    var(--mask-right) 66.6%,  /* Плотная заливка в последней трети */
                     var(--mask-right) 100%     
                 );
             z-index: 2;
@@ -80,8 +82,8 @@
             font-size: clamp(32px, 6vw, 85px);
             font-weight: 200; line-height: 1.1;
             text-transform: uppercase;
-            /* Тень усилена, так как слева фон теперь светлее (прозрачный) */
-            text-shadow: 0 2px 15px rgba(0,0,0,0.9), 0 5px 30px rgba(0,0,0,0.5);
+            /* Тень для читаемости на светлых участках фото */
+            text-shadow: 0 2px 15px rgba(0,0,0,0.8), 0 10px 40px rgba(0,0,0,0.4);
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
@@ -101,14 +103,13 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(0, 0, 0, 0.4); /* Затемнение под кнопкой для читаемости */
+            background: rgba(0, 0, 0, 0.3);
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
             backdrop-filter: blur(5px);
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 40px rgba(242, 201, 76, 0.6); }
 
-        /* ШАПКА */
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
@@ -125,7 +126,6 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
-        /* ЭТАПЫ */
         .footer-steps { display: flex; z-index: 50; }
 
         @media (min-width: 1025px) {
@@ -142,12 +142,10 @@
         }
         .step span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 1024px) {
             .hero { padding: 100px 5% 50px; justify-content: center; align-items: center; }
             .overlay {
-                /* На мобилках: прозрачно сверху (фото), плотно снизу (под текст) */
-                background: linear-gradient(180deg, var(--mask-left) 0%, var(--mask-right) 80%);
+                background: linear-gradient(180deg, var(--mask-left) 0%, var(--mask-right) 85%);
             }
             .content { align-items: center; text-align: center; width: 100%; gap: 20px; }
             .description { border-left: none; padding-left: 0; margin: 0 auto; }
