@@ -8,20 +8,20 @@
     <style>
         :root {
             --gold: #f2c94c;
-            --dark-grey: #1a1a1c; /* Новый базовый темно-серый */
+            --dark-grey: #161618; /* Еще более глубокий серый */
             
-            /* Настройки затемнения по ТЗ */
-            --mask-heavy: rgba(26, 26, 28, 0.8); /* 80% слева */
-            --mask-light: rgba(26, 26, 28, 0.2); /* 20% справа */
+            /* Новые параметры по ТЗ: 95% слева и 10% справа */
+            --mask-heavy: rgba(22, 22, 24, 0.95); 
+            --mask-light: rgba(22, 22, 24, 0.1); 
             
-            --gloss-shine: rgba(255, 255, 255, 0.15);
+            --gloss-shine: rgba(255, 255, 255, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body, html { 
             height: 100%; width: 100%; 
-            background: #0d0d0f; 
+            background: #000; 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
             overflow-x: hidden;
@@ -45,23 +45,23 @@
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1;
-            opacity: 0.6; /* Хорошая видимость для серого фона */
+            opacity: 0.65; /* Немного поднял яркость самой картинки */
         }
 
-        /* ГЕОМЕТРИЧЕСКИЙ ГРАДИЕНТ 1/3 */
+        /* УЛЬТРА-КОНТРАСТНЫЙ ГРАДИЕНТ */
         .overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                /* Глянцевый блик */
-                linear-gradient(115deg, transparent 45%, var(--gloss-shine) 50%, transparent 55%),
-                /* Основной серый фильтр с делением по 1/3 */
+                /* Глянцевый стальной блик */
+                linear-gradient(115deg, transparent 40%, var(--gloss-shine) 50%, transparent 60%),
+                /* Зонирование 1/3 по ТЗ */
                 linear-gradient(90deg, 
-                    var(--mask-heavy) 0%,      /* Начало: 80% */
-                    var(--mask-heavy) 33.3%,   /* Конец первой трети: 80% */
-                    rgba(26, 26, 28, 0.5) 50%, /* Плавный переход в центре */
-                    var(--mask-light) 66.6%,   /* Начало последней трети: 20% */
-                    var(--mask-light) 100%     /* Финиш: 20% */
+                    var(--mask-heavy) 0%,      /* 95% непрозрачности */
+                    var(--mask-heavy) 33.3%,   /* Держим до 1/3 экрана */
+                    rgba(22, 22, 24, 0.5) 55%, /* Переход в центре */
+                    var(--mask-light) 66.6%,   /* 10% непрозрачности с 2/3 экрана */
+                    var(--mask-light) 100%     
                 );
             z-index: 2;
         }
@@ -79,7 +79,6 @@
             font-size: clamp(32px, 6vw, 85px);
             font-weight: 200; line-height: 1.1;
             text-transform: uppercase;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
@@ -98,13 +97,12 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(242, 201, 76, 0.15);
+            background: rgba(242, 201, 76, 0.1);
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(5px);
         }
-        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 40px rgba(242, 201, 76, 0.5); }
+        .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 40px rgba(242, 201, 76, 0.4); }
 
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
@@ -141,16 +139,16 @@
         @media (max-width: 1024px) {
             .hero { padding: 100px 5% 50px; justify-content: center; align-items: center; }
             .overlay {
-                /* Вертикальный градиент для мобилок: 80% сверху, 20% снизу */
-                background: linear-gradient(180deg, var(--mask-heavy) 0%, var(--mask-heavy) 40%, var(--mask-light) 90%);
+                /* На мобилках градиент сверху вниз: 95% -> 10% */
+                background: linear-gradient(180deg, var(--mask-heavy) 0%, var(--mask-heavy) 35%, var(--mask-light) 95%);
             }
             .content { align-items: center; text-align: center; width: 100%; gap: 20px; }
-            .description { border-left: none; padding-left: 0; margin: 0 auto; }
+            .description { border-left: none; padding-left: 0; margin: 0 auto; font-size: 15px; }
             .btn { align-self: center; }
             .phone-number { display: none; }
             .footer-steps { position: relative; margin-top: 25px; flex-direction: column; gap: 15px; }
             .step { justify-content: center; }
-            h1 { font-size: clamp(28px, 8vw, 48px); }
+            h1 { font-size: clamp(26px, 8vw, 44px); }
         }
     </style>
 </head>
