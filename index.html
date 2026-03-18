@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KIMPROMEBEL | Exclusive Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700;900&display=swap" rel="stylesheet">
     <style>
@@ -22,7 +22,7 @@
             background: var(--dark); 
             font-family: 'Montserrat', sans-serif; 
             color: white; 
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         .hero {
@@ -61,11 +61,12 @@
             position: relative; 
             z-index: 10; 
             max-width: 900px;
+            width: 100%;
             animation: fadeInUp 1s ease-out forwards; 
         }
 
         h1 {
-            font-size: clamp(38px, 7vw, 90px);
+            font-size: clamp(32px, 7vw, 90px);
             font-weight: 200;
             line-height: 1;
             text-transform: uppercase;
@@ -75,20 +76,19 @@
         h1 b { font-weight: 900; display: block; }
         h1 span { color: var(--gold); }
 
-        /* --- ОПИСАНИЕ: УВЕЛИЧЕНО НА 10% --- */
         .description {
-            font-size: clamp(17.6px, 2vw, 22px); /* Было 16px, стало 17.6px (+10%) */
+            font-size: clamp(17px, 2vw, 22px);
             font-weight: 400;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.85);
+            line-height: 1.5;
+            color: rgba(255,255,255,0.9);
             max-width: 550px;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             border-left: 3px solid var(--gold);
             padding-left: 20px;
         }
 
         .btn {
-            padding: 20px 50px;
+            padding: 18px 45px;
             border: 1px solid var(--gold);
             color: white;
             text-decoration: none;
@@ -101,9 +101,7 @@
             display: inline-block;
         }
 
-        .btn:hover { background: var(--gold); color: black; }
-
-        /* --- ПОДВАЛ (STEPS BAR) - ТОЧНЫЙ РАЗМЕР И ТЕКСТ --- */
+        /* ПОДВАЛ ДЛЯ ДЕСКТОПА */
         .steps-bar {
             position: absolute;
             bottom: 50px;
@@ -111,70 +109,94 @@
             right: 8%;
             display: flex;
             justify-content: flex-start;
-            gap: 60px;
+            gap: 50px;
             z-index: 20;
             animation: fadeInUp 1.5s ease-out forwards;
         }
 
-        .step-item { display: flex; align-items: center; gap: 15px; }
+        .step-item { display: flex; align-items: center; gap: 12px; }
         .dot-marker { 
-            width: 12px; height: 12px; 
+            width: 10px; height: 10px; 
             background-color: var(--gold); 
             border-radius: 50%; 
-            box-shadow: 0 0 10px var(--gold);
+            box-shadow: 0 0 8px var(--gold);
         }
         
         .step-text { 
-            font-size: clamp(17.6px, 2vw, 22px); /* ТОЧНО ТАКОЙ ЖЕ РАЗМЕР, КАК ОПИСАНИЕ */
-            font-weight: 400; /* ТОЧНО ТАКАЯ ЖЕ ТОЛШИНА, КАК ОПИСАНИЕ */
+            font-size: clamp(17px, 2vw, 22px);
+            font-weight: 400;
             text-transform: uppercase; 
             letter-spacing: 1px; 
             color: #fff;
             white-space: nowrap;
         }
 
-        header { position: absolute; top: 40px; left: 8%; z-index: 100; }
-        .logo { font-weight: 900; font-size: 22px; letter-spacing: 1px; }
+        header { position: absolute; top: 30px; left: 8%; z-index: 100; }
+        .logo { font-weight: 900; font-size: 20px; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block {
             position: absolute;
-            top: 40px; right: 8%;
+            top: 30px; right: 8%;
             z-index: 100;
-            display: flex; align-items: center; gap: 12px;
+            display: flex; align-items: center; gap: 10px;
             text-decoration: none; color: white;
         }
 
         .phone-icon {
-            width: 40px; height: 40px;
+            width: 35px; height: 35px;
             border: 1px solid var(--gold);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             color: var(--gold);
         }
 
-        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
-        @media (max-width: 1100px) {
-            .steps-bar { gap: 30px; }
-        }
-
+        /* --- ГЛУБОКАЯ МОБИЛЬНАЯ ОПТИМИЗАЦИЯ --- */
         @media (max-width: 768px) {
-            .hero { padding: 0 6%; justify-content: center; text-align: center; }
-            .hero-bg { width: 100%; opacity: 0.5; }
-            .description { border-left: none; padding-left: 0; margin: 0 auto 35px; }
+            .hero { padding: 0 5%; justify-content: center; }
+            .content { text-align: center; display: flex; flex-direction: column; align-items: center; }
+            
+            .hero-bg { width: 100%; opacity: 0.4; }
+            .overlay { background: rgba(13, 13, 15, 0.85); }
+
+            h1 { font-size: 36px; margin-bottom: 20px; }
+            
+            .description { 
+                border-left: none; 
+                padding-left: 0; 
+                font-size: 16px; 
+                margin-bottom: 30px; 
+                line-height: 1.4;
+            }
+
+            .btn { width: 100%; max-width: 300px; padding: 15px; }
+
             .phone-number { display: none; }
+            header, .phone-block { top: 20px; }
 
             .steps-bar { 
                 position: relative;
-                bottom: auto;
-                left: auto;
-                right: auto;
-                margin-top: 50px;
-                flex-direction: column; 
-                align-items: center; 
-                gap: 20px; 
+                bottom: auto; left: auto; right: auto;
+                margin-top: 40px;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                width: 100%;
             }
-            .step-text { font-size: 18px; white-space: normal; }
+            
+            .step-text { 
+                font-size: 15px; /* Уменьшаем для мобильных, чтобы влезло */
+                white-space: normal; /* Разрешаем перенос, если экран совсем узкий */
+                text-align: center;
+            }
+
+            .dot-marker { width: 8px; height: 8px; }
+        }
+
+        /* Для сверхмалых экранов (iPhone 5/SE) */
+        @media (max-width: 350px) {
+            h1 { font-size: 28px; }
+            .step-text { font-size: 14px; }
         }
 
     </style>
@@ -201,12 +223,12 @@
                 Создаем техническую базу для безупречного производства.
             </div>
             <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
-        </div>
 
-        <div class="steps-bar">
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
-            <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
+            <div class="steps-bar">
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">создаем 3д проект</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">готовим документы</span></div>
+                <div class="step-item"><div class="dot-marker"></div><span class="step-text">отправляем в производсво</span></div>
+            </div>
         </div>
     </section>
 
