@@ -8,8 +8,7 @@
     <style>
         :root {
             --gold: #f2c94c;
-            /* Золотистый оттенок для блика */
-            --gold-glare: rgba(242, 201, 76, 0.05); /* Плотность 5% */
+            --gold-glare: rgba(242, 201, 76, 0.05);
             --gold-soft: rgba(242, 201, 76, 0.08);
             --pure-black: #0d0d0f;
         }
@@ -24,12 +23,11 @@
             overflow-x: hidden;
         }
 
-        /* АНИМАЦИЯ ЗОЛОТОГО БЛИКА — СТАЛА ЕЩЕ МЕДЛЕННЕЕ (3s) */
         @keyframes shine-slide {
             0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
-            10% { opacity: 1; } /* Плавное появление */
+            10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateX(350%) skewX(-25deg); opacity: 0; } /* Плавное затухание */
+            100% { transform: translateX(350%) skewX(-25deg); opacity: 0; }
         }
 
         .hero {
@@ -69,20 +67,13 @@
             overflow: hidden;
         }
 
-        /* КОРРЕКЦИЯ ЗОЛОТОГО БЛИКА: Тоньше, прозрачнее, золотистее */
         .overlay::before {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 30%; height: 100%;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--gold-glare) 50%, 
-                transparent 100%
-            );
-            /* Анимация один раз при загрузке (3 секунды) */
+            background: linear-gradient(90deg, transparent 0%, var(--gold-glare) 50%, transparent 100%);
             animation: shine-slide 3s ease-in-out forwards;
             z-index: 3;
-            /* Фильтр для имитации зеркальности */
             backdrop-filter: blur(1px);
         }
 
@@ -117,12 +108,13 @@
             color: white; text-decoration: none;
             text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px;
-            background: rgba(242, 201, 76, 0.05); /* Легкий золотой фон кнопки */
+            background: rgba(242, 201, 76, 0.05);
             display: inline-block; transition: 0.3s;
             align-self: flex-start;
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
+        /* ШАПКА ДЕСКТОП */
         .top-nav {
             position: absolute; top: 30px; left: 8%; right: 8%;
             display: flex; justify-content: space-between; align-items: center; z-index: 100;
@@ -136,6 +128,7 @@
         .phone-icon {
             width: 40px; height: 40px; border: 1.5px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
+            transition: 0.3s;
         }
 
         .footer-steps { display: flex; z-index: 50; }
@@ -154,23 +147,33 @@
         }
         .step span { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
 
+        /* МОБИЛЬНАЯ ВЕРСИЯ: ТОЛЬКО ТРУБКА Х2 */
         @media (max-width: 1024px) {
             .top-nav {
                 flex-direction: column; 
-                gap: 15px; 
-                top: 20px;
+                gap: 20px; 
+                top: 25px;
             }
-            .logo { font-size: 20px; }
-            .phone-block { 
-                flex-direction: row; 
-                background: rgba(255, 255, 255, 0.05);
-                padding: 8px 20px;
-                border-radius: 30px;
-                backdrop-filter: blur(10px);
+            .logo { font-size: 22px; }
+            
+            /* Скрываем текстовый номер */
+            .phone-number { display: none; }
+            
+            /* Увеличиваем иконку в 2 раза */
+            .phone-icon {
+                width: 70px; /* Увеличенный размер */
+                height: 70px;
+                border-width: 2px;
+                background: rgba(242, 201, 76, 0.1);
+                box-shadow: 0 0 20px rgba(242, 201, 76, 0.2);
             }
-            .phone-number { font-size: 15px; font-weight: 600; display: block !important; }
+            /* Увеличиваем SVG внутри иконки */
+            .phone-icon svg {
+                width: 30px;
+                height: 30px;
+            }
 
-            .hero { padding: 150px 5% 50px; justify-content: center; align-items: center; }
+            .hero { padding: 160px 5% 50px; justify-content: center; align-items: center; }
             .overlay {
                 background: linear-gradient(180deg, #0d0d0f 0%, #0d0d0f 35%, rgba(13, 13, 15, 0) 100%);
             }
@@ -190,7 +193,7 @@
         <a href="tel:+380675867998" class="phone-block">
             <div class="phone-number">(+38) 067 586 79 98</div>
             <div class="phone-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             </div>
         </a>
     </nav>
