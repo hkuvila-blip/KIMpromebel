@@ -31,17 +31,15 @@
             justify-content: space-between;
         }
 
-        /* ФОН С УСИЛЕННЫМ КОНТРАСТОМ */
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
             background-size: cover; background-position: center;
             z-index: 1; opacity: 0.9; 
-            filter: contrast(1.1) brightness(0.8); /* Затемняем само фото для лучшего фона */
+            filter: contrast(1.1) brightness(0.8); 
             transform: scaleX(-1); 
         }
 
-        /* ГРАФИТОВАЯ ТОНИРОВКА (Overlay) */
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(90deg, 
@@ -52,7 +50,6 @@
             z-index: 2;
         }
 
-        /* ВЕРХНЯЯ ПАНЕЛЬ */
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
             align-items: center; z-index: 100; width: 100%;
@@ -61,24 +58,36 @@
         .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; }
         .logo span { color: var(--gold); }
 
-        /* БЛОК ТЕЛЕФОНА С ПЛОТНЫМ ФОНОМ */
         .phone-block { 
             display: flex; align-items: center; gap: 15px; 
             text-decoration: none; color: white; 
             background: rgba(0, 0, 0, 0.4); 
             padding: 8px 15px; border-radius: 40px;
-            backdrop-filter: blur(8px); /* Эффект матового стекла */
+            backdrop-filter: blur(8px); 
             border: 1px solid rgba(242, 201, 76, 0.2);
+            transition: 0.3s ease;
         }
+        .phone-block:hover { border-color: var(--gold); background: rgba(0,0,0,0.6); }
+
         .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0.5px; }
+
+        /* ИСПРАВЛЕННАЯ ИКОНКА С ВНУТРЕННЕЙ ТЕНЬЮ */
         .phone-icon {
             width: clamp(40px, 5vw, 55px); height: clamp(40px, 5vw, 55px); 
             border: 2px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            box-shadow: 0 0 15px rgba(242, 201, 76, 0.2);
+            
+            /* Внутренняя тень: inset, сдвиг по X/Y 0, размытие 10px, цвет глубокий графит */
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+            
+            background: rgba(13, 13, 15, 0.3); /* Тонкая темная подложка внутри для усиления эффекта */
+            transition: 0.3s ease;
+        }
+        .phone-block:hover .phone-icon { 
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 1), 0 0 15px rgba(242, 201, 76, 0.3); 
+            background: rgba(13, 13, 15, 0.5);
         }
 
-        /* КОНТЕНТ */
         .content { 
             position: relative; z-index: 10; 
             display: flex; flex-direction: row; align-items: center;
@@ -88,7 +97,6 @@
 
         .text-block { max-width: 750px; display: flex; flex-direction: column; gap: 45px; }
 
-        /* ТЕНЬ ДЛЯ ТЕКСТА ЧТОБЫ ЧИТАЛСЯ НА БЕЛОМ */
         h1 { 
             font-size: clamp(34px, 5.8vw, 90px); font-weight: 200; line-height: 1.1; 
             text-transform: uppercase;
@@ -97,7 +105,6 @@
         h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
         h1 span { color: var(--gold); }
 
-        /* КНОПКА С ГРАФИТОВОЙ ПОДЛОЖКОЙ */
         .btn-main {
             padding: 24px 60px; 
             border: 2px solid var(--gold);
@@ -107,7 +114,7 @@
             font-weight: 800;
             font-size: 16px; 
             letter-spacing: 3px; 
-            background: rgba(13, 13, 15, 0.6); /* Темная подложка внутри кнопки */
+            background: rgba(13, 13, 15, 0.6); 
             display: inline-block; 
             transition: all 0.4s ease;
             align-self: flex-start;
@@ -122,7 +129,6 @@
             transform: translateY(-2px);
         }
 
-        /* ТАЙМЕР */
         .timer-wrapper {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 90; gap: 25px; flex-shrink: 0;
@@ -152,7 +158,6 @@
             background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px;
         }
 
-        /* ФУТЕР */
         .footer-steps { 
             position: relative; display: flex; z-index: 50; width: 100%;
             gap: clamp(30px, 6vw, 80px); justify-content: center; padding-bottom: 30px;
@@ -166,7 +171,6 @@
             text-shadow: 1px 1px 5px #000;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal { 
             display: none; position: fixed; z-index: 9999; 
             left: 0; top: 0; width: 100%; height: 100%; 
