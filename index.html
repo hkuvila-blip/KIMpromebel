@@ -159,18 +159,21 @@
         }
         .step span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
 
-        /* --- НОВЫЙ БЛОК: ТАЙМЕР --- */
+        /* --- ОБНОВЛЕННЫЙ БЛОК: ТАЙМЕР --- */
         .timer-wrapper {
             display: flex;
+            flex-direction: column; /* Текст под кругом */
             justify-content: center;
             align-items: center;
             z-index: 900;
             opacity: 1;
             transition: opacity 0.5s ease;
+            gap: 20px; /* Отступ от круга до текста */
         }
 
         .timer-container {
             position: relative;
+            /* Базовый размер для мобильных */
             width: 110px;
             height: 110px;
         }
@@ -184,17 +187,19 @@
         .timer-background {
             fill: none;
             stroke: rgba(255, 255, 255, 0.1);
-            stroke-width: 3;
+            /* Линии тоньше в 2 раза */
+            stroke-width: 2;
         }
 
         .timer-progress {
             fill: none;
             stroke: var(--gold);
-            stroke-width: 4;
+            /* Линии тоньше в 2 раза */
+            stroke-width: 2;
             stroke-dasharray: 283;
             stroke-dashoffset: 283;
             stroke-linecap: round;
-            stroke-dasharray: 6, 4; /* Пунктирная линия */
+            stroke-dasharray: 6, 4;
             transition: stroke-dashoffset 1s linear;
         }
 
@@ -202,9 +207,23 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 32px;
+            /* Размер шрифта адаптируется */
+            font-size: clamp(32px, 5vw, 48px);
             font-weight: 700;
             color: var(--gold);
+        }
+
+        /* Текст призыва под таймером */
+        .timer-cta {
+            font-size: clamp(10px, 1.2vw, 12px);
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            opacity: 0.9;
+            text-align: center;
+            max-width: 200px;
+            line-height: 1.4;
         }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
@@ -230,8 +249,8 @@
             box-shadow: 0 0 30px rgba(242, 201, 76, 0.2);
         }
 
-        .modal-content h3 { color: var(--gold); margin-bottom: 15px; text-transform: uppercase; }
-        .modal-content p { font-size: 14px; margin-bottom: 25px; opacity: 0.8; }
+        .modal-content h3 { color: var(--gold); margin-bottom: 15px; text-transform: uppercase; font-size: 18px;}
+        .modal-content p { font-size: 14px; margin-bottom: 25px; opacity: 0.8; line-height: 1.5;}
 
         .modal-input {
             width: 100%;
@@ -254,7 +273,9 @@
             text-transform: uppercase;
             cursor: pointer;
             border-radius: 5px;
+            transition: 0.3s;
         }
+        .modal-btn:hover { box-shadow: 0 0 20px rgba(242, 201, 76, 0.5); }
 
         .close-modal {
             position: absolute;
@@ -264,13 +285,19 @@
             cursor: pointer;
         }
 
-        /* --- АДАПТИВНОСТЬ ТАЙМЕРА --- */
+        /* --- КОРРЕКЦИЯ АДАПТИВНОСТИ --- */
         @media (min-width: 1025px) {
             .timer-wrapper {
                 position: fixed;
-                right: 5%;
+                /* Смещаем ближе к центру */
+                right: 15%;
                 top: 50%;
                 transform: translateY(-50%);
+            }
+            .timer-container {
+                /* Увеличиваем в 1.5 раза на больших экранах */
+                width: 165px; 
+                height: 165px;
             }
         }
 
@@ -287,10 +314,9 @@
             
             .btn { align-self: center; margin-bottom: 30px; }
 
-            /* Размещение таймера между блоками на мобильных */
             .timer-wrapper {
                 margin: 20px auto;
-                order: 2; /* Позволяет управлять очередностью в flex-контейнере */
+                order: 2;
             }
 
             .footer-steps { 
@@ -343,6 +369,7 @@
                     </svg>
                     <div id="timer-num" class="timer-number">1</div>
                 </div>
+                <div class="timer-cta">Оставь заявку — получи скидку</div>
             </div>
         </div>
 
@@ -356,10 +383,10 @@
     <div id="callback-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>Обсудим ваш проект?</h3>
-            <p>Оставьте ваш номер, и мы перезвоним для консультации.</p>
+            <h3>Ваша скидка зафиксирована!</h3>
+            <p>Оставьте номер, мы перезвоним для консультации и закрепим за вами предложение.</p>
             <input type="tel" class="modal-input" placeholder="+38 (0__) ___-__-__">
-            <button class="modal-btn" onclick="closeModal()">Жду звонка</button>
+            <button class="modal-btn" onclick="closeModal()">Получить консультацию</button>
         </div>
     </div>
 
@@ -373,7 +400,7 @@
         const circumference = 2 * Math.PI * 45;
         let current = 1;
 
-        progress.style.strokeDasharray = `6, 4`; // Задаем пунктир
+        progress.style.strokeDasharray = `6, 4`; // Пунктир
         
         const interval = setInterval(() => {
             if (current <= total) {
@@ -383,9 +410,10 @@
                 current++;
             } else {
                 clearInterval(interval);
-                timerWrapper.style.opacity = '0';
+                timerWrapper.style.opacity = '0'; // Плавно скрываем таймер
                 setTimeout(() => {
-                    modal.style.display = 'block';
+                    timerWrapper.style.display = 'none';
+                    modal.style.display = 'block'; // Показываем окно
                 }, 500);
             }
         }, 1000);
