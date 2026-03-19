@@ -120,7 +120,7 @@
         .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
         .step span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 
-        /* --- МОДАЛЬНОЕ ОКНО С ИСПРАВЛЕННЫМ ВВОДОМ --- */
+        /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal { 
             display: none; position: fixed; z-index: 9999; 
             left: 0; top: 0; width: 100%; height: 100%; 
@@ -129,63 +129,49 @@
 
         .modal-content { 
             background: #0d0d0f; border: 0.8px solid var(--gold); 
-            margin: 12vh auto; padding: 60px 40px; 
-            width: 92%; max-width: 550px; text-align: center; 
+            margin: 10vh auto; padding: 40px; 
+            width: 92%; max-width: 500px; text-align: center; 
             position: relative;
-            display: flex; flex-direction: column; gap: 35px;
+            display: flex; flex-direction: column; gap: 25px;
             box-shadow: 0 0 80px rgba(242, 201, 76, 0.1);
         }
 
         .modal-content h3 { 
             color: #fff; text-transform: uppercase; font-weight: 200; 
-            letter-spacing: 2px; line-height: 1.4; font-size: clamp(18px, 4vw, 24px);
+            letter-spacing: 2px; line-height: 1.4; font-size: 20px;
         }
         .modal-content h3 span { color: var(--gold); font-weight: 700; }
 
-        .iti { width: 100%; text-align: left; }
-        
-        /* Исправление наезда цифр на код страны */
-        .iti__country-list { background-color: #0d0d0f; border: 1px solid var(--gold); color: #fff; }
-        .iti__selected-flag { background: rgba(255,255,255,0.05) !important; padding: 0 15px !important; }
+        .input-group { display: flex; flex-direction: column; gap: 15px; text-align: left; }
 
         .modal-input {
-            width: 100% !important; 
-            height: 65px;
-            padding-top: 0; padding-bottom: 0;
+            width: 100% !important; height: 60px;
+            padding: 0 20px;
             background: rgba(255,255,255,0.03) !important;
             border: 1px solid rgba(242, 201, 76, 0.5) !important; 
             color: #fff !important; border-radius: 0 !important; 
-            outline: none; font-size: 20px;
-            transition: 0.3s;
+            outline: none; font-size: 18px;
         }
-        .modal-input:focus { border-color: var(--gold) !important; background: rgba(255,255,255,0.07) !important; }
+        .modal-input:focus { border-color: var(--gold) !important; }
+
+        /* Специфично для инпута телефона чтобы не наезжал флаг */
+        #phone { padding-left: 52px !important; }
 
         .modal-btn {
-            width: 100%; padding: 25px 10px; background: var(--gold);
+            width: 100%; padding: 22px 10px; background: var(--gold);
             color: #000; border: none; font-weight: 900; 
             text-transform: uppercase; cursor: pointer; 
-            font-size: clamp(20px, 6vw, 32px);
-            letter-spacing: 4px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-size: 24px; letter-spacing: 3px; 
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin-top: 10px;
         }
         .modal-btn:disabled { opacity: 0.8; cursor: not-allowed; }
 
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 35px; color: var(--gold); cursor: pointer; opacity: 0.5; }
 
-        @media (max-width: 1024px) {
-            .phone-number { display: none; }
-            .hero { padding: 30px 5%; }
-            .content { flex-direction: column; text-align: center; margin-top: 50px; gap: 60px; }
-            .text-block { align-items: center; }
-            .description { border-left: none; border-top: 1px solid var(--gold); padding: 20px 0 0 0; }
-            .btn-main { align-self: center; }
-            .footer-steps { flex-direction: column; align-items: center; gap: 15px; }
-        }
-
         @media (max-width: 480px) {
-            .logo { font-size: 18px; }
-            .modal-content { padding: 40px 20px; gap: 25px; }
-            .modal-btn { font-size: 24px; padding: 18px 5px; }
-            .timer-container { width: 190px; height: 190px; }
+            .modal-content { padding: 40px 20px; }
+            .modal-btn { font-size: 20px; }
         }
     </style>
 </head>
@@ -237,10 +223,15 @@
     <div id="callback-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>Напишите Ваш номер — <br><span>мы свяжемся с Вами</span></h3>
-            <div class="input-holder">
-                <input type="tel" id="phone" class="modal-input">
+            <h3><span>Получить консультацию</span><br>по вашему проекту</h3>
+            
+            <div class="input-group">
+                <input type="text" id="user-name" class="modal-input" placeholder="Ваше имя" required>
+                <div class="iti-wrapper">
+                    <input type="tel" id="phone" class="modal-input">
+                </div>
             </div>
+            
             <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
         </div>
     </div>
@@ -281,10 +272,18 @@
 
         function closeModal() { modal.style.display = 'none'; }
 
+        // ОБНОВЛЕННАЯ ФУНКЦИЯ ОТПРАВКИ
         function submitForm() {
+            const userName = document.getElementById('user-name').value.trim();
+            const fullNumber = iti.getNumber();
+            const btn = document.querySelector('.modal-btn');
+
+            if (!userName) {
+                alert("Пожалуйста, введите ваше имя.");
+                return;
+            }
+
             if (iti.isValidNumber()) {
-                const fullNumber = iti.getNumber();
-                const btn = document.querySelector('.modal-btn');
                 const formspreeEndpoint = 'https://formspree.io/f/maqpvnvp';
 
                 btn.textContent = "ОТПРАВКА...";
@@ -294,8 +293,9 @@
                     method: 'POST',
                     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        phone: fullNumber, 
-                        info: "Заявка с сайта КИМПРОМЕБЕЛЬ" 
+                        Name: userName,
+                        Phone: fullNumber, 
+                        Subject: "Новая заявка с сайта Exclusive Kitchens" 
                     })
                 })
                 .then(response => {
@@ -307,11 +307,12 @@
                             btn.textContent = "ОТПРАВИТЬ";
                             btn.style.background = "";
                             btn.disabled = false;
+                            document.getElementById('user-name').value = ""; // Очистка поля
                         }, 2000);
                     } else { throw new Error(); }
                 })
                 .catch(() => {
-                    alert("Ошибка отправки. Попробуйте еще раз.");
+                    alert("Ошибка. Попробуйте еще раз.");
                     btn.textContent = "ОТПРАВИТЬ";
                     btn.disabled = false;
                 });
