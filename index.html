@@ -24,7 +24,6 @@
             overflow-x: hidden; overflow-y: auto;
         }
 
-        /* Анимация блика */
         @keyframes shine-slide {
             0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
             10% { opacity: 1; }
@@ -162,7 +161,7 @@
 
         /* Стилизация международного ввода */
         .iti { width: 100%; margin-bottom: 30px; }
-        .iti__content { color: #000; } /* Цвет списка стран */
+        .iti__content { color: #000; }
         
         .modal-input {
             width: 100%; padding: 20px 20px 20px 52px !important; 
@@ -173,12 +172,15 @@
             letter-spacing: 1px;
         }
 
+        /* КНОПКА ОТПРАВИТЬ: ЖИРНАЯ И КРУПНАЯ */
         .modal-btn {
-            width: 100%; padding: 20px; background: var(--gold);
-            color: #000; border: none; font-weight: 900;
+            width: 100%; padding: 22px; background: var(--gold);
+            color: #000; border: none; 
+            font-weight: 900; /* Жирный шрифт */
             text-transform: uppercase; cursor: pointer; 
             transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            letter-spacing: 2px; font-size: 14px;
+            letter-spacing: 3px; 
+            font-size: 16px; /* Крупнее шрифт */
         }
         .modal-btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
@@ -251,18 +253,17 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3>Напишите Ваш номер — <br><span>мы свяжемся с Вами</span></h3>
             <input type="tel" id="phone" class="modal-input">
-            <button class="modal-btn" onclick="submitForm()">Свяжитесь со мной</button>
+            <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
     <script>
-        // Инициализация ввода телефона
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
             geoIpLookup: function(success, failure) {
-                fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("US"));
+                fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA"));
             },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
             separateDialCode: true,
@@ -300,9 +301,9 @@
         function closeModal() { modal.style.display = 'none'; }
         
         function submitForm() {
-            const fullNumber = iti.getNumber(); // Получаем номер в формате +123456789
+            const fullNumber = iti.getNumber();
             if (iti.isValidNumber()) {
-                alert("Заявка принята! Мы свяжемся с вами по номеру: " + fullNumber);
+                alert("Данные приняты! Международный номер: " + fullNumber);
                 closeModal();
             } else {
                 alert("Пожалуйста, введите корректный номер.");
