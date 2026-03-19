@@ -159,23 +159,23 @@
         }
         .step span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
 
-        /* --- ОБНОВЛЕННЫЙ БЛОК: ТАЙМЕР --- */
+        /* --- ВЕРСИЯ "МАКСИМУМ": ТАЙМЕР --- */
         .timer-wrapper {
             display: flex;
-            flex-direction: column; /* Текст под кругом */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 900;
             opacity: 1;
             transition: opacity 0.5s ease;
-            gap: 20px; /* Отступ от круга до текста */
+            gap: 25px; 
         }
 
         .timer-container {
             position: relative;
-            /* Базовый размер для мобильных */
-            width: 110px;
-            height: 110px;
+            /* Увеличенный размер для мобильных */
+            width: 140px;
+            height: 140px;
         }
 
         .timer-svg {
@@ -186,20 +186,18 @@
 
         .timer-background {
             fill: none;
-            stroke: rgba(255, 255, 255, 0.1);
-            /* Линии тоньше в 2 раза */
-            stroke-width: 2;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 1.5;
         }
 
         .timer-progress {
             fill: none;
             stroke: var(--gold);
-            /* Линии тоньше в 2 раза */
-            stroke-width: 2;
+            stroke-width: 1.5;
             stroke-dasharray: 283;
             stroke-dashoffset: 283;
             stroke-linecap: round;
-            stroke-dasharray: 6, 4;
+            stroke-dasharray: 5, 5;
             transition: stroke-dashoffset 1s linear;
         }
 
@@ -207,23 +205,22 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            /* Размер шрифта адаптируется */
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 700;
+            /* Стиль под заголовок: Тонкий и большой */
+            font-size: clamp(50px, 8vw, 90px);
+            font-weight: 200; 
             color: var(--gold);
+            letter-spacing: -2px;
         }
 
-        /* Текст призыва под таймером */
         .timer-cta {
-            font-size: clamp(10px, 1.2vw, 12px);
+            font-size: clamp(11px, 1.3vw, 13px);
             text-transform: uppercase;
             color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font-weight: 500;
+            letter-spacing: 2px;
             opacity: 0.9;
             text-align: center;
-            max-width: 200px;
-            line-height: 1.4;
+            white-space: nowrap; /* В одну строку */
         }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
@@ -232,104 +229,92 @@
             position: fixed;
             z-index: 9999;
             left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
         }
 
         .modal-content {
-            background: #111;
+            background: #0d0d0f;
             border: 1px solid var(--gold);
-            margin: 15vh auto;
-            padding: 40px 20px;
+            margin: 12vh auto;
+            padding: 50px 30px;
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
-            border-radius: 20px;
+            border-radius: 4px; /* Более строгий стиль */
             position: relative;
-            box-shadow: 0 0 30px rgba(242, 201, 76, 0.2);
+            box-shadow: 0 0 50px rgba(242, 201, 76, 0.15);
         }
 
-        .modal-content h3 { color: var(--gold); margin-bottom: 15px; text-transform: uppercase; font-size: 18px;}
-        .modal-content p { font-size: 14px; margin-bottom: 25px; opacity: 0.8; line-height: 1.5;}
+        .modal-content h3 { color: var(--gold); margin-bottom: 15px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .modal-content p { font-size: 15px; margin-bottom: 30px; opacity: 0.7; line-height: 1.6;}
 
         .modal-input {
             width: 100%;
-            padding: 15px;
-            background: #000;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(242, 201, 76, 0.3);
             color: white;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            border-radius: 2px;
+            margin-bottom: 25px;
             font-family: inherit;
+            outline: none;
         }
+        .modal-input:focus { border-color: var(--gold); }
 
         .modal-btn {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: var(--gold);
             color: black;
             border: none;
             font-weight: 900;
             text-transform: uppercase;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 2px;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
-        .modal-btn:hover { box-shadow: 0 0 20px rgba(242, 201, 76, 0.5); }
+        .modal-btn:hover { background: #fff; transform: translateY(-2px); }
 
         .close-modal {
             position: absolute;
             top: 15px; right: 20px;
-            font-size: 28px;
+            font-size: 32px;
             color: var(--gold);
             cursor: pointer;
+            opacity: 0.5;
         }
+        .close-modal:hover { opacity: 1; }
 
         /* --- КОРРЕКЦИЯ АДАПТИВНОСТИ --- */
         @media (min-width: 1025px) {
             .timer-wrapper {
                 position: fixed;
-                /* Смещаем ближе к центру */
-                right: 15%;
+                /* Еще ближе к центру */
+                right: 25%;
                 top: 50%;
                 transform: translateY(-50%);
             }
             .timer-container {
-                /* Увеличиваем в 1.5 раза на больших экранах */
-                width: 165px; 
-                height: 165px;
+                /* Увеличен еще в 2 раза от предыдущего (330px вместо 165px) */
+                width: 320px; 
+                height: 320px;
             }
         }
 
         @media (max-width: 1024px) {
             .hero { padding: 40px 5%; height: auto; min-height: 100vh; }
-            
             .top-nav { flex-direction: column; gap: 30px; margin-bottom: 50px; }
-            .logo { font-size: 22px; }
-            .phone-number { display: none; }
-            .phone-icon { width: 70px; height: 70px; background: rgba(242, 201, 76, 0.1); }
-
-            .content { align-items: center; text-align: center; gap: 40px; flex-grow: 0; }
+            .content { align-items: center; text-align: center; gap: 40px; }
             .description { font-size: 18px; border-left: none; padding-left: 0; margin: 0 auto; }
-            
-            .btn { align-self: center; margin-bottom: 30px; }
+            .btn { align-self: center; margin-bottom: 40px; }
 
-            .timer-wrapper {
-                margin: 20px auto;
-                order: 2;
-            }
+            .timer-wrapper { margin: 40px auto; order: 2; }
+            .timer-container { width: 180px; height: 180px; }
+            .timer-cta { white-space: normal; } /* На мобильных можно в 2 строки если не влезет */
 
-            .footer-steps { 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center; 
-                gap: 25px; 
-                margin-top: 20px;
-                padding-bottom: 40px;
-                order: 3;
-            }
-            .step { justify-content: center; }
-            h1 { font-size: clamp(26px, 8vw, 44px); }
+            .footer-steps { flex-direction: column; align-items: center; gap: 25px; order: 3; padding-bottom: 50px; }
         }
 
         @media (min-width: 1025px) {
@@ -384,7 +369,7 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3>Ваша скидка зафиксирована!</h3>
-            <p>Оставьте номер, мы перезвоним для консультации и закрепим за вами предложение.</p>
+            <p>Оставьте номер телефона. Специалист свяжется с вами, чтобы обсудить детали и закрепить персональное предложение.</p>
             <input type="tel" class="modal-input" placeholder="+38 (0__) ___-__-__">
             <button class="modal-btn" onclick="closeModal()">Получить консультацию</button>
         </div>
@@ -400,7 +385,7 @@
         const circumference = 2 * Math.PI * 45;
         let current = 1;
 
-        progress.style.strokeDasharray = `6, 4`; // Пунктир
+        progress.style.strokeDasharray = `5, 5`; 
         
         const interval = setInterval(() => {
             if (current <= total) {
@@ -410,10 +395,10 @@
                 current++;
             } else {
                 clearInterval(interval);
-                timerWrapper.style.opacity = '0'; // Плавно скрываем таймер
+                timerWrapper.style.opacity = '0'; 
                 setTimeout(() => {
                     timerWrapper.style.display = 'none';
-                    modal.style.display = 'block'; // Показываем окно
+                    modal.style.display = 'block'; 
                 }, 500);
             }
         }, 1000);
