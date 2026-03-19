@@ -24,6 +24,7 @@
             overflow-x: hidden; min-height: 100vh;
         }
 
+        /* --- BACKGROUND & OVERLAY --- */
         .hero {
             min-height: 100vh; width: 100%;
             display: flex; flex-direction: column;
@@ -50,6 +51,7 @@
             z-index: 2;
         }
 
+        /* --- NAVIGATION --- */
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
             align-items: center; z-index: 100; width: 100%;
@@ -79,11 +81,8 @@
             background: rgba(13, 13, 15, 0.3);
             transition: 0.3s ease;
         }
-        .phone-block:hover .phone-icon { 
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 1), 0 0 15px rgba(242, 201, 76, 0.3); 
-            background: rgba(13, 13, 15, 0.5);
-        }
 
+        /* --- MAIN CONTENT --- */
         .content { 
             position: relative; z-index: 10; 
             display: flex; flex-direction: row; align-items: center;
@@ -104,73 +103,43 @@
         .btn-main {
             padding: 24px 60px; 
             border: 2px solid var(--gold);
-            color: #fff; 
-            text-decoration: none; 
-            text-transform: uppercase; 
-            font-weight: 800;
-            font-size: 16px; 
-            letter-spacing: 3px; 
+            color: #fff; text-decoration: none; 
+            text-transform: uppercase; font-weight: 800;
+            font-size: 16px; letter-spacing: 3px; 
             background: rgba(13, 13, 15, 0.6); 
-            display: inline-block; 
-            transition: all 0.4s ease;
-            align-self: flex-start;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: inline-block; transition: all 0.4s ease;
+            cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
         }
         .btn-main:hover {
-            background: var(--gold);
-            color: #000;
+            background: var(--gold); color: #000;
             box-shadow: 0 0 40px rgba(242, 201, 76, 0.4);
             transform: translateY(-2px);
         }
 
-        .timer-wrapper {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 90; gap: 25px; flex-shrink: 0;
-        }
-
+        /* --- TIMER --- */
+        .timer-wrapper { display: flex; flex-direction: column; align-items: center; gap: 25px; }
         .timer-container {
             position: relative; width: clamp(230px, 26vw, 380px); height: clamp(230px, 26vw, 380px);
-            background: rgba(0,0,0,0.2); border-radius: 50%; backdrop-filter: blur(2px);
+            background: rgba(0,0,0,0.2); border-radius: 50%;
         }
-
-        .timer-progress {
-            fill: none; stroke: var(--gold); stroke-width: 1.2;
-            stroke-dasharray: 4, 6; stroke-linecap: round;
-            transition: stroke-dashoffset 1s linear;
-        }
-
+        .timer-progress { fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-dasharray: 4, 6; }
         .timer-number {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: clamp(80px, 9vw, 130px); font-weight: 100; color: var(--gold); letter-spacing: -4px;
-            text-shadow: 0 0 20px rgba(242, 201, 76, 0.3);
+            font-size: clamp(80px, 9vw, 130px); font-weight: 100; color: var(--gold);
         }
+        .timer-cta { font-size: 12px; text-transform: uppercase; color: var(--gold); letter-spacing: 3px; }
 
-        .timer-cta { 
-            font-size: clamp(11px, 1.3vw, 14px); 
-            text-transform: uppercase; color: var(--gold); 
-            letter-spacing: 4px; font-weight: 500;
-            background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px;
-        }
+        /* --- FOOTER STEPS --- */
+        .footer-steps { display: flex; gap: 50px; justify-content: center; z-index: 50; }
+        .step { display: flex; align-items: center; gap: 10px; }
+        .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
 
-        .footer-steps { 
-            position: relative; display: flex; z-index: 50; width: 100%;
-            gap: clamp(30px, 6vw, 80px); justify-content: center; padding-bottom: 30px;
-        }
-
-        .step { display: flex; align-items: center; gap: 15px; }
-        .dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
-        .step span { 
-            font-size: clamp(11px, 1.1vw, 14px); font-weight: 700; 
-            text-transform: uppercase; letter-spacing: 2.5px; 
-            text-shadow: 1px 1px 5px #000;
-        }
-
+        /* --- MODAL & FORM FIXES --- */
         .modal { 
             display: none; position: fixed; z-index: 9999; 
             left: 0; top: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); 
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); 
         }
 
         .modal-content { 
@@ -180,7 +149,7 @@
             position: relative; display: flex; flex-direction: column; gap: 25px;
         }
 
-        .modal-content h3 { color: #fff; text-transform: uppercase; font-weight: 100; letter-spacing: 1.5px; font-size: clamp(16px, 4vw, 19px); }
+        .modal-content h3 { font-weight: 100; letter-spacing: 1px; font-size: 18px; }
         .modal-content h3 span { color: var(--gold); font-weight: 800; display: block; margin-top: 10px; }
 
         .modal-input {
@@ -191,160 +160,21 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* КОРРЕКЦИЯ ТЕЛЕФОНА И СПИСКА СТРАН */
-        .iti { width: 100%; color: #000; } /* Цвет текста в выпадающем списке */
-        .iti__country-list { background-color: #1a1a1c !important; border: 1px solid var(--gold) !important; color: #fff !important; }
-        .iti__country:hover { background-color: rgba(242, 201, 76, 0.1) !important; }
-        .iti__selected-dial-code { color: var(--gold) !important; font-weight: 600; margin-left: 8px; }
+        /* ФИКС НАЛОЖЕНИЯ ЦИФР НА КОД СТРАНЫ */
+        .iti { width: 100%; text-align: left; }
+        .iti__country-list { 
+            background-color: #1a1a1c !important; 
+            border: 1px solid var(--gold) !important; 
+            color: #fff !important; 
+        }
+        .iti__selected-dial-code { color: #fff !important; margin-left: 5px; font-weight: 400; }
         
-        /* Убираем старый фиксированный padding и даем библиотеке рулить */
-        #phone { padding-left: 52px !important; } 
+        /* Важно: убираем старый padding-left и даем библиотеке самой управлять отступом */
+        #phone { padding-left: 90px !important; } 
 
         .modal-btn {
-            width: 100%; padding: 22px 10px; background: var(--gold);
+            width: 100%; padding: 22px; background: var(--gold);
             color: #000; border: none; font-weight: 900; 
             text-transform: uppercase; cursor: pointer; 
-            font-size: 22px; letter-spacing: 4px;
-            transition: 0.3s;
+            font-size: 22px; letter-spacing: 4px; transition: 0.3s;
         }
-        .modal-btn:hover { background: #fff; transform: scale(1.02); }
-
-        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 35px; color: var(--gold); cursor: pointer; line-height: 1; }
-
-        @media (max-width: 1024px) {
-            .content { flex-direction: column; text-align: center; gap: 70px; }
-            .text-block { align-items: center; }
-            .btn-main { align-self: center; }
-        }
-
-        @media (max-width: 768px) {
-            .phone-number { display: none; }
-            .footer-steps { flex-direction: column; align-items: center; gap: 25px; }
-            .modal-content { margin: 5vh auto; padding: 40px 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="overlay"></div>
-        
-        <nav class="top-nav">
-            <div class="logo">KIM<span>PRO</span>MEBEL</div>
-            <a href="tel:+380675867998" class="phone-block">
-                <div class="phone-number">(+38) 067 586 79 98</div>
-                <div class="phone-icon">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                </div>
-            </a>
-        </nav>
-
-        <div class="content">
-            <div class="text-block">
-                <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
-                <div class="btn-main" onclick="openModal()">Заказать проект</div>
-            </div>
-
-            <div id="timer-wrapper" class="timer-wrapper">
-                <div class="timer-container">
-                    <svg viewBox="0 0 100 100" style="transform: rotate(-90deg); width:100%; height:100%;">
-                        <circle id="progress" class="timer-progress" cx="50" cy="50" r="45"></circle>
-                    </svg>
-                    <div id="timer-num" class="timer-number">7</div>
-                </div>
-                <div class="timer-cta">Оставь заявку — получи скидку</div>
-            </div>
-        </div>
-
-        <div class="footer-steps">
-            <div class="step"><div class="dot"></div><span>Проект</span></div>
-            <div class="step"><div class="dot"></div><span>Документы</span></div>
-            <div class="step"><div class="dot"></div><span>Производство</span></div>
-        </div>
-    </section>
-
-    <div id="callback-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>ВВЕДИТЕ ИМЯ И ТЕЛЕФОН. <span>МЫ СВЯЖЕМСЯ С ВАМИ</span></h3>
-            
-            <input type="text" id="user-name" class="modal-input" placeholder="Имя">
-            <input type="tel" id="phone" class="modal-input">
-            
-            <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-    <script>
-        const phoneInput = document.querySelector("#phone");
-        const iti = window.intlTelInput(phoneInput, {
-            initialCountry: "auto",
-            geoIpLookup: (success) => fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA")),
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-            separateDialCode: true,
-            preferredCountries: ["ua", "pl", "de"]
-        });
-
-        const timerNum = document.getElementById('timer-num');
-        const progress = document.getElementById('progress');
-        const modal = document.getElementById('callback-modal');
-        const circumference = 2 * Math.PI * 45;
-        let current = 7; 
-
-        progress.style.strokeDasharray = circumference;
-        
-        const interval = setInterval(() => {
-            if (current >= 0) {
-                timerNum.textContent = current;
-                progress.style.strokeDashoffset = circumference - (current / 7) * circumference;
-                current--;
-            } else {
-                clearInterval(interval);
-                document.getElementById('timer-wrapper').style.display = 'none';
-                openModal();
-            }
-        }, 1000);
-
-        function openModal() { modal.style.display = 'block'; }
-        function closeModal() { modal.style.display = 'none'; }
-
-        // Закрытие при клике вне контента
-        window.onclick = function(event) {
-            if (event.target == modal) { closeModal(); }
-        }
-
-        function submitForm() {
-            const name = document.getElementById('user-name').value;
-            const phone = iti.getNumber();
-            const btn = document.querySelector('.modal-btn');
-
-            if (name && iti.isValidNumber()) {
-                const originalText = btn.textContent;
-                btn.textContent = "ОТПРАВКА...";
-                btn.disabled = true;
-
-                fetch('https://formspree.io/f/maqpvnvp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone })
-                }).then(() => {
-                    btn.textContent = "ГОТОВО!";
-                    setTimeout(() => {
-                        closeModal();
-                        btn.textContent = originalText;
-                        btn.disabled = false;
-                    }, 2000);
-                }).catch(() => {
-                    alert("Ошибка отправки. Попробуйте снова.");
-                    btn.disabled = false;
-                    btn.textContent = originalText;
-                });
-            } else { 
-                alert("Пожалуйста, введите корректное имя и номер телефона"); 
-            }
-        }
-    </script>
-</body>
-</html>
