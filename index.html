@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KIMPROMEBEL | Exclusive Design (V3)</title>
+    <title>KIMPROMEBEL | Exclusive Design (V4)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
@@ -87,7 +87,7 @@
         }
         .btn-main:hover { background: var(--gold); color: #000; transform: translateY(-2px); }
 
-        /* --- ТАЙМЕР V3 (С ИСЧЕЗАЮЩЕЙ ЛИНИЕЙ) --- */
+        /* --- ТАЙМЕР V4 (ТОНКАЯ ЛИНИЯ, БЕЗ СЛЕДА) --- */
         .timer-wrapper { display: flex; flex-direction: column; align-items: center; gap: 25px; }
         .timer-container {
             position: relative; 
@@ -103,18 +103,16 @@
 
         .timer-bg-circle {
             fill: none;
-            stroke: rgba(255, 255, 255, 0.05);
-            stroke-width: 2;
+            stroke: none; /* УБРАН СЛЕД КРУГА */
         }
 
         .timer-progress {
             fill: none;
             stroke: var(--gold);
-            stroke-width: 2;
+            stroke-width: 1; /* В ДВА РАЗА ТОНЬШЕ */
             stroke-linecap: round;
-            /* Плавное движение линии */
             transition: stroke-dashoffset 1s linear;
-            filter: drop-shadow(0 0 8px var(--gold));
+            filter: drop-shadow(0 0 5px var(--gold));
         }
 
         .timer-number {
@@ -203,7 +201,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
     <script>
-        // Инициализация телефона
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
@@ -212,17 +209,14 @@
             separateDialCode: true
         });
 
-        // Таймер логика
         const timerNum = document.getElementById('timer-num');
         const progressLine = document.getElementById('progress-line');
         const totalTime = 10;
         let timeLeft = totalTime;
 
-        // Длина окружности (2 * PI * R) где R=45
         const radius = 45;
         const circumference = 2 * Math.PI * radius;
 
-        // Устанавливаем начальное состояние линии
         progressLine.style.strokeDasharray = circumference;
         progressLine.style.strokeDashoffset = 0;
 
@@ -234,12 +228,11 @@
             
             if (timeLeft >= 0) {
                 timerNum.textContent = timeLeft;
-                // Рассчитываем отступ: (процент оставшегося времени) * длина
                 const offset = circumference - (timeLeft / totalTime) * circumference;
                 progressLine.style.strokeDashoffset = offset;
             } else {
                 clearInterval(countdown);
-                progressLine.style.strokeDashoffset = circumference; // Полное исчезновение
+                progressLine.style.strokeDashoffset = circumference;
                 openModal();
             }
         }, 1000);
