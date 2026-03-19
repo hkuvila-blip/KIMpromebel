@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KIMPROMEBEL | Exclusive Design</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 
@@ -20,13 +21,21 @@
         body, html { 
             width: 100%; background: #000; 
             font-family: 'Montserrat', sans-serif; color: white; 
-            overflow-x: hidden; min-height: 100%;
+            overflow-x: hidden; min-height: 100vh;
+        }
+
+        /* Фоновая анимация блика */
+        @keyframes shine-slide {
+            0% { transform: translateX(-150%) skewX(-25deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(350%) skewX(-25deg); opacity: 0; }
         }
 
         .hero {
             min-height: 100vh; width: 100%;
             display: flex; flex-direction: column;
-            position: relative; padding: 20px 8%;
+            position: relative; padding: 40px 8%;
             justify-content: space-between;
         }
 
@@ -46,18 +55,13 @@
             z-index: 2;
         }
 
-        /* --- НАВИГАЦИЯ --- */
+        /* --- ШАПКА САЙТА --- */
         .top-nav {
-            position: relative; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            z-index: 100;
-            width: 100%;
-            padding: 10px 0;
+            position: relative; display: flex; justify-content: space-between; 
+            align-items: center; z-index: 100; width: 100%;
         }
 
-        .logo { font-weight: 900; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
+        .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
         .logo span { color: var(--gold); }
 
         .phone-block { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
@@ -66,95 +70,133 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
             transition: 0.3s;
         }
-        .phone-icon:hover { background: var(--gold); color: black; }
+        .phone-icon:hover { background: var(--gold); color: #000; }
 
-        /* --- КОНТЕНТ --- */
+        /* --- ОСНОВНОЙ КОНТЕНТ --- */
         .content { 
             position: relative; z-index: 10; 
             display: flex; flex-direction: row; align-items: center;
             justify-content: space-between; gap: 40px; 
             width: 100%; margin: auto 0;
-            padding: 40px 0;
+            padding: 60px 0;
         }
 
-        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 30px; }
+        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 35px; }
 
-        h1 { font-size: clamp(28px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
+        h1 { font-size: clamp(30px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
         h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
         h1 span { color: var(--gold); }
 
         .description {
-            font-size: clamp(15px, 1.8vw, 22px); font-weight: 400; line-height: 1.5;
-            color: rgba(255,255,255,0.8); border-left: 3px solid var(--gold); padding-left: 20px;
+            font-size: clamp(16px, 1.8vw, 22px); font-weight: 400; line-height: 1.5;
+            color: rgba(255,255,255,0.85); border-left: 3px solid var(--gold); padding-left: 20px;
         }
 
-        .btn {
-            padding: 18px 45px; border: 1px solid var(--gold);
+        .btn-main {
+            padding: 20px 50px; border: 1px solid var(--gold);
             color: white; text-decoration: none; text-transform: uppercase; font-weight: 700;
             font-size: 13px; letter-spacing: 2px; background: rgba(242, 201, 76, 0.05);
             display: inline-block; transition: 0.3s; align-self: flex-start;
         }
+        .btn-main:hover { background: var(--gold); color: #000; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
         /* --- ТАЙМЕР --- */
         .timer-wrapper {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 90; gap: 20px; flex-shrink: 0;
+            z-index: 90; gap: 20px; flex-shrink: 0; transition: opacity 0.5s ease;
         }
 
         .timer-container {
-            position: relative; width: clamp(200px, 25vw, 360px); height: clamp(200px, 25vw, 360px);
+            position: relative; width: clamp(220px, 25vw, 360px); height: clamp(220px, 25vw, 360px);
         }
 
         .timer-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-        .timer-background { fill: none; stroke: transparent; }
-        .timer-progress { fill: none; stroke: var(--gold); stroke-width: 0.8; stroke-dasharray: 4, 6; transition: stroke-dashoffset 1s linear; }
+        .timer-background { fill: none; stroke: transparent; } /* Прозрачная подложка */
+        .timer-progress {
+            fill: none; stroke: var(--gold); stroke-width: 0.8;
+            stroke-dasharray: 4, 6; stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
+        }
 
         .timer-number {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: clamp(60px, 8vw, 120px); font-weight: 100; color: var(--gold);
+            font-size: clamp(70px, 8vw, 120px); font-weight: 100; color: var(--gold); letter-spacing: -3px;
         }
 
-        .timer-cta { font-size: 10px; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; opacity: 0.8; }
+        .timer-cta { font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 3px; opacity: 0.8; }
 
-        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ПРАВКИ) --- */
+        /* --- ПОДВАЛ (ШАГИ) --- */
+        .footer-steps { 
+            position: relative; display: flex; z-index: 50; width: 100%;
+            gap: 40px; justify-content: center; padding-bottom: 20px;
+        }
+
+        .step { display: flex; align-items: center; gap: 10px; }
+        .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); }
+        .step span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+
+        /* --- МОДАЛЬНОЕ ОКНО (ФОРМА) --- */
+        .modal { 
+            display: none; position: fixed; z-index: 9999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); 
+        }
+
+        .modal-content { 
+            background: #0d0d0f; border: 0.8px solid var(--gold); 
+            margin: 12vh auto; padding: 60px 40px; 
+            width: 92%; max-width: 550px; text-align: center; 
+            position: relative;
+            display: flex; flex-direction: column; gap: 35px; /* Отступы между блоками */
+            box-shadow: 0 0 80px rgba(242, 201, 76, 0.1);
+        }
+
+        .modal-content h3 { 
+            color: #fff; text-transform: uppercase; font-weight: 200; 
+            letter-spacing: 2px; line-height: 1.4; font-size: clamp(18px, 4vw, 24px);
+        }
+        .modal-content h3 span { color: var(--gold); font-weight: 700; }
+
+        .iti { width: 100%; }
+        .modal-input {
+            width: 100%; padding: 22px 20px 22px 52px !important; 
+            background: rgba(255,255,255,0.03) !important;
+            border: 1px solid rgba(242, 201, 76, 0.5) !important; 
+            color: #fff !important; border-radius: 0 !important; 
+            outline: none; font-size: 18px;
+        }
+
+        .modal-btn {
+            width: 100%; padding: 25px 10px; background: var(--gold);
+            color: #000; border: none; font-weight: 900; 
+            text-transform: uppercase; cursor: pointer; 
+            font-size: clamp(20px, 6vw, 32px); /* Текст в 2 раза больше (32px) */
+            letter-spacing: 4px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .modal-btn:hover { background: #fff; box-shadow: 0 10px 40px rgba(242, 201, 76, 0.4); transform: translateY(-3px); }
+
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 35px; color: var(--gold); cursor: pointer; opacity: 0.5; }
+
+        /* --- АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ И МОБИЛЬНЫХ --- */
         @media (max-width: 1024px) {
-            .phone-number { display: none; } /* Скрываем текст номера на планшетах и телефонах */
-            
-            .hero { padding: 20px 5%; }
+            .phone-number { display: none; } /* Скрываем текст номера */
+            .hero { padding: 30px 5%; }
             .content { 
-                flex-direction: column; 
-                text-align: center; 
-                margin-top: 60px; /* Чтобы не наезжало на шапку */
-                gap: 60px;
+                flex-direction: column; text-align: center; 
+                margin-top: 50px; gap: 60px; 
             }
             .text-block { align-items: center; }
             .description { border-left: none; border-top: 1px solid var(--gold); padding: 20px 0 0 0; }
-            .btn { align-self: center; }
+            .btn-main { align-self: center; }
+            .footer-steps { flex-direction: column; align-items: center; gap: 15px; }
         }
 
         @media (max-width: 480px) {
             .logo { font-size: 18px; }
-            .content { margin-top: 40px; gap: 40px; }
-            h1 b { font-size: 1.2em; }
-            .timer-container { width: 180px; height: 180px; }
-            
-            .footer-steps { 
-                flex-direction: column; 
-                align-items: center; 
-                gap: 15px; 
-                padding-bottom: 30px;
-            }
+            .modal-content { padding: 40px 20px; gap: 25px; }
+            .modal-btn { font-size: 24px; padding: 18px 5px; }
+            .timer-container { width: 190px; height: 190px; }
         }
-
-        /* МОДАЛЬНОЕ ОКНО */
-        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); }
-        .modal-content { background: #0d0d0f; border: 0.8px solid var(--gold); margin: 10vh auto; padding: 50px 30px; width: 90%; max-width: 500px; text-align: center; position: relative; }
-        .modal-btn { width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; font-weight: 900; text-transform: uppercase; font-size: 28px; letter-spacing: 2px; cursor: pointer; }
-        
-        .footer-steps { position: relative; display: flex; z-index: 50; width: 100%; gap: 20px; justify-content: center; padding-bottom: 20px; }
-        .step { display: flex; align-items: center; gap: 8px; }
-        .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
-        .step span { font-size: 9px; font-weight: 700; text-transform: uppercase; opacity: 0.6; }
     </style>
 </head>
 <body>
@@ -168,7 +210,7 @@
             <a href="tel:+380675867998" class="phone-block">
                 <div class="phone-number">(+38) 067 586 79 98</div>
                 <div class="phone-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 </div>
             </a>
         </nav>
@@ -180,7 +222,7 @@
                     Индивидуальное проектирование и деталировка. <br>
                     Создаем техническую базу для безупречного производства.
                 </div>
-                <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
+                <a href="https://t.me/mihailkuvila" target="_blank" class="btn-main">Заказать проект</a>
             </div>
 
             <div id="timer-wrapper" class="timer-wrapper">
@@ -204,14 +246,20 @@
 
     <div id="callback-modal" class="modal">
         <div class="modal-content">
-            <h3 style="color:#fff; margin-bottom:25px; text-transform:uppercase; font-weight:200;">Оставьте номер — <br><span style="color:var(--gold); font-weight:700;">мы свяжемся</span></h3>
-            <input type="tel" id="phone" class="modal-input" style="width:100%; padding:15px; margin-bottom:25px; background:rgba(255,255,255,0.05); border:1px solid var(--gold); color:#fff; outline:none;">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Напишите Ваш номер — <br><span>мы свяжемся с Вами</span></h3>
+            
+            <div class="input-holder">
+                <input type="tel" id="phone" class="modal-input">
+            </div>
+            
             <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
     <script>
+        // Инициализация ввода телефона
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
@@ -220,6 +268,7 @@
             separateDialCode: true
         });
 
+        // Логика таймера
         const timerNum = document.getElementById('timer-num');
         const progress = document.getElementById('progress');
         const modal = document.getElementById('callback-modal');
@@ -244,7 +293,19 @@
             }
         }, 1000);
 
-        function submitForm() { if (iti.isValidNumber()) { alert("Принято: " + iti.getNumber()); modal.style.display = 'none'; } else { alert("Ошибка в номере"); } }
+        function closeModal() { modal.style.display = 'none'; }
+        
+        function submitForm() { 
+            if (iti.isValidNumber()) { 
+                alert("Данные приняты! Номер: " + iti.getNumber()); 
+                closeModal(); 
+            } else { 
+                alert("Пожалуйста, введите корректный номер."); 
+            } 
+        }
+
+        // Закрытие по клику вне окна
+        window.onclick = (e) => { if (e.target == modal) closeModal(); }
     </script>
 </body>
 </html>
