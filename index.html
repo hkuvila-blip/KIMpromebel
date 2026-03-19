@@ -13,7 +13,6 @@
             --gold: #f2c94c;
             --gold-soft: rgba(242, 201, 76, 0.08);
             --pure-black: #0d0d0f;
-            --graphite-bg: rgba(13, 13, 15, 0.75);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,7 +23,6 @@
             overflow-x: hidden; min-height: 100vh;
         }
 
-        /* --- BACKGROUND & OVERLAY --- */
         .hero {
             min-height: 100vh; width: 100%;
             display: flex; flex-direction: column;
@@ -43,186 +41,107 @@
 
         .overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, 
-                rgba(13, 13, 15, 1) 0%, 
-                rgba(13, 13, 15, 0.9) 20%, 
-                rgba(13, 13, 15, 0.6) 50%, 
-                rgba(13, 13, 15, 0.3) 100%);
+            background: linear-gradient(90deg, rgba(13,13,15,1) 0%, rgba(13,13,15,0.9) 20%, rgba(13,13,15,0.6) 50%, rgba(13,13,15,0.3) 100%);
             z-index: 2;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAV --- */
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
             align-items: center; z-index: 100; width: 100%;
         }
-
         .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; }
         .logo span { color: var(--gold); }
 
         .phone-block { 
-            display: flex; align-items: center; gap: 15px; 
-            text-decoration: none; color: white; 
-            background: rgba(0, 0, 0, 0.4); 
-            padding: 8px 15px; border-radius: 40px;
-            backdrop-filter: blur(8px); 
-            border: 1px solid rgba(242, 201, 76, 0.2);
-            transition: 0.3s ease;
+            display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; 
+            background: rgba(0,0,0,0.4); padding: 8px 15px; border-radius: 40px;
+            backdrop-filter: blur(8px); border: 1px solid rgba(242,201,76,0.2);
         }
-        .phone-block:hover { border-color: var(--gold); background: rgba(0,0,0,0.6); }
-
-        .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0.5px; }
-
+        .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; }
         .phone-icon {
-            width: clamp(40px, 5vw, 55px); height: clamp(40px, 5vw, 55px); 
-            border: 2px solid var(--gold); border-radius: 50%;
+            width: 45px; height: 45px; border: 2px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
-            background: rgba(13, 13, 15, 0.3);
-            transition: 0.3s ease;
         }
 
-        /* --- MAIN CONTENT --- */
+        /* --- CONTENT & BUTTON --- */
         .content { 
             position: relative; z-index: 10; 
             display: flex; flex-direction: row; align-items: center;
             justify-content: space-between; gap: 40px; 
-            width: 100%; margin: auto 0; padding: 60px 0;
+            width: 100%; margin: auto 0; padding: 40px 0;
         }
 
-        .text-block { max-width: 750px; display: flex; flex-direction: column; gap: 45px; }
+        .text-block { max-width: 750px; display: flex; flex-direction: column; gap: 35px; }
 
-        h1 { 
-            font-size: clamp(34px, 5.8vw, 90px); font-weight: 200; line-height: 1.1; 
-            text-transform: uppercase;
-            text-shadow: 2px 2px 15px rgba(0,0,0,0.8); 
-        }
-        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
+        h1 { font-size: clamp(32px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
+        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; } 
         h1 span { color: var(--gold); }
 
+        /* ОКОНЧАТЕЛЬНЫЙ РЕМОНТ КНОПКИ */
         .btn-main {
-            padding: 24px 60px; 
+            display: block;
+            width: 100%;
+            max-width: 320px; /* Фикс ширины */
+            padding: 20px 30px; 
             border: 2px solid var(--gold);
             color: #fff; text-decoration: none; 
-            text-transform: uppercase; font-weight: 800;
-            font-size: 16px; letter-spacing: 3px; 
+            text-transform: uppercase; 
+            font-weight: 400; /* Крупный, но не жирный */
+            font-size: 18px; 
+            letter-spacing: 3px; 
             background: rgba(13, 13, 15, 0.6); 
-            display: inline-block; transition: all 0.4s ease;
-            cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            cursor: pointer; 
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 100;
         }
         .btn-main:hover {
             background: var(--gold); color: #000;
-            box-shadow: 0 0 40px rgba(242, 201, 76, 0.4);
+            box-shadow: 0 0 30px rgba(242, 201, 76, 0.4);
             transform: translateY(-2px);
         }
 
         /* --- TIMER --- */
-        .timer-wrapper { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .timer-wrapper { display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .timer-container {
-            position: relative; width: clamp(230px, 26vw, 380px); height: clamp(230px, 26vw, 380px);
-            background: rgba(0,0,0,0.2); border-radius: 50%;
+            position: relative; width: clamp(200px, 25vw, 350px); height: clamp(200px, 25vw, 350px);
         }
-        .timer-progress { fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-dasharray: 4, 6; }
+        .timer-progress { fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-dasharray: 4, 6; }
         .timer-number {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: clamp(80px, 9vw, 130px); font-weight: 100; color: var(--gold);
+            font-size: clamp(70px, 8vw, 120px); font-weight: 100; color: var(--gold);
         }
-        .timer-cta { font-size: 12px; text-transform: uppercase; color: var(--gold); letter-spacing: 3px; }
+        .timer-cta { font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; }
 
-        /* --- ИСПРАВЛЕННЫЙ ПОДВАЛ (ФУТЕР) --- */
+        /* --- FOOTER --- */
         .footer-steps { 
-            position: relative; 
-            display: flex; 
-            z-index: 50; 
-            width: 100%;
-            /* Увеличиваем расстояние между пунктами для баланса */
-            gap: clamp(50px, 8vw, 100px); 
-            justify-content: center; 
-            padding-bottom: 30px;
+            display: flex; gap: 60px; justify-content: center; z-index: 50; padding-bottom: 20px;
         }
+        .step { display: flex; align-items: center; gap: 12px; }
+        .dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); }
+        .step span { font-size: 1.4rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        .step { display: flex; align-items: center; gap: 15px; } /* Увеличили gap между точкой и текстом */
-        
-        /* Увеличили саму точку, чтобы она соответствовала новому тексту */
-        .dot { width: 12px; height: 12px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
-        
-        .step span { 
-            /* Текст стал в 1.5 раза больше (был примерно 14px, стал примерно 22px) */
-            font-size: 1.5rem; /* rem лучше адаптируется под разные экраны */
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 2.5px; 
-            text-shadow: 1px 1px 5px #000;
-        }
-
-        /* --- MODAL & FORM FIXES --- */
-        .modal { 
-            display: none; position: fixed; z-index: 9999; 
-            left: 0; top: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); 
-        }
-
-        .modal-content { 
-            background: #0d0d0f; border: 1px solid var(--gold); 
-            margin: 10vh auto; padding: 50px 30px; 
-            width: 92%; max-width: 480px; text-align: center; 
-            position: relative; display: flex; flex-direction: column; gap: 25px;
-        }
-
-        .modal-content h3 { font-weight: 100; letter-spacing: 1px; font-size: 18px; color: #fff; text-transform: uppercase; }
-        .modal-content h3 span { color: var(--gold); font-weight: 800; display: block; margin-top: 10px; }
-
-        .modal-input {
-            width: 100% !important; height: 60px; padding: 0 20px;
-            background: rgba(255,255,255,0.03) !important;
-            border: 1px solid rgba(242, 201, 76, 0.4) !important; 
-            color: #fff !important; outline: none; font-size: 18px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* ИСПРАВЛЕНИЕ НАЛОЖЕНИЯ ТЕЛЕФОНА */
-        .iti { width: 100%; text-align: left; }
-        .iti__country-list { 
-            background-color: #1a1a1c !important; 
-            border: 1px solid var(--gold) !important; 
-            color: #fff !important; 
-            z-index: 10000;
-        }
-        .iti__selected-dial-code { color: #fff !important; margin-left: 6px; }
-        .iti__country:hover { background-color: #333 !important; }
-
-        .modal-btn {
-            width: 100%; padding: 22px; background: var(--gold);
-            color: #000; border: none; font-weight: 900; 
-            text-transform: uppercase; cursor: pointer; 
-            font-size: 22px; letter-spacing: 4px; transition: 0.3s;
-        }
-        .modal-btn:hover { background: #fff; }
-
-        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 30px; color: var(--gold); cursor: pointer; }
-
+        /* --- ADAPTIVITY --- */
         @media (max-width: 1024px) {
             .content { flex-direction: column; text-align: center; }
-            .btn-main { align-self: center; }
+            .btn-main { margin: 0 auto; } /* Центрируем кнопку на планшетах */
         }
         @media (max-width: 768px) {
+            .top-nav { flex-direction: column; gap: 20px; }
             .phone-number { display: none; }
-            
-            /* --- ГАРМОНИЯ ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ --- */
-            .footer-steps { 
-                flex-direction: column; 
-                align-items: flex-start; /* Выравниваем по левому краю для аккуратности */
-                gap: 20px; 
-                max-width: 300px; /* Ограничиваем ширину, чтобы блок не растягивался */
-                margin: 0 auto; /* Центрируем сам блок по центру экрана */
-                padding-bottom: 50px;
-            }
-            .step span { 
-                /* Чуть уменьшаем, чтобы помещалось, но оставалось крупным */
-                font-size: 1.3rem; 
-            }
+            .footer-steps { flex-direction: column; align-items: center; gap: 15px; }
+            .btn-main { font-size: 16px; padding: 18px; max-width: 280px; }
         }
+
+        /* FORM FIX */
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); }
+        .modal-content { background: #0d0d0f; border: 1px solid var(--gold); margin: 10vh auto; padding: 40px 20px; width: 90%; max-width: 450px; text-align: center; }
+        .modal-input { width: 100% !important; height: 55px; margin-bottom: 15px; background: #111 !important; border: 1px solid #444 !important; color: #fff !important; padding: 0 15px; font-size: 16px; }
+        .modal-btn { width: 100%; padding: 20px; background: var(--gold); border: none; font-weight: 900; font-size: 18px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -236,7 +155,7 @@
             <a href="tel:+380675867998" class="phone-block">
                 <div class="phone-number">(+38) 067 586 79 98</div>
                 <div class="phone-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 </div>
             </a>
         </nav>
@@ -267,12 +186,9 @@
 
     <div id="callback-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>ВВЕДИТЕ ИМЯ И ТЕЛЕФОН. <span>МЫ СВЯЖЕМСЯ С ВАМИ</span></h3>
-            
+            <h3>ВВЕДИТЕ ДАННЫЕ</h3><br>
             <input type="text" id="user-name" class="modal-input" placeholder="Имя">
             <input type="tel" id="phone" class="modal-input">
-            
             <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
         </div>
     </div>
@@ -282,66 +198,23 @@
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
-            geoIpLookup: (success) => fetch("https://ipapi.co/json")
-                .then(res => res.json())
-                .then(data => success(data.country_code))
-                .catch(() => success("UA")),
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-            separateDialCode: true
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
         });
 
-        const timerNum = document.getElementById('timer-num');
-        const progress = document.getElementById('progress');
-        const modal = document.getElementById('callback-modal');
-        const circumference = 2 * Math.PI * 45;
-        let current = 7; 
-
-        progress.style.strokeDasharray = circumference;
+        function openModal() { document.getElementById('callback-modal').style.display = 'block'; }
+        function closeModal() { document.getElementById('callback-modal').style.display = 'none'; }
         
+        let current = 7;
         const interval = setInterval(() => {
             if (current >= 0) {
-                timerNum.textContent = current;
-                progress.style.strokeDashoffset = circumference - (current / 7) * circumference;
+                document.getElementById('timer-num').textContent = current;
                 current--;
             } else {
                 clearInterval(interval);
-                document.getElementById('timer-wrapper').style.display = 'none';
                 openModal();
             }
         }, 1000);
-
-        function openModal() { modal.style.display = 'block'; }
-        function closeModal() { modal.style.display = 'none'; }
-
-        function submitForm() {
-            const name = document.getElementById('user-name').value;
-            const phone = iti.getNumber();
-            const btn = document.querySelector('.modal-btn');
-
-            if (name && iti.isValidNumber()) {
-                btn.textContent = "ОТПРАВКА...";
-                btn.disabled = true;
-
-                fetch('https://formspree.io/f/maqpvnvp', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone })
-                }).then(() => {
-                    btn.textContent = "ГОТОВО!";
-                    setTimeout(closeModal, 2000);
-                }).catch(() => {
-                    alert("Ошибка. Попробуйте снова.");
-                    btn.disabled = false;
-                    btn.textContent = "ОТПРАВИТЬ";
-                });
-            } else { 
-                alert("Пожалуйста, введите имя и правильный номер телефона"); 
-            }
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) closeModal();
-        }
     </script>
 </body>
 </html>
