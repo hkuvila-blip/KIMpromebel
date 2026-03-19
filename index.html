@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KIMPROMEBEL | Exclusive Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 
     <style>
@@ -21,7 +20,7 @@
         body, html { 
             width: 100%; background: #000; 
             font-family: 'Montserrat', sans-serif; color: white; 
-            overflow-x: hidden; overflow-y: auto;
+            overflow-x: hidden; height: 100%;
         }
 
         @keyframes shine-slide {
@@ -35,6 +34,8 @@
             min-height: 100vh; width: 100%;
             display: flex; flex-direction: column;
             position: relative; padding: 40px 8%;
+            /* Обеспечивает центровку контента по высоте на всех устройствах */
+            justify-content: space-between; 
         }
 
         .hero-bg {
@@ -53,16 +54,9 @@
             z-index: 2; overflow: hidden;
         }
 
-        .overlay::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 30%; height: 100%;
-            background: linear-gradient(90deg, transparent 0%, var(--gold-glare) 50%, transparent 100%);
-            animation: shine-slide 3s ease-in-out forwards; z-index: 3;
-            backdrop-filter: blur(1px);
-        }
-
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
-            align-items: center; z-index: 100; margin-bottom: 5vh;
+            align-items: center; z-index: 100;
         }
 
         .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
@@ -74,21 +68,24 @@
             display: flex; align-items: center; justify-content: center; color: var(--gold);
         }
 
+        /* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
         .content { 
             position: relative; z-index: 10; max-width: 1400px; 
             display: flex; flex-direction: row; align-items: center;
-            justify-content: space-between; gap: 40px; flex-grow: 1; width: 100%;
+            justify-content: space-between; 
+            gap: 40px; width: 100%;
+            margin: auto 0; /* Центрирует группу элементов по вертикали */
         }
 
-        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 35px; }
+        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 30px; }
 
-        h1 { font-size: clamp(30px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { font-size: clamp(30px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
         h1 b { font-weight: 900; display: block; letter-spacing: 0.06em; margin: 5px 0; } 
         h1 span { color: var(--gold); font-weight: 200; }
 
         .description {
-            font-size: clamp(18px, 1.8vw, 24px); font-weight: 400; line-height: 1.5;
-            color: rgba(255,255,255,0.9); border-left: 4px solid var(--gold); padding-left: 25px;
+            font-size: clamp(16px, 1.8vw, 22px); font-weight: 400; line-height: 1.5;
+            color: rgba(255,255,255,0.9); border-left: 3px solid var(--gold); padding-left: 20px;
         }
 
         .btn {
@@ -99,10 +96,10 @@
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
-        /* ТАЙМЕР */
+        /* --- ТАЙМЕР --- */
         .timer-wrapper {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 90; opacity: 1; transition: opacity 0.5s ease; gap: 25px; flex-shrink: 0; padding-right: 5%; 
+            z-index: 90; opacity: 1; transition: opacity 0.5s ease; gap: 20px; flex-shrink: 0;
         }
 
         .timer-container {
@@ -113,9 +110,7 @@
         .timer-background { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 0.8; }
         .timer-progress {
             fill: none; stroke: var(--gold); stroke-width: 0.8;
-            stroke-dasharray: 283; stroke-dashoffset: 0;
-            stroke-linecap: round; stroke-dasharray: 4, 6;
-            transition: stroke-dashoffset 1s linear;
+            stroke-dasharray: 4, 6; transition: stroke-dashoffset 1s linear;
         }
 
         .timer-number {
@@ -124,18 +119,18 @@
         }
 
         .timer-cta {
-            font-size: clamp(10px, 1vw, 13px); text-transform: uppercase;
-            color: var(--gold); font-weight: 500; letter-spacing: 3px; white-space: nowrap; opacity: 0.8;
+            font-size: 11px; text-transform: uppercase; color: var(--gold);
+            font-weight: 500; letter-spacing: 3px; opacity: 0.8;
         }
 
         .footer-steps { 
             position: relative; display: flex; z-index: 50; width: 100%;
-            margin-top: 5vh; padding-bottom: 40px; gap: 40px; justify-content: center;
+            padding-bottom: 20px; gap: 40px; justify-content: center;
         }
 
         .step { display: flex; align-items: center; gap: 10px; }
-        .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); flex-shrink: 0; }
-        .step span { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
+        .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+        .step span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 
         /* МОДАЛЬНОЕ ОКНО */
         .modal {
@@ -148,57 +143,45 @@
             background: #0d0d0f; border: 0.8px solid var(--gold);
             margin: 15vh auto; padding: 60px 40px;
             width: 90%; max-width: 500px; text-align: center;
-            position: relative; box-shadow: 0 0 60px rgba(242, 201, 76, 0.1);
+            position: relative;
         }
 
-        .modal-content h3 { 
-            color: #fff; margin-bottom: 30px; text-transform: uppercase; 
-            font-weight: 200; letter-spacing: 2px;
-            font-size: clamp(18px, 2vw, 22px); line-height: 1.4;
-        }
-        
+        .modal-content h3 { color: #fff; margin-bottom: 30px; text-transform: uppercase; font-weight: 200; letter-spacing: 2px; }
         .modal-content h3 span { color: var(--gold); font-weight: 700; }
-
-        /* Стилизация международного ввода */
-        .iti { width: 100%; margin-bottom: 30px; }
-        .iti__content { color: #000; }
         
+        .iti { width: 100%; margin-bottom: 30px; }
         .modal-input {
             width: 100%; padding: 20px 20px 20px 52px !important; 
             background: rgba(255,255,255,0.02) !important;
             border: 0.5px solid rgba(242, 201, 76, 0.4) !important; 
             color: #fff !important; border-radius: 0 !important; 
-            outline: none; font-family: inherit; font-size: 16px;
-            letter-spacing: 1px;
+            outline: none; font-size: 16px;
         }
 
-        /* КНОПКА ОТПРАВИТЬ: ЖИРНАЯ И КРУПНАЯ */
         .modal-btn {
             width: 100%; padding: 22px; background: var(--gold);
-            color: #000; border: none; 
-            font-weight: 900; /* Жирный шрифт */
-            text-transform: uppercase; cursor: pointer; 
-            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            letter-spacing: 3px; 
-            font-size: 16px; /* Крупнее шрифт */
+            color: #000; border: none; font-weight: 900;
+            text-transform: uppercase; cursor: pointer; font-size: 16px; letter-spacing: 3px;
         }
-        .modal-btn:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        .close-modal { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--gold); cursor: pointer; opacity: 0.4; }
-
-        /* АДАПТИВНОСТЬ */
+        /* --- ФИНАЛЬНАЯ АДАПТИВНОСТЬ ДЛЯ ПЛАНШЕТОВ --- */
         @media (max-width: 1150px) {
-            .content { flex-direction: column; text-align: center; gap: 60px; }
-            .text-block { align-items: center; }
-            .description { border-left: none; padding-left: 0; }
+            .hero { padding: 40px 5%; }
+            .content { 
+                flex-direction: column; 
+                text-align: center; 
+                justify-content: center;
+                gap: 50px; /* Идеальный одинаковый отступ между текстом и таймером */
+            }
+            .text-block { align-items: center; gap: 25px; }
+            .description { border-left: none; border-top: 1px solid var(--gold); padding: 15px 0 0 0; }
             .btn { align-self: center; }
-            .timer-wrapper { padding-right: 0; }
+            .timer-wrapper { padding-right: 0; margin-top: 0; }
+            .footer-steps { flex-direction: column; align-items: center; gap: 15px; margin-top: 30px; }
         }
 
-        @media (max-width: 767px) {
-            .hero { padding: 30px 5%; }
-            .top-nav { flex-direction: column; gap: 20px; }
-            .footer-steps { flex-direction: column; align-items: center; gap: 20px; }
+        @media (max-height: 800px) and (orientation: portrait) {
+            .content { gap: 30px; } /* Сжимаем отступы на маленьких экранах */
             .timer-container { width: 180px; height: 180px; }
         }
     </style>
@@ -214,7 +197,7 @@
             <a href="tel:+380675867998" class="phone-block">
                 <div class="phone-number">(+38) 067 586 79 98</div>
                 <div class="phone-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 </div>
             </a>
         </nav>
@@ -262,30 +245,27 @@
         const phoneInput = document.querySelector("#phone");
         const iti = window.intlTelInput(phoneInput, {
             initialCountry: "auto",
-            geoIpLookup: function(success, failure) {
+            geoIpLookup: (success) => {
                 fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA"));
             },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-            separateDialCode: true,
-            preferredCountries: ["ua", "us", "de", "gb", "pl"]
+            separateDialCode: true
         });
 
         const timerNum = document.getElementById('timer-num');
         const progress = document.getElementById('progress');
         const modal = document.getElementById('callback-modal');
         const timerWrapper = document.getElementById('timer-wrapper');
-        
-        const total = 7;
         const circumference = 2 * Math.PI * 45;
-        let current = total; 
+        let current = 7; 
 
-        progress.style.strokeDasharray = `4, 6`; 
+        progress.style.strokeDasharray = circumference;
+        progress.style.strokeDashoffset = 0;
         
         const interval = setInterval(() => {
             if (current >= 0) {
                 timerNum.textContent = current;
-                const progressPercent = (total - current) / total;
-                const offset = circumference * progressPercent;
+                const offset = circumference - (current / 7) * circumference;
                 progress.style.strokeDashoffset = offset;
                 current--;
             } else {
@@ -299,19 +279,7 @@
         }, 1000);
 
         function closeModal() { modal.style.display = 'none'; }
-        
-        function submitForm() {
-            const fullNumber = iti.getNumber();
-            if (iti.isValidNumber()) {
-                alert("Данные приняты! Международный номер: " + fullNumber);
-                closeModal();
-            } else {
-                alert("Пожалуйста, введите корректный номер.");
-            }
-        }
-
-        window.onclick = function(event) { if (event.target == modal) closeModal(); }
+        function submitForm() { if (iti.isValidNumber()) { alert("ОТПРАВЛЕНО: " + iti.getNumber()); closeModal(); } else { alert("Ошибка в номере"); } }
     </script>
-
 </body>
 </html>
