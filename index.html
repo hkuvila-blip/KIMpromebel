@@ -1,76 +1,250 @@
-<style>
-    .modal { 
-        display: none; position: fixed; z-index: 9999; 
-        left: 0; top: 0; width: 100%; height: 100%; 
-        background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); 
-    }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KIMPROMEBEL | Exclusive Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 
-    .modal-content { 
-        background: #0d0d0f; border: 0.8px solid var(--gold); 
-        margin: 12vh auto; padding: 60px 40px; 
-        width: 92%; max-width: 550px; text-align: center; 
-        position: relative;
-        /* Создаем вертикальный стек с отступами */
-        display: flex; flex-direction: column; gap: 35px;
-        box-shadow: 0 0 80px rgba(242, 201, 76, 0.1);
-    }
+    <style>
+        :root {
+            --gold: #f2c94c;
+            --gold-glare: rgba(242, 201, 76, 0.05);
+            --gold-soft: rgba(242, 201, 76, 0.08);
+            --pure-black: #0d0d0f;
+        }
 
-    .modal-content h3 { 
-        color: #fff; text-transform: uppercase; 
-        font-weight: 200; letter-spacing: 2px; line-height: 1.4;
-        font-size: clamp(18px, 4vw, 24px);
-        margin: 0; 
-    }
-    
-    .modal-content h3 span { color: var(--gold); font-weight: 700; }
-
-    /* Контейнер для плагина номера телефона */
-    .iti { width: 100%; }
-    
-    .modal-input {
-        width: 100%; padding: 22px 20px 22px 52px !important; 
-        background: rgba(255,255,255,0.03) !important;
-        border: 1px solid rgba(242, 201, 76, 0.5) !important; 
-        color: #fff !important; border-radius: 0 !important; 
-        outline: none; font-size: 18px;
-    }
-
-    .modal-btn {
-        width: 100%; padding: 25px 10px;
-        background: var(--gold); color: #000; border: none; 
-        font-weight: 900; text-transform: uppercase; 
-        cursor: pointer; 
-        font-size: clamp(20px, 6vw, 32px); /* Адаптивный размер шрифта */
-        letter-spacing: 3px;
-        transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-
-    .modal-btn:hover { 
-        background: #fff; 
-        box-shadow: 0 10px 30px rgba(242, 201, 76, 0.3); 
-    }
-
-    .close-modal { 
-        position: absolute; top: 15px; right: 20px; 
-        font-size: 35px; color: var(--gold); cursor: pointer; 
-        opacity: 0.5; transition: 0.3s; 
-    }
-
-    @media (max-width: 480px) {
-        .modal-content { padding: 45px 25px; gap: 25px; margin: 15vh auto; }
-        .modal-btn { padding: 20px 5px; }
-    }
-</style>
-
-<div id="callback-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <h3>Напишите Ваш номер — <br><span>мы свяжемся с Вами</span></h3>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        <div class="input-wrapper">
-            <input type="tel" id="phone" class="modal-input">
+        body, html { 
+            width: 100%; background: #000; 
+            font-family: 'Montserrat', sans-serif; color: white; 
+            overflow-x: hidden; min-height: 100%;
+        }
+
+        .hero {
+            min-height: 100vh; width: 100%;
+            display: flex; flex-direction: column;
+            position: relative; padding: 20px 8%;
+            justify-content: space-between;
+        }
+
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
+            background-size: cover; background-position: center;
+            z-index: 1; opacity: 0.95; filter: contrast(1.15);
+            transform: scaleX(-1); 
+        }
+
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 5% 20%, var(--gold-soft) 0%, transparent 40%),
+                linear-gradient(90deg, #0d0d0f 0%, #0d0d0f 25%, rgba(13, 13, 15, 0.7) 45%, rgba(13, 13, 15, 0) 100%);
+            z-index: 2;
+        }
+
+        /* --- НАВИГАЦИЯ --- */
+        .top-nav {
+            position: relative; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            z-index: 100;
+            width: 100%;
+            padding: 10px 0;
+        }
+
+        .logo { font-weight: 900; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
+        .logo span { color: var(--gold); }
+
+        .phone-block { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+        .phone-icon {
+            width: 45px; height: 45px; border: 1.5px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--gold);
+            transition: 0.3s;
+        }
+        .phone-icon:hover { background: var(--gold); color: black; }
+
+        /* --- КОНТЕНТ --- */
+        .content { 
+            position: relative; z-index: 10; 
+            display: flex; flex-direction: row; align-items: center;
+            justify-content: space-between; gap: 40px; 
+            width: 100%; margin: auto 0;
+            padding: 40px 0;
+        }
+
+        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 30px; }
+
+        h1 { font-size: clamp(28px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
+        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
+        h1 span { color: var(--gold); }
+
+        .description {
+            font-size: clamp(15px, 1.8vw, 22px); font-weight: 400; line-height: 1.5;
+            color: rgba(255,255,255,0.8); border-left: 3px solid var(--gold); padding-left: 20px;
+        }
+
+        .btn {
+            padding: 18px 45px; border: 1px solid var(--gold);
+            color: white; text-decoration: none; text-transform: uppercase; font-weight: 700;
+            font-size: 13px; letter-spacing: 2px; background: rgba(242, 201, 76, 0.05);
+            display: inline-block; transition: 0.3s; align-self: flex-start;
+        }
+
+        /* --- ТАЙМЕР --- */
+        .timer-wrapper {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 90; gap: 20px; flex-shrink: 0;
+        }
+
+        .timer-container {
+            position: relative; width: clamp(200px, 25vw, 360px); height: clamp(200px, 25vw, 360px);
+        }
+
+        .timer-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+        .timer-background { fill: none; stroke: transparent; }
+        .timer-progress { fill: none; stroke: var(--gold); stroke-width: 0.8; stroke-dasharray: 4, 6; transition: stroke-dashoffset 1s linear; }
+
+        .timer-number {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: clamp(60px, 8vw, 120px); font-weight: 100; color: var(--gold);
+        }
+
+        .timer-cta { font-size: 10px; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; opacity: 0.8; }
+
+        /* --- МОБИЛЬНАЯ АДАПТАЦИЯ (ПРАВКИ) --- */
+        @media (max-width: 1024px) {
+            .phone-number { display: none; } /* Скрываем текст номера на планшетах и телефонах */
+            
+            .hero { padding: 20px 5%; }
+            .content { 
+                flex-direction: column; 
+                text-align: center; 
+                margin-top: 60px; /* Чтобы не наезжало на шапку */
+                gap: 60px;
+            }
+            .text-block { align-items: center; }
+            .description { border-left: none; border-top: 1px solid var(--gold); padding: 20px 0 0 0; }
+            .btn { align-self: center; }
+        }
+
+        @media (max-width: 480px) {
+            .logo { font-size: 18px; }
+            .content { margin-top: 40px; gap: 40px; }
+            h1 b { font-size: 1.2em; }
+            .timer-container { width: 180px; height: 180px; }
+            
+            .footer-steps { 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 15px; 
+                padding-bottom: 30px;
+            }
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); }
+        .modal-content { background: #0d0d0f; border: 0.8px solid var(--gold); margin: 10vh auto; padding: 50px 30px; width: 90%; max-width: 500px; text-align: center; position: relative; }
+        .modal-btn { width: 100%; padding: 20px; background: var(--gold); color: #000; border: none; font-weight: 900; text-transform: uppercase; font-size: 28px; letter-spacing: 2px; cursor: pointer; }
+        
+        .footer-steps { position: relative; display: flex; z-index: 50; width: 100%; gap: 20px; justify-content: center; padding-bottom: 20px; }
+        .step { display: flex; align-items: center; gap: 8px; }
+        .dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+        .step span { font-size: 9px; font-weight: 700; text-transform: uppercase; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="overlay"></div>
+        
+        <nav class="top-nav">
+            <div class="logo">KIM<span>PRO</span>MEBEL</div>
+            <a href="tel:+380675867998" class="phone-block">
+                <div class="phone-number">(+38) 067 586 79 98</div>
+                <div class="phone-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+            </a>
+        </nav>
+
+        <div class="content">
+            <div class="text-block">
+                <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
+                <div class="description">
+                    Индивидуальное проектирование и деталировка. <br>
+                    Создаем техническую базу для безупречного производства.
+                </div>
+                <a href="https://t.me/mihailkuvila" target="_blank" class="btn">Заказать проект</a>
+            </div>
+
+            <div id="timer-wrapper" class="timer-wrapper">
+                <div class="timer-container">
+                    <svg class="timer-svg" viewBox="0 0 100 100">
+                        <circle class="timer-background" cx="50" cy="50" r="45"></circle>
+                        <circle id="progress" class="timer-progress" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <div id="timer-num" class="timer-number">7</div>
+                </div>
+                <div class="timer-cta">Оставь заявку — получи скидку</div>
+            </div>
         </div>
-        
-        <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
+
+        <div class="footer-steps">
+            <div class="step"><div class="dot"></div><span>Проект</span></div>
+            <div class="step"><div class="dot"></div><span>Документы</span></div>
+            <div class="step"><div class="dot"></div><span>Производство</span></div>
+        </div>
+    </section>
+
+    <div id="callback-modal" class="modal">
+        <div class="modal-content">
+            <h3 style="color:#fff; margin-bottom:25px; text-transform:uppercase; font-weight:200;">Оставьте номер — <br><span style="color:var(--gold); font-weight:700;">мы свяжемся</span></h3>
+            <input type="tel" id="phone" class="modal-input" style="width:100%; padding:15px; margin-bottom:25px; background:rgba(255,255,255,0.05); border:1px solid var(--gold); color:#fff; outline:none;">
+            <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
+        </div>
     </div>
-</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: (success) => fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA")),
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+            separateDialCode: true
+        });
+
+        const timerNum = document.getElementById('timer-num');
+        const progress = document.getElementById('progress');
+        const modal = document.getElementById('callback-modal');
+        const timerWrapper = document.getElementById('timer-wrapper');
+        const circumference = 2 * Math.PI * 45;
+        let current = 7; 
+
+        progress.style.strokeDasharray = circumference;
+        
+        const interval = setInterval(() => {
+            if (current >= 0) {
+                timerNum.textContent = current;
+                progress.style.strokeDashoffset = circumference - (current / 7) * circumference;
+                current--;
+            } else {
+                clearInterval(interval);
+                timerWrapper.style.opacity = '0'; 
+                setTimeout(() => {
+                    timerWrapper.style.display = 'none';
+                    modal.style.display = 'block'; 
+                }, 500);
+            }
+        }, 1000);
+
+        function submitForm() { if (iti.isValidNumber()) { alert("Принято: " + iti.getNumber()); modal.style.display = 'none'; } else { alert("Ошибка в номере"); } }
+    </script>
+</body>
+</html>
