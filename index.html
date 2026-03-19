@@ -12,6 +12,7 @@
         :root {
             --gold: #f2c94c;
             --gold-soft: rgba(242, 201, 76, 0.08);
+            --pure-black: #0d0d0f;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,52 +43,98 @@
             z-index: 2;
         }
 
+        /* --- ВЕРХНЯЯ ПАНЕЛЬ --- */
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
             align-items: center; z-index: 100; width: 100%;
         }
 
-        .logo { font-weight: 900; font-size: 24px; text-transform: uppercase; letter-spacing: 1px; }
+        .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; }
         .logo span { color: var(--gold); }
 
+        .phone-block { display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; }
+        .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0.5px; }
+        .phone-icon {
+            width: clamp(50px, 6vw, 65px); height: clamp(50px, 6vw, 65px); 
+            border: 2px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--gold);
+            box-shadow: 0 0 15px rgba(242, 201, 76, 0.2);
+        }
+
+        /* --- КОНТЕНТ --- */
         .content { 
             position: relative; z-index: 10; 
-            display: flex; align-items: center;
+            display: flex; flex-direction: row; align-items: center;
             justify-content: space-between; gap: 40px; 
-            width: 100%; margin: auto 0;
+            width: 100%; margin: auto 0; padding: 60px 0;
         }
 
-        .text-block { max-width: 700px; display: flex; flex-direction: column; gap: 35px; }
+        .text-block { max-width: 750px; display: flex; flex-direction: column; gap: 45px; }
 
-        h1 { font-size: clamp(30px, 5.5vw, 85px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
-        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; } 
+        h1 { font-size: clamp(34px, 5.8vw, 90px); font-weight: 200; line-height: 1.1; text-transform: uppercase; }
+        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
         h1 span { color: var(--gold); }
 
+        /* ИСПРАВЛЕННАЯ КНОПКА ЗАКАЗАТЬ ПРОЕКТ */
         .btn-main {
-            padding: 20px 50px; border: 1px solid var(--gold);
-            color: white; text-decoration: none; text-transform: uppercase; font-weight: 700;
-            font-size: 13px; letter-spacing: 2px; background: rgba(242, 201, 76, 0.05);
-            display: inline-block; transition: 0.3s;
+            padding: 24px 60px; 
+            border: 2px solid var(--gold);
+            color: #fff; 
+            text-decoration: none; 
+            text-transform: uppercase; 
+            font-weight: 800;
+            font-size: 16px; 
+            letter-spacing: 3px; 
+            background: rgba(242, 201, 76, 0.05);
+            display: inline-block; 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            align-self: flex-start;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(242, 201, 76, 0.1);
+        }
+        .btn-main:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 40px rgba(242, 201, 76, 0.4);
+            transform: translateY(-2px);
         }
 
+        /* --- ТАЙМЕР --- */
         .timer-wrapper {
-            display: flex; flex-direction: column; align-items: center;
-            z-index: 90; gap: 20px; transition: opacity 0.5s ease;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 90; gap: 25px; flex-shrink: 0; transition: opacity 0.5s ease;
         }
 
         .timer-container {
-            position: relative; width: clamp(220px, 25vw, 360px); height: clamp(220px, 25vw, 360px);
+            position: relative; width: clamp(230px, 26vw, 380px); height: clamp(230px, 26vw, 380px);
         }
 
         .timer-progress {
             fill: none; stroke: var(--gold); stroke-width: 0.8;
-            stroke-dasharray: 4, 6; transition: stroke-dashoffset 1s linear;
+            stroke-dasharray: 4, 6; stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
         }
 
         .timer-number {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: clamp(70px, 8vw, 120px); font-weight: 100; color: var(--gold);
+            font-size: clamp(80px, 9vw, 130px); font-weight: 100; color: var(--gold); letter-spacing: -4px;
         }
+
+        .timer-cta { 
+            font-size: clamp(11px, 1.3vw, 14px); 
+            text-transform: uppercase; color: var(--gold); 
+            letter-spacing: 4px; font-weight: 500;
+        }
+
+        /* --- ФУТЕР --- */
+        .footer-steps { 
+            position: relative; display: flex; z-index: 50; width: 100%;
+            gap: clamp(30px, 6vw, 80px); justify-content: center; padding-bottom: 30px;
+        }
+
+        .step { display: flex; align-items: center; gap: 15px; }
+        .dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px rgba(242, 201, 76, 0.6); }
+        .step span { font-size: clamp(11px, 1.1vw, 14px); font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; opacity: 0.9; }
 
         /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal { 
@@ -97,26 +144,25 @@
         }
 
         .modal-content { 
-            background: #0d0d0f; border: 0.8px solid var(--gold); 
-            margin: 15vh auto; padding: 50px 40px; 
-            width: 92%; max-width: 500px; text-align: center; 
-            position: relative; display: flex; flex-direction: column; gap: 30px;
+            background: #0d0d0f; border: 1px solid var(--gold); 
+            margin: 12vh auto; padding: 60px 40px; 
+            width: 92%; max-width: 520px; text-align: center; 
+            position: relative; display: flex; flex-direction: column; gap: 35px;
         }
 
         .modal-content h3 { 
             color: #fff; text-transform: uppercase; font-weight: 100; 
-            letter-spacing: 1px; line-height: 1.4; font-size: 18px;
+            letter-spacing: 1.5px; line-height: 1.6; font-size: 19px;
         }
-        .modal-content h3 span { color: var(--gold); font-weight: 700; display: block; margin-top: 5px; }
+        .modal-content h3 span { color: var(--gold); font-weight: 800; display: block; margin-top: 10px; }
 
         .modal-input {
-            width: 100% !important; height: 60px; padding: 0 20px;
+            width: 100% !important; height: 65px; padding: 0 25px;
             background: rgba(255,255,255,0.03) !important;
-            border: 1px solid rgba(242, 201, 76, 0.5) !important; 
+            border: 1px solid rgba(242, 201, 76, 0.4) !important; 
             color: #fff !important; outline: none; font-size: 18px;
         }
 
-        /* ИСПРАВЛЕНИЕ НАЕЗДА ЦИФР */
         .iti { width: 100%; }
         #phone { padding-left: 110px !important; }
 
@@ -124,11 +170,21 @@
             width: 100%; padding: 25px 10px; background: var(--gold);
             color: #000; border: none; font-weight: 900; 
             text-transform: uppercase; cursor: pointer; 
-            font-size: 26px; letter-spacing: 5px; transition: 0.4s;
+            font-size: 26px; letter-spacing: 6px; transition: 0.4s;
         }
-        .modal-btn:disabled { opacity: 0.8; }
 
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 35px; color: var(--gold); cursor: pointer; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 40px; color: var(--gold); cursor: pointer; opacity: 0.7; }
+
+        @media (max-width: 1024px) {
+            .content { flex-direction: column; text-align: center; gap: 70px; }
+            .text-block { align-items: center; }
+            .btn-main { align-self: center; }
+        }
+
+        @media (max-width: 768px) {
+            .phone-number { display: none; }
+            .footer-steps { flex-direction: column; align-items: center; gap: 25px; }
+        }
     </style>
 </head>
 <body>
@@ -139,12 +195,18 @@
         
         <nav class="top-nav">
             <div class="logo">KIM<span>PRO</span>MEBEL</div>
+            <a href="tel:+380675867998" class="phone-block">
+                <div class="phone-number">(+38) 067 586 79 98</div>
+                <div class="phone-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+            </a>
         </nav>
 
         <div class="content">
             <div class="text-block">
                 <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
-                <a href="#" class="btn-main" onclick="openModal()">Заказать проект</a>
+                <div class="btn-main" onclick="openModal()">Заказать проект</div>
             </div>
 
             <div id="timer-wrapper" class="timer-wrapper">
@@ -154,7 +216,14 @@
                     </svg>
                     <div id="timer-num" class="timer-number">7</div>
                 </div>
+                <div class="timer-cta">Оставь заявку — получи скидку</div>
             </div>
+        </div>
+
+        <div class="footer-steps">
+            <div class="step"><div class="dot"></div><span>Проект</span></div>
+            <div class="step"><div class="dot"></div><span>Документы</span></div>
+            <div class="step"><div class="dot"></div><span>Производство</span></div>
         </div>
     </section>
 
