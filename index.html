@@ -1,138 +1,323 @@
-/* --- ГЛАВНЫЙ КОНТЕЙНЕР --- */
-.hero {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    padding: 40px 8%;
-    justify-content: space-between;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KIMPROMEBEL | Exclusive Design</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css">
 
-/* --- ОБНОВЛЕННЫЙ ФОН И ОВЕРЛЕЙ ДЛЯ ЧИТАЕМОСТИ --- */
-.hero-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-    /* Уменьшим яркость и увеличим контраст, чтобы светлые участки стали темнее */
-    opacity: 0.95; 
-    filter: contrast(1.15); /* Делает тени глубже, а светлые участки графитовыми */
-    transform: scaleX(-1); /* Сохраним отзеркаливание */
-}
+    <style>
+        :root {
+            --gold: #f2c94c;
+            --gold-soft: rgba(242, 201, 76, 0.08);
+            --pure-black: #0d0d0f;
+            --graphite-bg: rgba(13, 13, 15, 0.75);
+        }
 
-/* --- ОВЕРЛЕЙ (ЗАЧЕМНЕНИЕ И ТОНИРОВКА) --- */
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Мы заменим старый радиальный градиент на более плотный линейный,
-       который полностью тонирует светлые участки фонового изображения.
-       Старый градиент: radial-gradient(circle at 5% 20%, var(--gold-soft) 0%, transparent 40%).
-       Новый градиент: тонирует изображение по всей площади, создавая плотную графитовую базу. */
-    background: 
-        /* Тонкий графитовый оттенок по всей площади */
-        linear-gradient(180deg, rgba(13, 13, 15, 0.5) 0%, rgba(13, 13, 15, 0) 100%),
-        /* Жесткое затенение слева и сверху, где текст */
-        linear-gradient(90deg, #0d0d0f 0%, #0d0d0f 25%, rgba(13, 13, 15, 0.7) 45%, rgba(13, 13, 15, 0) 100%);
-    z-index: 2;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body, html { 
+            width: 100%; background: #000; 
+            font-family: 'Montserrat', sans-serif; color: white; 
+            overflow-x: hidden; min-height: 100vh;
+        }
 
-/* --- СТИЛИЗАЦИЯ ЭЛЕМЕНТОВ (для усиления читаемости) --- */
-.logo { 
-    font-weight: 900; 
-    font-size: 24px; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-    z-index: 10;
-}
-.logo span { color: var(--gold); }
+        .hero {
+            min-height: 100vh; width: 100%;
+            display: flex; flex-direction: column;
+            position: relative; padding: 40px 8%;
+            justify-content: space-between;
+        }
 
-.phone-block { 
-    position: relative;
-    display: flex; 
-    align-items: center; 
-    gap: 12px; 
-    text-decoration: none; 
-    color: white;
-    z-index: 10;
-}
-/* Затенение блока телефона графитовым фоном для 100% читаемости */
-.phone-block::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(13, 13, 15, 0.6); /* Плотный графитовый цвет */
-    backdrop-filter: blur(5px); /* Тонкий эффект матового стекла */
-    border-radius: 30px;
-    z-index: -1;
-    transform: scaleX(1.15) scaleY(1.3); /* Подвинем оверлей, чтобы он покрывал блок */
-}
+        /* ФОН С УСИЛЕННЫМ КОНТРАСТОМ */
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://github.com/user-attachments/assets/7162f987-ebc5-4a1c-808b-ffa029dc14d5');
+            background-size: cover; background-position: center;
+            z-index: 1; opacity: 0.9; 
+            filter: contrast(1.1) brightness(0.8); /* Затемняем само фото для лучшего фона */
+            transform: scaleX(-1); 
+        }
 
-.phone-number { 
-    font-size: 16px; 
-    font-weight: 500;
-}
-.phone-icon {
-    width: 45px; 
-    height: 45px; 
-    border: 1.5px solid var(--gold); 
-    border-radius: 50%;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: var(--gold);
-    transition: 0.3s;
-}
+        /* ГРАФИТОВАЯ ТОНИРОВКА (Overlay) */
+        .overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(13, 13, 15, 1) 0%, 
+                rgba(13, 13, 15, 0.9) 20%, 
+                rgba(13, 13, 15, 0.6) 50%, 
+                rgba(13, 13, 15, 0.3) 100%);
+            z-index: 2;
+        }
 
-h1 { 
-    font-size: clamp(30px, 5.5vw, 85px); 
-    font-weight: 200; 
-    line-height: 1.1; 
-    text-transform: uppercase;
-    /* Усилим затенение под текстом */
-    text-shadow: 0 4px 10px rgba(0,0,0,0.7);
-}
-h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
-h1 span { color: var(--gold); }
+        /* ВЕРХНЯЯ ПАНЕЛЬ */
+        .top-nav {
+            position: relative; display: flex; justify-content: space-between; 
+            align-items: center; z-index: 100; width: 100%;
+        }
 
-.description {
-    font-size: clamp(16px, 1.8vw, 22px); 
-    font-weight: 400; 
-    line-height: 1.5;
-    color: rgba(255,255,255,0.85); 
-    border-left: 3px solid var(--gold); 
-    padding-left: 20px;
-}
+        .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; }
+        .logo span { color: var(--gold); }
 
-.btn-main {
-    padding: 20px 50px; 
-    border: 1px solid var(--gold);
-    color: white; 
-    text-decoration: none; 
-    text-transform: uppercase; 
-    font-weight: 700;
-    font-size: 13px; 
-    letter-spacing: 2px; 
-    background: rgba(242, 201, 76, 0.05);
-    display: inline-block; 
-    transition: 0.3s; 
-    align-self: flex-start;
-    /* Добавим тень, чтобы кнопка отделялась */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-.btn-main:hover { 
-    background: var(--gold); 
-    color: #000; 
-    box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); 
-}
+        /* БЛОК ТЕЛЕФОНА С ПЛОТНЫМ ФОНОМ */
+        .phone-block { 
+            display: flex; align-items: center; gap: 15px; 
+            text-decoration: none; color: white; 
+            background: rgba(0, 0, 0, 0.4); 
+            padding: 8px 15px; border-radius: 40px;
+            backdrop-filter: blur(8px); /* Эффект матового стекла */
+            border: 1px solid rgba(242, 201, 76, 0.2);
+        }
+        .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0.5px; }
+        .phone-icon {
+            width: clamp(40px, 5vw, 55px); height: clamp(40px, 5vw, 55px); 
+            border: 2px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--gold);
+            box-shadow: 0 0 15px rgba(242, 201, 76, 0.2);
+        }
+
+        /* КОНТЕНТ */
+        .content { 
+            position: relative; z-index: 10; 
+            display: flex; flex-direction: row; align-items: center;
+            justify-content: space-between; gap: 40px; 
+            width: 100%; margin: auto 0; padding: 60px 0;
+        }
+
+        .text-block { max-width: 750px; display: flex; flex-direction: column; gap: 45px; }
+
+        /* ТЕНЬ ДЛЯ ТЕКСТА ЧТОБЫ ЧИТАЛСЯ НА БЕЛОМ */
+        h1 { 
+            font-size: clamp(34px, 5.8vw, 90px); font-weight: 200; line-height: 1.1; 
+            text-transform: uppercase;
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.8); 
+        }
+        h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
+        h1 span { color: var(--gold); }
+
+        /* КНОПКА С ГРАФИТОВОЙ ПОДЛОЖКОЙ */
+        .btn-main {
+            padding: 24px 60px; 
+            border: 2px solid var(--gold);
+            color: #fff; 
+            text-decoration: none; 
+            text-transform: uppercase; 
+            font-weight: 800;
+            font-size: 16px; 
+            letter-spacing: 3px; 
+            background: rgba(13, 13, 15, 0.6); /* Темная подложка внутри кнопки */
+            display: inline-block; 
+            transition: all 0.4s ease;
+            align-self: flex-start;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        .btn-main:hover {
+            background: var(--gold);
+            color: #000;
+            box-shadow: 0 0 40px rgba(242, 201, 76, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ТАЙМЕР */
+        .timer-wrapper {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 90; gap: 25px; flex-shrink: 0;
+        }
+
+        .timer-container {
+            position: relative; width: clamp(230px, 26vw, 380px); height: clamp(230px, 26vw, 380px);
+            background: rgba(0,0,0,0.2); border-radius: 50%; backdrop-filter: blur(2px);
+        }
+
+        .timer-progress {
+            fill: none; stroke: var(--gold); stroke-width: 1.2;
+            stroke-dasharray: 4, 6; stroke-linecap: round;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .timer-number {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: clamp(80px, 9vw, 130px); font-weight: 100; color: var(--gold); letter-spacing: -4px;
+            text-shadow: 0 0 20px rgba(242, 201, 76, 0.3);
+        }
+
+        .timer-cta { 
+            font-size: clamp(11px, 1.3vw, 14px); 
+            text-transform: uppercase; color: var(--gold); 
+            letter-spacing: 4px; font-weight: 500;
+            background: rgba(0,0,0,0.5); padding: 5px 15px; border-radius: 20px;
+        }
+
+        /* ФУТЕР */
+        .footer-steps { 
+            position: relative; display: flex; z-index: 50; width: 100%;
+            gap: clamp(30px, 6vw, 80px); justify-content: center; padding-bottom: 30px;
+        }
+
+        .step { display: flex; align-items: center; gap: 15px; }
+        .dot { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
+        .step span { 
+            font-size: clamp(11px, 1.1vw, 14px); font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 2.5px; 
+            text-shadow: 1px 1px 5px #000;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal { 
+            display: none; position: fixed; z-index: 9999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.98); backdrop-filter: blur(15px); 
+        }
+
+        .modal-content { 
+            background: #0d0d0f; border: 1px solid var(--gold); 
+            margin: 12vh auto; padding: 60px 40px; 
+            width: 92%; max-width: 520px; text-align: center; 
+            position: relative; display: flex; flex-direction: column; gap: 35px;
+        }
+
+        .modal-content h3 { color: #fff; text-transform: uppercase; font-weight: 100; letter-spacing: 1.5px; font-size: 19px; }
+        .modal-content h3 span { color: var(--gold); font-weight: 800; display: block; margin-top: 10px; }
+
+        .modal-input {
+            width: 100% !important; height: 65px; padding: 0 25px;
+            background: rgba(255,255,255,0.03) !important;
+            border: 1px solid rgba(242, 201, 76, 0.4) !important; 
+            color: #fff !important; outline: none; font-size: 18px;
+        }
+
+        .iti { width: 100%; }
+        #phone { padding-left: 110px !important; }
+
+        .modal-btn {
+            width: 100%; padding: 25px 10px; background: var(--gold);
+            color: #000; border: none; font-weight: 900; 
+            text-transform: uppercase; cursor: pointer; 
+            font-size: 26px; letter-spacing: 6px;
+        }
+
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 40px; color: var(--gold); cursor: pointer; }
+
+        @media (max-width: 1024px) {
+            .content { flex-direction: column; text-align: center; gap: 70px; }
+            .text-block { align-items: center; }
+            .btn-main { align-self: center; }
+        }
+
+        @media (max-width: 768px) {
+            .phone-number { display: none; }
+            .footer-steps { flex-direction: column; align-items: center; gap: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="overlay"></div>
+        
+        <nav class="top-nav">
+            <div class="logo">KIM<span>PRO</span>MEBEL</div>
+            <a href="tel:+380675867998" class="phone-block">
+                <div class="phone-number">(+38) 067 586 79 98</div>
+                <div class="phone-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+            </a>
+        </nav>
+
+        <div class="content">
+            <div class="text-block">
+                <h1>Эксклюзивные <b>КУХНИ</b> <span>PRO</span> уровня</h1>
+                <div class="btn-main" onclick="openModal()">Заказать проект</div>
+            </div>
+
+            <div id="timer-wrapper" class="timer-wrapper">
+                <div class="timer-container">
+                    <svg viewBox="0 0 100 100" style="transform: rotate(-90deg); width:100%; height:100%;">
+                        <circle id="progress" class="timer-progress" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <div id="timer-num" class="timer-number">7</div>
+                </div>
+                <div class="timer-cta">Оставь заявку — получи скидку</div>
+            </div>
+        </div>
+
+        <div class="footer-steps">
+            <div class="step"><div class="dot"></div><span>Проект</span></div>
+            <div class="step"><div class="dot"></div><span>Документы</span></div>
+            <div class="step"><div class="dot"></div><span>Производство</span></div>
+        </div>
+    </section>
+
+    <div id="callback-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>ВВЕДИТЕ ИМЯ И ТЕЛЕФОН. <span>МЫ СВЯЖЕМСЯ С ВАМИ</span></h3>
+            
+            <input type="text" id="user-name" class="modal-input" placeholder="Имя">
+            <input type="tel" id="phone" class="modal-input">
+            
+            <button class="modal-btn" onclick="submitForm()">ОТПРАВИТЬ</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+    <script>
+        const phoneInput = document.querySelector("#phone");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: (success) => fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA")),
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+            separateDialCode: true
+        });
+
+        const timerNum = document.getElementById('timer-num');
+        const progress = document.getElementById('progress');
+        const modal = document.getElementById('callback-modal');
+        const circumference = 2 * Math.PI * 45;
+        let current = 7; 
+
+        progress.style.strokeDasharray = circumference;
+        
+        const interval = setInterval(() => {
+            if (current >= 0) {
+                timerNum.textContent = current;
+                progress.style.strokeDashoffset = circumference - (current / 7) * circumference;
+                current--;
+            } else {
+                clearInterval(interval);
+                document.getElementById('timer-wrapper').style.display = 'none';
+                openModal();
+            }
+        }, 1000);
+
+        function openModal() { modal.style.display = 'block'; }
+        function closeModal() { modal.style.display = 'none'; }
+
+        function submitForm() {
+            const name = document.getElementById('user-name').value;
+            const phone = iti.getNumber();
+            const btn = document.querySelector('.modal-btn');
+
+            if (name && iti.isValidNumber()) {
+                btn.textContent = "ОТПРАВКА...";
+                btn.disabled = true;
+
+                fetch('https://formspree.io/f/maqpvnvp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone })
+                }).then(() => {
+                    btn.textContent = "ГОТОВО!";
+                    setTimeout(closeModal, 2000);
+                });
+            } else { alert("Заполните поля корректно"); }
+        }
+    </script>
+</body>
+</html>
