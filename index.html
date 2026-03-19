@@ -100,30 +100,16 @@
         h1 b { font-weight: 900; display: block; letter-spacing: 0.05em; margin: 5px 0; } 
         h1 span { color: var(--gold); }
 
-        /* --- ИСПРАВЛЕННАЯ КНОПКА ЗАКАЗАТЬ ПРОЕКТ --- */
         .btn-main {
-            /* Стандартные, элегантные паддинги */
-            padding: 18px 40px; 
+            padding: 24px 60px; 
             border: 2px solid var(--gold);
             color: #fff; text-decoration: none; 
-            text-transform: uppercase; 
-            
-            /* Текст крупный, но не жирный */
-            font-weight: 400; 
-            font-size: 18px; 
-            letter-spacing: 3px; 
-            
+            text-transform: uppercase; font-weight: 800;
+            font-size: 16px; letter-spacing: 3px; 
             background: rgba(13, 13, 15, 0.6); 
-            display: inline-block; 
-            transition: all 0.4s ease;
-            cursor: pointer; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: inline-block; transition: all 0.4s ease;
+            cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
-            
-            /* Ограничиваем максимальную ширину на больших экранах */
-            max-width: 320px;
-            width: 100%;
-            text-align: center;
         }
         .btn-main:hover {
             background: var(--gold); color: #000;
@@ -144,10 +130,31 @@
         }
         .timer-cta { font-size: 12px; text-transform: uppercase; color: var(--gold); letter-spacing: 3px; }
 
-        /* --- FOOTER STEPS --- */
-        .footer-steps { display: flex; gap: 50px; justify-content: center; z-index: 50; padding-bottom: 20px;}
-        .step { display: flex; align-items: center; gap: 10px; }
-        .dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+        /* --- ИСПРАВЛЕННЫЙ ПОДВАЛ (ФУТЕР) --- */
+        .footer-steps { 
+            position: relative; 
+            display: flex; 
+            z-index: 50; 
+            width: 100%;
+            /* Увеличиваем расстояние между пунктами для баланса */
+            gap: clamp(50px, 8vw, 100px); 
+            justify-content: center; 
+            padding-bottom: 30px;
+        }
+
+        .step { display: flex; align-items: center; gap: 15px; } /* Увеличили gap между точкой и текстом */
+        
+        /* Увеличили саму точку, чтобы она соответствовала новому тексту */
+        .dot { width: 12px; height: 12px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 15px var(--gold); }
+        
+        .step span { 
+            /* Текст стал в 1.5 раза больше (был примерно 14px, стал примерно 22px) */
+            font-size: 1.5rem; /* rem лучше адаптируется под разные экраны */
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2.5px; 
+            text-shadow: 1px 1px 5px #000;
+        }
 
         /* --- MODAL & FORM FIXES --- */
         .modal { 
@@ -182,7 +189,7 @@
             color: #fff !important; 
             z-index: 10000;
         }
-        .iti__selected-dial-code { color: #fff !important; margin-left: 6px; font-weight: 400;}
+        .iti__selected-dial-code { color: #fff !important; margin-left: 6px; }
         .iti__country:hover { background-color: #333 !important; }
 
         .modal-btn {
@@ -196,16 +203,25 @@
         .close-modal { position: absolute; top: 10px; right: 15px; font-size: 30px; color: var(--gold); cursor: pointer; }
 
         @media (max-width: 1024px) {
-            .content { flex-direction: column; text-align: center; gap: 60px;}
-            .btn-main { align-self: center; max-width: 300px;}
-            .text-block { gap: 30px; }
+            .content { flex-direction: column; text-align: center; }
+            .btn-main { align-self: center; }
         }
         @media (max-width: 768px) {
             .phone-number { display: none; }
-            .footer-steps { flex-direction: column; align-items: center; gap: 15px; }
             
-            /* На мобильных кнопка шире */
-            .btn-main { max-width: 90%; font-size: 16px; padding: 16px 20px;}
+            /* --- ГАРМОНИЯ ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ --- */
+            .footer-steps { 
+                flex-direction: column; 
+                align-items: flex-start; /* Выравниваем по левому краю для аккуратности */
+                gap: 20px; 
+                max-width: 300px; /* Ограничиваем ширину, чтобы блок не растягивался */
+                margin: 0 auto; /* Центрируем сам блок по центру экрана */
+                padding-bottom: 50px;
+            }
+            .step span { 
+                /* Чуть уменьшаем, чтобы помещалось, но оставалось крупным */
+                font-size: 1.3rem; 
+            }
         }
     </style>
 </head>
