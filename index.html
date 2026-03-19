@@ -71,16 +71,12 @@
 
         .phone-number { font-size: clamp(18px, 2.2vw, 24px); font-weight: 500; letter-spacing: 0.5px; }
 
-        /* ИСПРАВЛЕННАЯ ИКОНКА С ВНУТРЕННЕЙ ТЕНЬЮ */
         .phone-icon {
             width: clamp(40px, 5vw, 55px); height: clamp(40px, 5vw, 55px); 
             border: 2px solid var(--gold); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--gold);
-            
-            /* Внутренняя тень: inset, сдвиг по X/Y 0, размытие 10px, цвет глубокий графит */
             box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
-            
-            background: rgba(13, 13, 15, 0.3); /* Тонкая темная подложка внутри для усиления эффекта */
+            background: rgba(13, 13, 15, 0.3);
             transition: 0.3s ease;
         }
         .phone-block:hover .phone-icon { 
@@ -179,32 +175,41 @@
 
         .modal-content { 
             background: #0d0d0f; border: 1px solid var(--gold); 
-            margin: 12vh auto; padding: 60px 40px; 
-            width: 92%; max-width: 520px; text-align: center; 
-            position: relative; display: flex; flex-direction: column; gap: 35px;
+            margin: 10vh auto; padding: 50px 30px; 
+            width: 92%; max-width: 480px; text-align: center; 
+            position: relative; display: flex; flex-direction: column; gap: 25px;
         }
 
-        .modal-content h3 { color: #fff; text-transform: uppercase; font-weight: 100; letter-spacing: 1.5px; font-size: 19px; }
+        .modal-content h3 { color: #fff; text-transform: uppercase; font-weight: 100; letter-spacing: 1.5px; font-size: clamp(16px, 4vw, 19px); }
         .modal-content h3 span { color: var(--gold); font-weight: 800; display: block; margin-top: 10px; }
 
         .modal-input {
-            width: 100% !important; height: 65px; padding: 0 25px;
+            width: 100% !important; height: 60px; padding: 0 20px;
             background: rgba(255,255,255,0.03) !important;
             border: 1px solid rgba(242, 201, 76, 0.4) !important; 
             color: #fff !important; outline: none; font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .iti { width: 100%; }
-        #phone { padding-left: 110px !important; }
+        /* КОРРЕКЦИЯ ТЕЛЕФОНА И СПИСКА СТРАН */
+        .iti { width: 100%; color: #000; } /* Цвет текста в выпадающем списке */
+        .iti__country-list { background-color: #1a1a1c !important; border: 1px solid var(--gold) !important; color: #fff !important; }
+        .iti__country:hover { background-color: rgba(242, 201, 76, 0.1) !important; }
+        .iti__selected-dial-code { color: var(--gold) !important; font-weight: 600; margin-left: 8px; }
+        
+        /* Убираем старый фиксированный padding и даем библиотеке рулить */
+        #phone { padding-left: 52px !important; } 
 
         .modal-btn {
-            width: 100%; padding: 25px 10px; background: var(--gold);
+            width: 100%; padding: 22px 10px; background: var(--gold);
             color: #000; border: none; font-weight: 900; 
             text-transform: uppercase; cursor: pointer; 
-            font-size: 26px; letter-spacing: 6px;
+            font-size: 22px; letter-spacing: 4px;
+            transition: 0.3s;
         }
+        .modal-btn:hover { background: #fff; transform: scale(1.02); }
 
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 40px; color: var(--gold); cursor: pointer; }
+        .close-modal { position: absolute; top: 10px; right: 15px; font-size: 35px; color: var(--gold); cursor: pointer; line-height: 1; }
 
         @media (max-width: 1024px) {
             .content { flex-direction: column; text-align: center; gap: 70px; }
@@ -215,6 +220,7 @@
         @media (max-width: 768px) {
             .phone-number { display: none; }
             .footer-steps { flex-direction: column; align-items: center; gap: 25px; }
+            .modal-content { margin: 5vh auto; padding: 40px 20px; }
         }
     </style>
 </head>
@@ -277,7 +283,8 @@
             initialCountry: "auto",
             geoIpLookup: (success) => fetch("https://ipapi.co/json").then(res => res.json()).then(data => success(data.country_code)).catch(() => success("UA")),
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
-            separateDialCode: true
+            separateDialCode: true,
+            preferredCountries: ["ua", "pl", "de"]
         });
 
         const timerNum = document.getElementById('timer-num');
@@ -303,12 +310,18 @@
         function openModal() { modal.style.display = 'block'; }
         function closeModal() { modal.style.display = 'none'; }
 
+        // Закрытие при клике вне контента
+        window.onclick = function(event) {
+            if (event.target == modal) { closeModal(); }
+        }
+
         function submitForm() {
             const name = document.getElementById('user-name').value;
             const phone = iti.getNumber();
             const btn = document.querySelector('.modal-btn');
 
             if (name && iti.isValidNumber()) {
+                const originalText = btn.textContent;
                 btn.textContent = "ОТПРАВКА...";
                 btn.disabled = true;
 
@@ -318,9 +331,19 @@
                     body: JSON.stringify({ name, phone })
                 }).then(() => {
                     btn.textContent = "ГОТОВО!";
-                    setTimeout(closeModal, 2000);
+                    setTimeout(() => {
+                        closeModal();
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 2000);
+                }).catch(() => {
+                    alert("Ошибка отправки. Попробуйте снова.");
+                    btn.disabled = false;
+                    btn.textContent = originalText;
                 });
-            } else { alert("Заполните поля корректно"); }
+            } else { 
+                alert("Пожалуйста, введите корректное имя и номер телефона"); 
+            }
         }
     </script>
 </body>
