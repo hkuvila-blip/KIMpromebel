@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KIMPROMEBEL | Exclusive Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #f2c94c;
@@ -94,17 +94,18 @@
         .content { 
             position: relative; 
             z-index: 10; 
-            max-width: 1200px; 
+            max-width: 1400px; 
             display: flex;
-            flex-direction: row; /* На ПК в ряд */
+            flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            gap: 45px; 
+            justify-content: space-between; /* На ПК разносит блоки */
+            gap: 40px; 
             flex-grow: 1;
+            width: 100%;
         }
 
         .text-block {
-            max-width: 750px;
+            max-width: 700px;
             display: flex;
             flex-direction: column;
             gap: 35px;
@@ -147,7 +148,7 @@
         }
         .btn:hover { background: var(--gold); color: black; box-shadow: 0 0 50px rgba(242, 201, 76, 0.4); }
 
-        /* --- ТАЙМЕР: ЭЛАСТИЧНЫЙ БЛОК --- */
+        /* --- ОБНОВЛЕННЫЙ ТАЙМЕР: ТОНКИЕ ЛИНИИ + ПОЗИЦИЯ --- */
         .timer-wrapper {
             display: flex;
             flex-direction: column;
@@ -156,14 +157,16 @@
             z-index: 90;
             opacity: 1;
             transition: opacity 0.5s ease;
-            gap: 20px;
+            gap: 25px;
             flex-shrink: 0;
+            /* Сдвигаем вправо на ПК */
+            padding-right: 5%; 
         }
 
         .timer-container {
             position: relative;
-            width: clamp(200px, 20vw, 320px);
-            height: clamp(200px, 20vw, 320px);
+            width: clamp(220px, 25vw, 360px);
+            height: clamp(220px, 25vw, 360px);
         }
 
         .timer-svg {
@@ -172,13 +175,15 @@
         }
 
         .timer-background {
-            fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 1.5;
+            fill: none; stroke: rgba(255, 255, 255, 0.05); 
+            stroke-width: 0.8; /* В два раза тоньше */
         }
 
         .timer-progress {
-            fill: none; stroke: var(--gold); stroke-width: 1.5;
-            stroke-dasharray: 283; stroke-dashoffset: 283;
-            stroke-linecap: round; stroke-dasharray: 5, 5;
+            fill: none; stroke: var(--gold); 
+            stroke-width: 0.8; /* В два раза тоньше */
+            stroke-dasharray: 283; stroke-dashoffset: 0;
+            stroke-linecap: round; stroke-dasharray: 4, 6;
             transition: stroke-dashoffset 1s linear;
         }
 
@@ -186,10 +191,10 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            font-size: clamp(60px, 6vw, 100px);
-            font-weight: 200; 
+            font-size: clamp(70px, 8vw, 120px);
+            font-weight: 100; /* Ультратонкий шрифт */
             color: var(--gold);
-            letter-spacing: -2px;
+            letter-spacing: -3px;
         }
 
         .timer-cta {
@@ -197,8 +202,9 @@
             text-transform: uppercase;
             color: var(--gold);
             font-weight: 500;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             white-space: nowrap;
+            opacity: 0.8;
         }
 
         .footer-steps { 
@@ -230,7 +236,7 @@
             background: #0d0d0f; border: 1px solid var(--gold);
             margin: 12vh auto; padding: 50px 30px;
             width: 90%; max-width: 450px; text-align: center;
-            border-radius: 4px; position: relative;
+            border-radius: 2px; position: relative;
         }
 
         .modal-input {
@@ -247,31 +253,24 @@
 
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 32px; color: var(--gold); cursor: pointer; }
 
-        /* --- ПРАВИЛЬНАЯ АДАПТИВНОСТЬ --- */
-
-        /* Средние экраны (Планшеты) */
+        /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 1150px) {
             .content {
-                flex-direction: column; /* Переключаем в колонку, чтобы не налегали */
+                flex-direction: column;
                 text-align: center;
                 gap: 60px;
-                padding-top: 20px;
             }
             .text-block { align-items: center; }
             .description { border-left: none; padding-left: 0; }
             .btn { align-self: center; }
-            .timer-wrapper { position: relative; right: auto; top: auto; transform: none; }
+            .timer-wrapper { padding-right: 0; }
         }
 
-        /* Смартфоны */
         @media (max-width: 767px) {
             .hero { padding: 30px 5%; }
             .top-nav { flex-direction: column; gap: 20px; }
-            .logo { font-size: 20px; }
-            .phone-number { display: none; }
             .footer-steps { flex-direction: column; align-items: center; gap: 20px; }
             .timer-container { width: 180px; height: 180px; }
-            .timer-cta { white-space: normal; line-height: 1.4; }
         }
     </style>
 </head>
@@ -307,7 +306,7 @@
                         <circle class="timer-background" cx="50" cy="50" r="45"></circle>
                         <circle id="progress" class="timer-progress" cx="50" cy="50" r="45"></circle>
                     </svg>
-                    <div id="timer-num" class="timer-number">1</div>
+                    <div id="timer-num" class="timer-number">7</div>
                 </div>
                 <div class="timer-cta">Оставь заявку — получи скидку</div>
             </div>
@@ -338,16 +337,18 @@
         
         const total = 7;
         const circumference = 2 * Math.PI * 45;
-        let current = 1;
+        let current = total; // Начинаем с 7
 
-        progress.style.strokeDasharray = `5, 5`; 
+        progress.style.strokeDasharray = `4, 6`; 
         
         const interval = setInterval(() => {
-            if (current <= total) {
+            if (current >= 0) {
                 timerNum.textContent = current;
-                const offset = circumference - (current / total) * circumference;
+                // Анимация заполнения круга в обратную сторону
+                const progressPercent = (total - current) / total;
+                const offset = circumference * progressPercent;
                 progress.style.strokeDashoffset = offset;
-                current++;
+                current--;
             } else {
                 clearInterval(interval);
                 timerWrapper.style.opacity = '0'; 
