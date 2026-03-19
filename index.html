@@ -51,13 +51,14 @@
             z-index: 2;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (ДЛЯ ДЕСКТОПА И МОБИЛЬНЫХ) --- */
         .top-nav {
             position: relative; display: flex; justify-content: space-between; 
             align-items: center; z-index: 100; width: 100%;
+            transition: 0.3s ease;
         }
 
-        .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; }
+        .logo { font-weight: 900; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; letter-spacing: 1.5px; text-align: center;}
         .logo span { color: var(--gold); }
 
         .phone-block { 
@@ -185,8 +186,32 @@
             .content { flex-direction: column; text-align: center; }
             .btn-main { align-self: center; }
         }
+
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ (ДО 768PX) --- */
         @media (max-width: 768px) {
+            /* Центрируем шапку: Название над телефоном */
+            .top-nav { flex-direction: column; gap: 25px; padding-top: 20px; }
+            .logo { order: -1; } /* Убеждаемся, что логотип всегда первый */
+
+            /* Убираем текст номера телефона, оставляем иконку */
             .phone-number { display: none; }
+
+            /* Делаем кнопку телефона круглой, больше в 2 раза */
+            .phone-block {
+                order: 1; /* Размещаем под названием */
+                padding: 0; background: transparent; border: none; /* Убираем фон и обводку контейнера */
+                width: auto; height: auto;
+            }
+            .phone-icon {
+                /* Старый размер был 40px, делаем 80px */
+                width: 80px; height: 80px; 
+                border-width: 3px; /* Немного жирнее обводку */
+                box-shadow: inset 0 0 20px rgba(0, 0, 0, 1), 0 0 15px rgba(242, 201, 76, 0.4);
+                background: rgba(13, 13, 15, 0.6);
+            }
+            /* Увеличиваем саму иконку трубки внутри круга */
+            .phone-icon svg { width: 38px; height: 38px; }
+
             .footer-steps { flex-direction: column; align-items: center; gap: 15px; }
             .modal-content { margin: 5vh auto; }
         }
